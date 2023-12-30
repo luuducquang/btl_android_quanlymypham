@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".login"
+    tools:context=".Login"
     android:background="@drawable/login_bg">
 
     <TableLayout
@@ -25,6 +25,7 @@
 
         <TableRow>
             <EditText
+                android:id="@+id/taikhoan"
                 android:layout_height="50sp"
                 android:layout_width="0dp"
                 android:layout_weight="1"
@@ -33,6 +34,7 @@
 
         <TableRow>
             <EditText
+                android:id="@+id/matkhau"
                 android:layout_height="50sp"
                 android:layout_width="0dp"
                 android:layout_weight="1"
@@ -41,6 +43,7 @@
 
 
         <Button
+            android:id="@+id/login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

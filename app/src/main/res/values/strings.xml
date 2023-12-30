@@ -1,12 +1,17 @@
 <resources>
-    <string name="app_name">Quản lý mỹ phẩm</string>
+    <string name="app_name"></string>
     <string name="nav_home">Trang chủ</string>
+    <string name="nav_category">Danh mục</string>
     <string name="nav_mypham">Thông tin mỹ phẩm</string>
+    <string name="nav_loaimypham">Loại mỹ phẩm</string>
+    <string name="nav_nhacungcap">Nhà cung cấp</string>
+    <string name="nav_hoadonban">Hoá đơn bán</string>
+    <string name="nav_hoadonnhap">Hoá đơn nhập</string>
+    <string name="nav_Thongke">Thống kê</string>
+    <string name="nav_Taikhoan">Tài khoản</string>
+    <string name="nav_Dangxuat">Đăng xuất</string>
 
     <string name="open_nav">Open Drawer Layout</string>
     <string name="close_nav">Close Drawer Layout</string>
 
-    <string-array name="arrsearch">
-        <item></item>
-    </string-array>
 </resources>

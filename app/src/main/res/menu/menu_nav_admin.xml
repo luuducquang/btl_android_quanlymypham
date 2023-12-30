@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_ttmypham"
+            android:title="@string/nav_mypham"
+            android:icon="@drawable/baseline_volcano_24"/>
+        <item
+            android:id="@+id/nav_loaimypham"
+            android:title="@string/nav_loaimypham"
+            android:icon="@drawable/baseline_bloodtype_24"/>
+        <item
+            android:id="@+id/nav_nhacungcap"
+            android:title="@string/nav_nhacungcap"
+            android:icon="@drawable/baseline_restaurant_menu_24"/>
+        <item
+            android:id="@+id/nav_hoadonban"
+            android:title="@string/nav_hoadonban"
+            android:icon="@drawable/baseline_sell_24"/>
+        <item
+            android:id="@+id/nav_hoadonnhap"
+            android:title="@string/nav_hoadonnhap"
+            android:icon="@drawable/baseline_sim_card_download_24"/>
+        <item
+            android:id="@+id/nav_thongke"
+            android:title="@string/nav_Thongke"
+            android:icon="@drawable/baseline_trending_up_24"/>
+        <item
+            android:id="@+id/nav_taikhoan"
+            android:title="@string/nav_Taikhoan"
+            android:icon="@drawable/baseline_account_circle_24"/>
+    </group>
+</menu>

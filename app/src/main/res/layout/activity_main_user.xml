@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".main"
+    tools:context=".MainUser"
     tools:openDrawer="start">
 
     <LinearLayout
@@ -30,11 +30,6 @@
             android:id="@+id/content_frame"
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
-
-            <ListView
-                android:id="@+id/list_search_main"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
         </FrameLayout>
     </LinearLayout>
 
@@ -44,6 +39,6 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:headerLayout="@layout/header_layout_nav"
-        app:menu="@menu/menu_nav"/>
+        app:menu="@menu/menu_nav_user"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>

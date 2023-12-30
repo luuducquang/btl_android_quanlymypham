@@ -6,8 +6,8 @@
             android:title="@string/nav_home"
             android:icon="@drawable/ic_home"/>
         <item
-            android:id="@+id/nav_ttmypham"
-            android:title="@string/nav_mypham"
+            android:id="@+id/nav_category"
+            android:title="@string/nav_category"
             android:icon="@drawable/ic_home"/>
     </group>
 </menu>
