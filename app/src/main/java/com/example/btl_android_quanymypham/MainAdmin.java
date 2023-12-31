@@ -18,12 +18,18 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.btl_android_quanymypham.fragment.HomeFragmentUser;
 import com.example.btl_android_quanymypham.fragment.LoaiMyPhamFragmentAdmin;
 import com.example.btl_android_quanymypham.fragment.TTMyPhamFragmentAdmin;
+import com.example.btl_android_quanymypham.fragment.TaiKhoanFragmentAdmin;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainAdmin extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout mDrawerLayout;
     private static final int FragmentTTmypham = 0;
     private static final int FragmentLoaimypham = 1;
+    private static final int FragmentNhaCungCap = 2;
+    private static final int FragmentHoaDonBan = 3;
+    private static final int FragmentHoaDonNhap = 4;
+    private static final int FragmentThongKe = 5;
+    private static final int FragmentTaiKhoan = 6;
 
     private int mCurrentFragment = FragmentTTmypham;
 
@@ -76,6 +82,12 @@ public class MainAdmin extends AppCompatActivity implements NavigationView.OnNav
             if (mCurrentFragment!=FragmentLoaimypham){
                 replaceFragment(new LoaiMyPhamFragmentAdmin());
                 mCurrentFragment = FragmentLoaimypham;
+            }
+        }
+        else if (id == R.id.nav_taikhoan){
+            if (mCurrentFragment!=FragmentTaiKhoan){
+                replaceFragment(new TaiKhoanFragmentAdmin());
+                mCurrentFragment = FragmentTaiKhoan;
             }
         }
         mDrawerLayout.closeDrawer(GravityCompat.START);
