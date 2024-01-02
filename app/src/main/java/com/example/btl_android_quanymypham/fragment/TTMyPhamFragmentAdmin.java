@@ -15,7 +15,7 @@ public class TTMyPhamFragmentAdmin extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.ttmypham_fragment,container,false);
+        View view = inflater.inflate(R.layout.ttmypham_fragment_admin,container,false);
         return view;
     }
 }

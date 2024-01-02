@@ -10,21 +10,27 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.btl_android_quanymypham.fragment.HomeFragmentUser;
 import com.example.btl_android_quanymypham.fragment.TTMyPhamFragmentAdmin;
+import com.example.btl_android_quanymypham.model.TaiKhoanAdmin;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainUser extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout mDrawerLayout;
     private static final int FragmentHome = 0;
     private static final int FragmentCategory = 1;
-
     private int mCurrentFragment = FragmentHome;
+    TextView nameUser,emailUser;
+    ImageView imgUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +65,20 @@ public class MainUser extends AppCompatActivity implements NavigationView.OnNavi
             }
         });
 
+        imgUser = headerView.findViewById(R.id.img_user);
+        nameUser = headerView.findViewById(R.id.name_user);
+        emailUser = headerView.findViewById(R.id.email_user);
+
+        Bundle bundle = getIntent().getExtras();
+        if (bundle==null){
+            return;
+        }
+        TaiKhoanAdmin taiKhoanAdmin = (TaiKhoanAdmin) bundle.get("ObjectUser");
+        byte[]anhdaidien = taiKhoanAdmin.getAnhdaidien();
+        Bitmap bitmap = BitmapFactory.decodeByteArray(anhdaidien,0,anhdaidien.length);
+        imgUser.setImageBitmap(bitmap);
+        nameUser.setText(taiKhoanAdmin.getHoten());
+        emailUser.setText(taiKhoanAdmin.getEmail());
 
     }
 

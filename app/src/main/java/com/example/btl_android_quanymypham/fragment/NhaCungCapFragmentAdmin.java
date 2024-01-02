@@ -3,6 +3,7 @@ package com.example.btl_android_quanymypham.fragment;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -19,60 +20,66 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.btl_android_quanymypham.adapter.LoaiMyPhamAdapterAdmin;
-import com.example.btl_android_quanymypham.model.LoaiMyPhamAdmin;
-import com.example.btl_android_quanymypham.database.LoaiMyPhamDataBaseHandlerAdmin;
 import com.example.btl_android_quanymypham.R;
+import com.example.btl_android_quanymypham.adapter.LoaiMyPhamAdapterAdmin;
+import com.example.btl_android_quanymypham.adapter.NhaCungCapAdapterAdmin;
+import com.example.btl_android_quanymypham.database.LoaiMyPhamDataBaseHandlerAdmin;
+import com.example.btl_android_quanymypham.database.NhaCungCapDataBaseHandlerAdmin;
+import com.example.btl_android_quanymypham.model.LoaiMyPhamAdmin;
+import com.example.btl_android_quanymypham.model.NhaCungCapAdmin;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class LoaiMyPhamFragmentAdmin extends Fragment {
+public class NhaCungCapFragmentAdmin extends Fragment {
     private RecyclerView recyclerView;
-    private LoaiMyPhamAdapterAdmin loaiMyPhamAdapterAdmin;
-    LoaiMyPhamDataBaseHandlerAdmin db;
-    EditText tenloai,mota;
+    private NhaCungCapAdapterAdmin nhaCungCapAdapterAdmin;
+    NhaCungCapDataBaseHandlerAdmin db;
+    EditText tenncc,diachincc,sdtncc;
     private int selectedId;
 
     Button them,sua,lammoi;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.loaimypham_fragment_admin,container,false);
+        View view = inflater.inflate(R.layout.nhacungcap_fragment_admin,container,false);
 
-        db = new LoaiMyPhamDataBaseHandlerAdmin(requireContext());
+        db = new NhaCungCapDataBaseHandlerAdmin(requireContext());
 
         Init(view);
         DataListView();
-        HandleButton();
+        HandlerButton();
 
         return view;
     }
 
-    private void HandleButton() {
+    private void HandlerButton() {
         lammoi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tenloai.setText("");
-                mota.setText("");
-                selectedId = 0;
-                tenloai.requestFocus();
+                tenncc.setText("");
+                diachincc.setText("");
+                sdtncc.setText("");
+                selectedId =0;
+                tenncc.requestFocus();
             }
         });
         them.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String strTenLoai = tenloai.getText().toString();
-                String strMoTa = mota.getText().toString();
+                String strTenNCC = tenncc.getText().toString();
+                String strDiaChiNCC = diachincc.getText().toString();
+                String strSDT = sdtncc.getText().toString();
 
-                if (strTenLoai.isEmpty() || strMoTa.isEmpty()) {
+                if (strTenNCC.isEmpty() || strDiaChiNCC.isEmpty()|| strSDT.isEmpty()) {
                     Toast.makeText(requireContext(), "Vui lòng nhập đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
                 } else {
-                    db.insertData(strTenLoai, strMoTa);
+                    db.insertData(strTenNCC, strDiaChiNCC,strSDT);
                     DataListView();
-                    tenloai.setText("");
-                    mota.setText("");
-                    tenloai.requestFocus();
+                    tenncc.setText("");
+                    diachincc.setText("");
+                    sdtncc.setText("");
+                    tenncc.requestFocus();
                 }
             }
         });
@@ -80,52 +87,63 @@ public class LoaiMyPhamFragmentAdmin extends Fragment {
         sua.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String strTenLoai = tenloai.getText().toString();
-                String strMoTa = mota.getText().toString();
+                String strTenNCC = tenncc.getText().toString();
+                String strDiaChiNCC = diachincc.getText().toString();
+                String strSDT = sdtncc.getText().toString();
 
-                if (strTenLoai.isEmpty() || strMoTa.isEmpty()) {
+                if (strTenNCC.isEmpty() || strDiaChiNCC.isEmpty()|| strSDT.isEmpty()) {
                     Toast.makeText(requireContext(), "Vui lòng nhập đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
                 } else {
-                    db.updateData(selectedId,strTenLoai,strMoTa);
+                    db.updateData(selectedId,strTenNCC, strDiaChiNCC,strSDT);
                     DataListView();
                 }
             }
         });
-
     }
+
     private void DataListView() {
         Cursor cursor = db.getAllData();
         if (cursor.getCount() == 0) {
             return;
         }
-        List<LoaiMyPhamAdmin> data = new ArrayList<>();
+        List<NhaCungCapAdmin> data = new ArrayList<>();
         while (cursor.moveToNext()) {
             int id = cursor.getInt(0);
-            String tenLoai = cursor.getString(1);
-            String moTa = cursor.getString(2);
-            LoaiMyPhamAdmin loaiMyPhamAdmin = new LoaiMyPhamAdmin(id, tenLoai, moTa);
-            data.add(loaiMyPhamAdmin);
+            String TenNCC = cursor.getString(1);
+            String DiaChiNCC = cursor.getString(2);
+            String SdtNCC = cursor.getString(3);
+            NhaCungCapAdmin nhaCungCapAdmin = new NhaCungCapAdmin(id, TenNCC, DiaChiNCC,SdtNCC);
+            data.add(nhaCungCapAdmin);
         }
 
         recyclerView.setLayoutManager(new GridLayoutManager(requireContext(), 1));
 
-        loaiMyPhamAdapterAdmin = new LoaiMyPhamAdapterAdmin(requireContext(), data,tenloai,mota);
-        recyclerView.setAdapter(loaiMyPhamAdapterAdmin);
+        nhaCungCapAdapterAdmin = new NhaCungCapAdapterAdmin(data,requireContext());
+        recyclerView.setAdapter(nhaCungCapAdapterAdmin);
 
-        loaiMyPhamAdapterAdmin.setOnItemClickListener(new LoaiMyPhamAdapterAdmin.OnItemClickListener() {
+        nhaCungCapAdapterAdmin.setOnItemClickListener(new NhaCungCapAdapterAdmin.OnItemClickListener() {
             @Override
-            public void onItemClick(int id) {
-                selectedId = id;
+            public void onItemClick(NhaCungCapAdmin nhaCungCapAdmin) {
+                selectedId = nhaCungCapAdmin.getId();
+                tenncc.setText(nhaCungCapAdmin.getTen());
+                diachincc.setText(nhaCungCapAdmin.getDiachi());
+                sdtncc.setText(nhaCungCapAdmin.getSdt());
             }
         });
 
-        loaiMyPhamAdapterAdmin.setOnItemLongClickListener(new LoaiMyPhamAdapterAdmin.OnItemLongClickListener() {
+        nhaCungCapAdapterAdmin.setOnItemLongClickListener(new NhaCungCapAdapterAdmin.OnItemLongClickListener() {
             @Override
-            public void onItemLongClick(int id) {
+            public void onItemLongClick(NhaCungCapAdmin nhaCungCapAdmin) {
                 getActivity().openContextMenu(recyclerView);
-                selectedId = id;
+                selectedId = nhaCungCapAdmin.getId();
             }
         });
+    }
+
+    @Override
+    public void onCreateContextMenu(@NonNull ContextMenu menu, @NonNull View v, @Nullable ContextMenu.ContextMenuInfo menuInfo) {
+        getActivity().getMenuInflater().inflate(R.menu.menu_context_delete, menu);
+        super.onCreateContextMenu(menu, v, menuInfo);
     }
 
     @Override
@@ -145,7 +163,7 @@ public class LoaiMyPhamFragmentAdmin extends Fragment {
             public void onClick(DialogInterface dialog, int which) {
                 db.deleteData(selectedId);
                 DataListView();
-                Toast.makeText(requireContext(), "Đã xóa", Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), "Đã xóa" , Toast.LENGTH_SHORT).show();
             }
         });
         builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
@@ -158,20 +176,14 @@ public class LoaiMyPhamFragmentAdmin extends Fragment {
         builder.create().show();
     }
 
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
-        getActivity().getMenuInflater().inflate(R.menu.menu_context_delete, menu);
-    }
-
-
     private void Init(View view) {
-        tenloai = view.findViewById(R.id.tenloai);
-        mota = view.findViewById(R.id.mota);
+        tenncc = view.findViewById(R.id.ten_ncc);
+        diachincc = view.findViewById(R.id.diachi_ncc);
+        sdtncc = view.findViewById(R.id.sdt_ncc);
+        lammoi = view.findViewById(R.id.btnMoi);
         them = view.findViewById(R.id.btnThem);
         sua = view.findViewById(R.id.btnSua);
-        lammoi = view.findViewById(R.id.btnMoi);
-        recyclerView = view.findViewById(R.id.rcv_loaimypham);
+        recyclerView = view.findViewById(R.id.rcv_nhacungcap);
         registerForContextMenu(recyclerView);
     }
 }

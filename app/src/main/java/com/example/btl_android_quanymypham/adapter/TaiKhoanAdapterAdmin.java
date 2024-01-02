@@ -18,11 +18,30 @@ import com.example.btl_android_quanymypham.R;
 import com.example.btl_android_quanymypham.model.LoaiMyPhamAdmin;
 import com.example.btl_android_quanymypham.model.TaiKhoanAdmin;
 
+import java.sql.Blob;
 import java.util.List;
 
 public class TaiKhoanAdapterAdmin extends RecyclerView.Adapter<TaiKhoanAdapterAdmin.TaiKhoanViewHolder>{
     private List<TaiKhoanAdmin> taiKhoanAdmins;
     Context context;
+    private OnItemClickListener onItemClickListener;
+    private OnItemLongClickListener onItemLongClickListener;
+
+    public interface OnItemClickListener {
+        void onItemClick(TaiKhoanAdmin taiKhoanAdmin);
+    }
+
+    public void setOnItemClickListener(TaiKhoanAdapterAdmin.OnItemClickListener listener) {
+        this.onItemClickListener = listener;
+    }
+
+    public interface OnItemLongClickListener {
+        void onItemLongClick(TaiKhoanAdmin taiKhoanAdmin);
+    }
+
+    public void setOnItemLongClickListener(TaiKhoanAdapterAdmin.OnItemLongClickListener listener) {
+        this.onItemLongClickListener = listener;
+    }
 
     public TaiKhoanAdapterAdmin(Context context, List<TaiKhoanAdmin> taiKhoanAdmins) {
         this.context = context;
@@ -80,6 +99,30 @@ public class TaiKhoanAdapterAdmin extends RecyclerView.Adapter<TaiKhoanAdapterAd
             item_email = itemView.findViewById(R.id.item_email);
             item_quyen = itemView.findViewById(R.id.item_quyen);
             item_anhdaidien = itemView.findViewById(R.id.item_anhdaidien);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION && onItemClickListener != null) {
+                        TaiKhoanAdmin taiKhoanAdmin = taiKhoanAdmins.get(position);
+                        onItemClickListener.onItemClick(taiKhoanAdmin);
+                    }
+                }
+            });
+
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION && onItemLongClickListener != null) {
+                        TaiKhoanAdmin taiKhoanAdmin = taiKhoanAdmins.get(position);
+                        onItemLongClickListener.onItemLongClick(taiKhoanAdmin);
+                        return true;
+                    }
+                    return false;
+                }
+            });
         }
     }
 }

@@ -15,9 +15,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
-                android:text="Tên loại:" />
+                android:text="Tên nhà cung cấp:" />
             <EditText
-                android:id="@+id/tenloai"
+                android:id="@+id/ten_ncc"
                 android:layout_width="200sp"
                 android:layout_marginLeft="10sp"
                 android:layout_height="wrap_content"/>
@@ -27,9 +27,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
-                android:text="Mô tả:" />
+                android:text="Địa chỉ:" />
             <EditText
-                android:id="@+id/mota"
+                android:id="@+id/diachi_ncc"
+                android:layout_width="200sp"
+                android:layout_marginLeft="10sp"
+                android:layout_height="wrap_content"/>
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="Số điện thoại:" />
+            <EditText
+                android:id="@+id/sdt_ncc"
+                android:inputType="number"
                 android:layout_width="200sp"
                 android:layout_marginLeft="10sp"
                 android:layout_height="wrap_content"/>
@@ -70,7 +83,7 @@
             android:backgroundTint="#00BCD4"/>
     </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcv_loaimypham"
+        android:id="@+id/rcv_nhacungcap"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 </LinearLayout>
