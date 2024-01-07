@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/item_ttmypham_admin"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="6dp"
+    android:layout_margin="4dp">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/item_anhsanpham"
+                android:layout_width="100sp"
+                android:layout_height="match_parent"
+                android:src="@drawable/anhfb"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TableLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp">
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ID: "
+                        android:textSize="15sp"/>
+
+                    <TextView
+                        android:id="@+id/item_id"
+                        android:layout_width="200sp"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:textSize="15sp"/>
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tên mỹ phẩm: "
+                        android:textSize="15sp"/>
+
+                    <TextView
+                        android:id="@+id/item_tenmypham"
+                        android:layout_width="200sp"
+                        android:layout_height="wrap_content"
+                        android:text="Sữa rửa mặt Cerave SA cho da dầu"
+                        android:textSize="15sp"/>
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5sp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Dung tích: "
+                        android:textSize="15sp"/>
+
+                    <TextView
+                        android:id="@+id/item_dungtich"
+                        android:layout_width="200sp"
+                        android:layout_height="wrap_content"
+                        android:text="200 ml"
+                        android:textSize="15sp"/>
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Loại mỹ phẩm: "
+                        android:textSize="15sp"/>
+
+                    <TextView
+                        android:id="@+id/item_loaimypham"
+                        android:layout_width="200sp"
+                        android:layout_height="wrap_content"
+                        android:text="Sửa rửa mặt"
+                        android:textSize="15sp"/>
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Giá bán: "
+                        android:textSize="15sp"/>
+
+                    <TextView
+                        android:id="@+id/item_gia"
+                        android:layout_width="200sp"
+                        android:layout_height="wrap_content"
+                        android:text="200000"
+                        android:textSize="15sp"/>
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Mô tả: "
+                        android:textSize="15sp"/>
+
+                    <TextView
+                        android:id="@+id/item_mota"
+                        android:layout_width="200sp"
+                        android:layout_height="wrap_content"
+                        android:text="Sữa rửa mặt dành cho da dầu"
+                        android:textSize="15sp"/>
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Chi tiết: "
+                        android:textSize="15sp"/>
+
+                    <TextView
+                        android:id="@+id/item_chitiet"
+                        android:layout_width="200sp"
+                        android:layout_height="wrap_content"
+                        android:text="Sữa rửa mặt dành cho da dầu mụn và các loại da"
+                        android:textSize="15sp"/>
+                </TableRow>
+
+            </TableLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

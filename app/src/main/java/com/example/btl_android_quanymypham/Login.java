@@ -4,18 +4,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.btl_android_quanymypham.database.TaiKhoanDataBaseHandlerAdmin;
+import com.example.btl_android_quanymypham.DAO.TaiKhoanDAOAdmin;
 import com.example.btl_android_quanymypham.model.TaiKhoanAdmin;
 
 public class Login extends AppCompatActivity {
 
-    TaiKhoanDataBaseHandlerAdmin db;
+    TaiKhoanDAOAdmin db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +28,7 @@ public class Login extends AppCompatActivity {
         mk = (EditText) findViewById(R.id.matkhau);
         log = (Button) findViewById(R.id.login);
 
-        db = new TaiKhoanDataBaseHandlerAdmin(Login.this);
+        db = new TaiKhoanDAOAdmin(Login.this);
         log.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -8,7 +8,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.provider.MediaStore;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -31,17 +30,13 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.btl_android_quanymypham.R;
-import com.example.btl_android_quanymypham.adapter.LoaiMyPhamAdapterAdmin;
 import com.example.btl_android_quanymypham.adapter.TaiKhoanAdapterAdmin;
-import com.example.btl_android_quanymypham.database.LoaiMyPhamDataBaseHandlerAdmin;
-import com.example.btl_android_quanymypham.database.TaiKhoanDataBaseHandlerAdmin;
-import com.example.btl_android_quanymypham.model.LoaiMyPhamAdmin;
+import com.example.btl_android_quanymypham.DAO.TaiKhoanDAOAdmin;
 import com.example.btl_android_quanymypham.model.TaiKhoanAdmin;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,7 +47,7 @@ public class TaiKhoanFragmentAdmin extends Fragment {
     Button lammoi,them,sua;
     private RecyclerView recyclerView;
     private TaiKhoanAdapterAdmin taiKhoanAdapterAdmin;
-    TaiKhoanDataBaseHandlerAdmin db;
+    TaiKhoanDAOAdmin db;
     private int selectedId;
     ImageView img;
     int REQUEST_CODE_CAMERA = 123;
@@ -63,7 +58,7 @@ public class TaiKhoanFragmentAdmin extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.taikhoan_fragment_admin,container,false);
 
-        db = new TaiKhoanDataBaseHandlerAdmin(requireContext());
+        db = new TaiKhoanDAOAdmin(requireContext());
 
         Init(view);
         HandlerImg();
@@ -99,6 +94,7 @@ public class TaiKhoanFragmentAdmin extends Fragment {
                 email.setText("");
                 img.setImageBitmap(null);
                 tk.requestFocus();
+                DataListView();
             }
         });
         them.setOnClickListener(new View.OnClickListener() {

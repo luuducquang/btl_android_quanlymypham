@@ -1,30 +1,17 @@
-package com.example.btl_android_quanymypham.database;
+package com.example.btl_android_quanymypham.DAO;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
-public class LoaiMyPhamDataBaseHandlerAdmin extends SQLiteOpenHelper {
-    private static final String DATABASE_NAME = "btl_quanlymypham.db";
-    private static final int DATABASE_VERSION = 2;
+import com.example.btl_android_quanymypham.database.DataBaseHandler;
 
-    public LoaiMyPhamDataBaseHandlerAdmin(@Nullable Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
-    }
-
-    @Override
-    public void onCreate(SQLiteDatabase db) {
-        String createTableQuery = "CREATE TABLE IF NOT EXISTS LoaiMyPham (id INTEGER PRIMARY KEY AUTOINCREMENT, TenLoai TEXT, MoTa TEXT);";
-        db.execSQL(createTableQuery);
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+public class LoaiMyPhamDAOAdmin extends DataBaseHandler  {
+    public LoaiMyPhamDAOAdmin(@Nullable Context context) {
+        super(context);
     }
 
     public void insertData(String TenLoai, String MoTa) {

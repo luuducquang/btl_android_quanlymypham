@@ -3,7 +3,6 @@ package com.example.btl_android_quanymypham.fragment;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -21,11 +20,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.btl_android_quanymypham.R;
-import com.example.btl_android_quanymypham.adapter.LoaiMyPhamAdapterAdmin;
 import com.example.btl_android_quanymypham.adapter.NhaCungCapAdapterAdmin;
-import com.example.btl_android_quanymypham.database.LoaiMyPhamDataBaseHandlerAdmin;
-import com.example.btl_android_quanymypham.database.NhaCungCapDataBaseHandlerAdmin;
-import com.example.btl_android_quanymypham.model.LoaiMyPhamAdmin;
+import com.example.btl_android_quanymypham.DAO.NhaCungCapDAOAdmin;
 import com.example.btl_android_quanymypham.model.NhaCungCapAdmin;
 
 import java.util.ArrayList;
@@ -34,7 +30,7 @@ import java.util.List;
 public class NhaCungCapFragmentAdmin extends Fragment {
     private RecyclerView recyclerView;
     private NhaCungCapAdapterAdmin nhaCungCapAdapterAdmin;
-    NhaCungCapDataBaseHandlerAdmin db;
+    NhaCungCapDAOAdmin db;
     EditText tenncc,diachincc,sdtncc;
     private int selectedId;
 
@@ -44,7 +40,7 @@ public class NhaCungCapFragmentAdmin extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.nhacungcap_fragment_admin,container,false);
 
-        db = new NhaCungCapDataBaseHandlerAdmin(requireContext());
+        db = new NhaCungCapDAOAdmin(requireContext());
 
         Init(view);
         DataListView();
@@ -62,6 +58,7 @@ public class NhaCungCapFragmentAdmin extends Fragment {
                 sdtncc.setText("");
                 selectedId =0;
                 tenncc.requestFocus();
+                DataListView();
             }
         });
         them.setOnClickListener(new View.OnClickListener() {

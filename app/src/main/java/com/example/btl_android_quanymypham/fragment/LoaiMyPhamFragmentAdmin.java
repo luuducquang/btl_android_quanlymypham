@@ -21,7 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.btl_android_quanymypham.adapter.LoaiMyPhamAdapterAdmin;
 import com.example.btl_android_quanymypham.model.LoaiMyPhamAdmin;
-import com.example.btl_android_quanymypham.database.LoaiMyPhamDataBaseHandlerAdmin;
+import com.example.btl_android_quanymypham.DAO.LoaiMyPhamDAOAdmin;
 import com.example.btl_android_quanymypham.R;
 
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ import java.util.List;
 public class LoaiMyPhamFragmentAdmin extends Fragment {
     private RecyclerView recyclerView;
     private LoaiMyPhamAdapterAdmin loaiMyPhamAdapterAdmin;
-    LoaiMyPhamDataBaseHandlerAdmin db;
+    LoaiMyPhamDAOAdmin db;
     EditText tenloai,mota;
     private int selectedId;
 
@@ -40,7 +40,7 @@ public class LoaiMyPhamFragmentAdmin extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.loaimypham_fragment_admin,container,false);
 
-        db = new LoaiMyPhamDataBaseHandlerAdmin(requireContext());
+        db = new LoaiMyPhamDAOAdmin(requireContext());
 
         Init(view);
         DataListView();
@@ -57,6 +57,7 @@ public class LoaiMyPhamFragmentAdmin extends Fragment {
                 mota.setText("");
                 selectedId = 0;
                 tenloai.requestFocus();
+                DataListView();
             }
         });
         them.setOnClickListener(new View.OnClickListener() {

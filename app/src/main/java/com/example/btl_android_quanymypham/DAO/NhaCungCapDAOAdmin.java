@@ -1,30 +1,18 @@
-package com.example.btl_android_quanymypham.database;
+package com.example.btl_android_quanymypham.DAO;
 
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
-public class NhaCungCapDataBaseHandlerAdmin extends SQLiteOpenHelper {
-    private static final String DATABASE_NAME = "btl_quanlymypham21.db";
-    private static final int DATABASE_VERSION = 2;
-    public NhaCungCapDataBaseHandlerAdmin(@Nullable Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
-    }
+import com.example.btl_android_quanymypham.database.DataBaseHandler;
 
-    @Override
-    public void onCreate(SQLiteDatabase db) {
-        String createTableQuery = "CREATE TABLE IF NOT EXISTS NhaCungCap (id INTEGER PRIMARY KEY AUTOINCREMENT, TenNCC TEXT, DiaChiNCC TEXT, SdtNCC TEXT);";
-        db.execSQL(createTableQuery);
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+public class NhaCungCapDAOAdmin extends DataBaseHandler {
+    public NhaCungCapDAOAdmin(@Nullable Context context) {
+        super(context);
     }
 
     public void insertData(String TenNCC, String DiaChiNCC, String SdtNCC) {
