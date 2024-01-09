@@ -59,6 +59,7 @@ public class NhaCungCapFragmentAdmin extends Fragment {
                 selectedId =0;
                 tenncc.requestFocus();
                 DataListView();
+                Toast.makeText(requireContext(), "Làm mới thành công", Toast.LENGTH_SHORT).show();
             }
         });
         them.setOnClickListener(new View.OnClickListener() {
@@ -77,6 +78,7 @@ public class NhaCungCapFragmentAdmin extends Fragment {
                     diachincc.setText("");
                     sdtncc.setText("");
                     tenncc.requestFocus();
+                    Toast.makeText(requireContext(), "Thêm dữ liệu thành công", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -93,6 +95,7 @@ public class NhaCungCapFragmentAdmin extends Fragment {
                 } else {
                     db.updateData(selectedId,strTenNCC, strDiaChiNCC,strSDT);
                     DataListView();
+                    Toast.makeText(requireContext(), "Sửa dữ liệu thành công", Toast.LENGTH_SHORT).show();
                 }
             }
         });

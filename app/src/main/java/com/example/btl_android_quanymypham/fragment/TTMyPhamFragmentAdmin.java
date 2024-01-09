@@ -129,6 +129,7 @@ public class TTMyPhamFragmentAdmin extends Fragment {
                 img.setImageBitmap(null);
                 tenmp.requestFocus();
                 DataListView();
+                Toast.makeText(requireContext(), "Làm mới thành công", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -171,6 +172,7 @@ public class TTMyPhamFragmentAdmin extends Fragment {
                         chitiet.getEditText().setText("");
                         img.setImageBitmap(null);
                         tenmp.requestFocus();
+                        Toast.makeText(requireContext(), "Thêm dữ liệu thành công", Toast.LENGTH_SHORT).show();
                     } catch (NumberFormatException e) {
 
                     }
@@ -200,6 +202,7 @@ public class TTMyPhamFragmentAdmin extends Fragment {
                         Long Gia = Long.valueOf(strGiaBan);
                         db.updateThongTinMyPham(selectedId,strTenMyPham, strDungTich, SpinnerValue, hinhanh, Gia, strMoTa, strCHiTiet);
                         DataListView();
+                        Toast.makeText(requireContext(), "Sửa dữ liệu thành công", Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     Toast.makeText(requireContext(), "Vui lòng nhập đầy đủ thông tin!", Toast.LENGTH_SHORT).show();

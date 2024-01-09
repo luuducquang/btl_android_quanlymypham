@@ -95,6 +95,7 @@ public class TaiKhoanFragmentAdmin extends Fragment {
                 img.setImageBitmap(null);
                 tk.requestFocus();
                 DataListView();
+                Toast.makeText(requireContext(), "Làm mới thành công", Toast.LENGTH_SHORT).show();
             }
         });
         them.setOnClickListener(new View.OnClickListener() {
@@ -129,6 +130,7 @@ public class TaiKhoanFragmentAdmin extends Fragment {
                     email.setText("");
                     img.setImageBitmap(null);
                     tk.requestFocus();
+                    Toast.makeText(requireContext(), "Thêm dữ liệu thành công", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -154,6 +156,7 @@ public class TaiKhoanFragmentAdmin extends Fragment {
                     } else {
                         db.updateData(selectedId,strTaikhoan, strMatkhau,strHoten,strEmail,hinhanh,strQuyen);
                         DataListView();
+                        Toast.makeText(requireContext(), "Sửa dữ liệu thành công", Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     Toast.makeText(requireContext(), "Vui lòng nhập đầy đủ thông tin!", Toast.LENGTH_SHORT).show();

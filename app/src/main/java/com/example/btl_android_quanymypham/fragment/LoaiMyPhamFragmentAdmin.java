@@ -58,6 +58,7 @@ public class LoaiMyPhamFragmentAdmin extends Fragment {
                 selectedId = 0;
                 tenloai.requestFocus();
                 DataListView();
+                Toast.makeText(requireContext(), "Làm mới thành công", Toast.LENGTH_SHORT).show();
             }
         });
         them.setOnClickListener(new View.OnClickListener() {
@@ -74,6 +75,7 @@ public class LoaiMyPhamFragmentAdmin extends Fragment {
                     tenloai.setText("");
                     mota.setText("");
                     tenloai.requestFocus();
+                    Toast.makeText(requireContext(), "Thêm dữ liệu thành công", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -89,6 +91,7 @@ public class LoaiMyPhamFragmentAdmin extends Fragment {
                 } else {
                     db.updateData(selectedId,strTenLoai,strMoTa);
                     DataListView();
+                    Toast.makeText(requireContext(), "Sửa dữ liệu thành công", Toast.LENGTH_SHORT).show();
                 }
             }
         });

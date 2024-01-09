@@ -40,6 +40,49 @@ public class DataBaseHandler extends SQLiteOpenHelper {
                 "ChiTiet TEXT, " +
                 "FOREIGN KEY (LoaiMyPham) REFERENCES LoaiMyPham(id));";
         db.execSQL(createTableQueryThongTinMyPham);
+
+        String createTableQueryHoaDonBan = "CREATE TABLE IF NOT EXISTS HoaDonBan " +
+                "(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "NguoiTao INTEGER, " +
+                "TenKH TEXT, " +
+                "DiaChi TEXT, " +
+                "Sdt TEXT, " +
+                "NgayBan TEXT, " +
+                "TongTien LONG, " +
+                "FOREIGN KEY (NguoiTao) REFERENCES DangNhap(id));";
+        db.execSQL(createTableQueryHoaDonBan);
+
+        String createTableQueryChiTietHoaDonBan = "CREATE TABLE IF NOT EXISTS ChiTietHoaDonBan " +
+                "(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "MaHDB INTEGER, " +
+                "MaMP INTEGER, " +
+                "SoLuong INTEGER, " +
+                "DonGia LONG, " +
+                "TongTien LONG, " +
+                "FOREIGN KEY (MaHDB) REFERENCES HoaDonBan(id), " +
+                "FOREIGN KEY (MaMP) REFERENCES ThongTinMyPham(id));";
+        db.execSQL(createTableQueryChiTietHoaDonBan);
+
+        String createTableQueryHoaDonNhap = "CREATE TABLE IF NOT EXISTS HoaDonNhap " +
+                "(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "NguoiTao INTEGER, " +
+                "MaNCC INTEGER, " +
+                "NgayNhap TEXT, " +
+                "TongTien LONG, " +
+                "FOREIGN KEY (NguoiTao) REFERENCES DangNhap(id), " +
+                "FOREIGN KEY (MaNCC) REFERENCES NhaCungCap(id));";
+        db.execSQL(createTableQueryHoaDonNhap);
+
+        String createTableQueryChiTietHoaDonNhap = "CREATE TABLE IF NOT EXISTS ChiTietHoaDonNhap " +
+                "(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "MaHDN INTEGER, " +
+                "MaMP INTEGER, " +
+                "SoLuong INTEGER, " +
+                "DonGia LONG, " +
+                "TongTien LONG, " +
+                "FOREIGN KEY (MaHDN) REFERENCES HoaDonNhap(id), " +
+                "FOREIGN KEY (MaMP) REFERENCES ThongTinMyPham(id));";
+        db.execSQL(createTableQueryChiTietHoaDonNhap);
     }
 
     @Override

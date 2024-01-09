@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -27,6 +28,8 @@ import com.example.btl_android_quanymypham.fragment.TaiKhoanFragmentAdmin;
 import com.example.btl_android_quanymypham.model.ProductHomeUser;
 import com.example.btl_android_quanymypham.model.TaiKhoanAdmin;
 import com.google.android.material.navigation.NavigationView;
+
+import java.util.List;
 
 public class MainAdmin extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout mDrawerLayout;
@@ -90,6 +93,23 @@ public class MainAdmin extends AppCompatActivity implements NavigationView.OnNav
         imgUser.setImageBitmap(bitmap);
         nameUser.setText(taiKhoanAdmin.getHoten());
         emailUser.setText(taiKhoanAdmin.getEmail());
+
+        Bundle bundle2 = new Bundle();
+        bundle2.putSerializable("ObjectUser", taiKhoanAdmin);
+        Fragment fragment = new TTMyPhamFragmentAdmin();
+        fragment.setArguments(bundle2);
+        replaceFragment(fragment);
+
+//        Bundle bundle = getArguments();
+//        if (bundle != null) {
+//            TaiKhoanAdmin taiKhoanAdmin = (TaiKhoanAdmin) bundle.getSerializable("ObjectUser");
+//            if (taiKhoanAdmin != null) {
+//                Toast.makeText(requireContext(), ""+taiKhoanAdmin.getHoten(), Toast.LENGTH_SHORT).show();
+//            }
+//            else {
+//                Toast.makeText(requireContext(), "khong co du lieu", Toast.LENGTH_SHORT).show();
+//            }
+//        }
     }
 
     @Override
