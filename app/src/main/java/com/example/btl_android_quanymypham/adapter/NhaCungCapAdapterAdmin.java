@@ -55,7 +55,6 @@ public class NhaCungCapAdapterAdmin extends RecyclerView.Adapter<NhaCungCapAdapt
         if (nhaCungCapAdmin==null){
             return;
         }
-        holder.item_id.setText(String.valueOf(nhaCungCapAdmin.getId()));
         holder.item_ten.setText(nhaCungCapAdmin.getTen());
         holder.item_diachi.setText(nhaCungCapAdmin.getDiachi());
         holder.item_sdt.setText(nhaCungCapAdmin.getSdt());
@@ -71,7 +70,6 @@ public class NhaCungCapAdapterAdmin extends RecyclerView.Adapter<NhaCungCapAdapt
 
     public class NhaCungCapViewHolder extends RecyclerView.ViewHolder {
         private CardView Itemnhacungcap;
-        private TextView item_id;
         private TextView item_ten;
         private TextView item_diachi;
         private TextView item_sdt;
@@ -79,7 +77,6 @@ public class NhaCungCapAdapterAdmin extends RecyclerView.Adapter<NhaCungCapAdapt
         public NhaCungCapViewHolder(@NonNull View itemView) {
             super(itemView);
             Itemnhacungcap = itemView.findViewById(R.id.item_nhacungcap_admin);
-            item_id = itemView.findViewById(R.id.item_id);
             item_ten = itemView.findViewById(R.id.item_tenncc);
             item_diachi = itemView.findViewById(R.id.item_diachincc);
             item_sdt = itemView.findViewById(R.id.item_sdtncc);

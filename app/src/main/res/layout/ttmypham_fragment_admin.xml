@@ -22,7 +22,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Tên mỹ phẩm: "
-                    android:textSize="20sp"/>
+                    android:textSize="20sp"
+                    android:textColor="#9A9A9A"/>
 
                 <EditText
                     android:id="@+id/txtTenMP"
@@ -38,7 +39,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Dung tích: "
-                    android:textSize="20sp"/>
+                    android:textSize="20sp"
+                    android:textColor="#9A9A9A"/>
 
                 <EditText
                     android:id="@+id/txtDungTich"
@@ -54,7 +56,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Loại mỹ phẩm: "
-                    android:textSize="20sp"/>
+                    android:textSize="20sp"
+                    android:textColor="#9A9A9A"/>
 
                 <Spinner
                     android:id="@+id/spinnerLoaiMP"
@@ -69,6 +72,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
                     android:text="Ảnh sản phẩm:"
+                    android:textColor="#9A9A9A"
                     android:layout_gravity="center_vertical"/>
 
                 <LinearLayout>
@@ -101,7 +105,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Giá bán: "
-                    android:textSize="20sp"/>
+                    android:textSize="20sp"
+                    android:textColor="#9A9A9A"/>
 
                 <EditText
                     android:id="@+id/txtGiaBan"
@@ -118,7 +123,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Mô tả: "
-                    android:textSize="20sp"/>
+                    android:textSize="20sp"
+                    android:textColor="#9A9A9A"/>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/txtMoTa"
@@ -139,6 +145,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Chi tiết: "
+                    android:textColor="#9A9A9A"
                     android:textSize="20sp"/>
 
                 <com.google.android.material.textfield.TextInputLayout

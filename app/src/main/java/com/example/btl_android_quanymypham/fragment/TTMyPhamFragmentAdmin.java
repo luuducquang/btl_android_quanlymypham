@@ -247,7 +247,7 @@ public class TTMyPhamFragmentAdmin extends Fragment {
             @Override
             public void onItemClick(TTMyPhamAdmin ttMyPhamAdmin) {
                 selectedId = ttMyPhamAdmin.getId();
-                tenmp.setText(ttMyPhamAdmin.getTenloaimypham());
+                tenmp.setText(ttMyPhamAdmin.getTenmypham());
                 dungtich.setText(ttMyPhamAdmin.getDungtich());
                 giaban.setText(String.valueOf(ttMyPhamAdmin.getGia()));
                 mota.getEditText().setText(ttMyPhamAdmin.getMota());
@@ -266,6 +266,14 @@ public class TTMyPhamFragmentAdmin extends Fragment {
             public void onItemLongClick(TTMyPhamAdmin ttMyPhamAdmin) {
                 getActivity().openContextMenu(recyclerView);
                 selectedId = ttMyPhamAdmin.getId();
+            }
+        });
+
+        ttMyPhamAdapterAdmin.setDelOnItemClickListener(new TTMyPhamAdapterAdmin.OnDelItemClickListener(){
+            @Override
+            public void onDelItemClick(TTMyPhamAdmin ttMyPhamAdmin) {
+                selectedId = ttMyPhamAdmin.getId();
+                DeleteItem();
             }
         });
     }

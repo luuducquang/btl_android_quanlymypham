@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -25,7 +26,17 @@ public class TTMyPhamAdapterAdmin extends RecyclerView.Adapter<TTMyPhamAdapterAd
 
     Context context;
     private OnItemClickListener onItemClickListener;
+
+    private OnDelItemClickListener onDelItemClickListener;
     private OnItemLongClickListener onItemLongClickListener;
+
+    public interface OnDelItemClickListener {
+        void onDelItemClick(TTMyPhamAdmin ttMyPhamAdmin);
+    }
+
+    public void setDelOnItemClickListener(TTMyPhamAdapterAdmin.OnDelItemClickListener listener) {
+        this.onDelItemClickListener = listener;
+    }
 
     public interface OnItemClickListener {
         void onItemClick(TTMyPhamAdmin ttMyPhamAdmin);
@@ -60,7 +71,6 @@ public class TTMyPhamAdapterAdmin extends RecyclerView.Adapter<TTMyPhamAdapterAd
         if (ttMyPhamAdmin==null){
             return;
         }
-        holder.item_id.setText(String.valueOf(ttMyPhamAdmin.getId()));
         holder.item_temmypham.setText(ttMyPhamAdmin.getTenmypham());
         holder.item_dungtich.setText(ttMyPhamAdmin.getDungtich());
         holder.item_loaimp.setText(ttMyPhamAdmin.getTenloaimypham());
@@ -82,7 +92,6 @@ public class TTMyPhamAdapterAdmin extends RecyclerView.Adapter<TTMyPhamAdapterAd
 
     public class TTMyPhamViewHolder extends RecyclerView.ViewHolder {
         private CardView ItemTTMyPham;
-        private TextView item_id;
         private TextView item_temmypham;
         private TextView item_dungtich;
         private TextView item_loaimp;
@@ -90,11 +99,11 @@ public class TTMyPhamAdapterAdmin extends RecyclerView.Adapter<TTMyPhamAdapterAd
         private TextView item_giaban;
         private TextView item_mota;
         private TextView item_chitiet;
+        private ImageView btn_delete;
         public TTMyPhamViewHolder(@NonNull View itemView) {
             super(itemView);
 
             ItemTTMyPham = itemView.findViewById(R.id.item_ttmypham_admin);
-            item_id = itemView.findViewById(R.id.item_id);
             item_temmypham = itemView.findViewById(R.id.item_tenmypham);
             item_dungtich = itemView.findViewById(R.id.item_dungtich);
             item_loaimp = itemView.findViewById(R.id.item_loaimypham);
@@ -102,6 +111,18 @@ public class TTMyPhamAdapterAdmin extends RecyclerView.Adapter<TTMyPhamAdapterAd
             item_giaban = itemView.findViewById(R.id.item_gia);
             item_mota = itemView.findViewById(R.id.item_mota);
             item_chitiet = itemView.findViewById(R.id.item_chitiet);
+            btn_delete = itemView.findViewById(R.id.btn_img_delete_item);
+
+            btn_delete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION && onDelItemClickListener != null) {
+                        TTMyPhamAdmin ttMyPhamAdmin = ttMyPhamAdminList.get(position);
+                        onDelItemClickListener.onDelItemClick(ttMyPhamAdmin);
+                    }
+                }
+            });
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

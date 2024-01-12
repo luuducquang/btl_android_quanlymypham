@@ -60,7 +60,6 @@ public class TaiKhoanAdapterAdmin extends RecyclerView.Adapter<TaiKhoanAdapterAd
         if (taiKhoanAdmin==null){
             return;
         }
-        holder.item_id.setText(String.valueOf(taiKhoanAdmin.getId()));
         holder.item_taikhoan.setText(taiKhoanAdmin.getTaikhoan());
         holder.item_matkhau.setText(taiKhoanAdmin.getMatkhau());
         holder.item_hoten.setText(taiKhoanAdmin.getHoten());
@@ -81,7 +80,6 @@ public class TaiKhoanAdapterAdmin extends RecyclerView.Adapter<TaiKhoanAdapterAd
 
     public class TaiKhoanViewHolder extends RecyclerView.ViewHolder {
         private CardView Itemtaikhoan;
-        private TextView item_id;
         private TextView item_taikhoan;
         private TextView item_matkhau;
         private TextView item_hoten;
@@ -92,7 +90,6 @@ public class TaiKhoanAdapterAdmin extends RecyclerView.Adapter<TaiKhoanAdapterAd
             super(itemView);
 
             Itemtaikhoan = itemView.findViewById(R.id.item_taikhoan_admin);
-            item_id = itemView.findViewById(R.id.item_id);
             item_taikhoan = itemView.findViewById(R.id.item_taikhoan);
             item_matkhau = itemView.findViewById(R.id.item_matkhau);
             item_hoten = itemView.findViewById(R.id.item_hoten);

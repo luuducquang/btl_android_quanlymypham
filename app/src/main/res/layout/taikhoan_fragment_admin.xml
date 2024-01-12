@@ -18,7 +18,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
-                    android:text="Tài khoản:" />
+                    android:text="Tài khoản:"
+                    android:textColor="#9A9A9A"/>
                 <EditText
                     android:id="@+id/taikhoan"
                     android:layout_width="200sp"
@@ -30,7 +31,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
-                    android:text="Mật khẩu:" />
+                    android:text="Mật khẩu:"
+                    android:textColor="#9A9A9A"/>
                 <EditText
                     android:id="@+id/matkhau"
                     android:layout_width="200sp"
@@ -42,7 +44,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
-                    android:text="Họ tên:" />
+                    android:text="Họ tên:"
+                    android:textColor="#9A9A9A" />
                 <EditText
                     android:id="@+id/hoten"
                     android:layout_width="200sp"
@@ -54,7 +57,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
-                    android:text="Email:" />
+                    android:text="Email:"
+                    android:textColor="#9A9A9A" />
                 <EditText
                     android:id="@+id/email"
                     android:layout_width="200sp"
@@ -67,6 +71,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
                     android:text="Ảnh đại diện:"
+                    android:textColor="#9A9A9A"
                     android:layout_gravity="center_vertical"/>
 
                 <LinearLayout>
@@ -96,7 +101,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
-                    android:text="Quyền:" />
+                    android:text="Quyền:"
+                    android:textColor="#9A9A9A"/>
                 <Spinner
                     android:layout_marginLeft="10sp"
                     android:layout_height="40sp"

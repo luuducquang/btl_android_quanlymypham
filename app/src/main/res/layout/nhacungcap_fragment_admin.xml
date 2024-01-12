@@ -15,7 +15,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
-                android:text="Tên nhà cung cấp:" />
+                android:text="Tên nhà cung cấp:"
+                android:textColor="#9A9A9A" />
             <EditText
                 android:id="@+id/ten_ncc"
                 android:layout_width="200sp"
@@ -27,7 +28,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
-                android:text="Địa chỉ:" />
+                android:text="Địa chỉ:"
+                android:textColor="#9A9A9A" />
             <EditText
                 android:id="@+id/diachi_ncc"
                 android:layout_width="200sp"
@@ -39,7 +41,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
-                android:text="Số điện thoại:" />
+                android:text="Số điện thoại:"
+                android:textColor="#9A9A9A" />
             <EditText
                 android:id="@+id/sdt_ncc"
                 android:inputType="number"

@@ -61,7 +61,6 @@ public class LoaiMyPhamAdapterAdmin extends RecyclerView.Adapter<LoaiMyPhamAdapt
         if (loaiMyPhamAdmin==null){
             return;
         }
-        holder.item_ma.setText(String.valueOf(loaiMyPhamAdmin.getId()));
         holder.item_tenloai.setText(loaiMyPhamAdmin.getTenloai());
         holder.item_mota.setText(loaiMyPhamAdmin.getMota());
         holder.Itemloaimypham.setOnClickListener(new View.OnClickListener() {
@@ -101,13 +100,11 @@ public class LoaiMyPhamAdapterAdmin extends RecyclerView.Adapter<LoaiMyPhamAdapt
     public class LoaiMyPhamViewHolder extends RecyclerView.ViewHolder {
         private CardView Itemloaimypham;
         private TextView item_tenloai;
-        private TextView item_ma;
         private TextView item_mota;
         public LoaiMyPhamViewHolder(@NonNull View itemView) {
             super(itemView);
 
             Itemloaimypham = itemView.findViewById(R.id.item_loaimypham_admin);
-            item_ma = itemView.findViewById(R.id.item_id);
             item_tenloai = itemView.findViewById(R.id.item_tenloai);
             item_mota = itemView.findViewById(R.id.item_mota);
         }

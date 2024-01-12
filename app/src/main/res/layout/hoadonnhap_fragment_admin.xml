@@ -15,26 +15,26 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
-                android:text="Tên loại:"
+                android:text="Nhà cung cấp:"
                 android:textColor="#9A9A9A" />
-            <EditText
-                android:id="@+id/tenloai"
-                android:layout_width="200sp"
-                android:layout_marginLeft="10sp"
-                android:layout_height="wrap_content"/>
+            <Spinner
+                android:id="@+id/spinnerNCC"
+            android:layout_width="200sp"
+            android:layout_marginLeft="10sp"
+            android:layout_height="40sp"/>
         </TableRow>
         <TableRow>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
-                android:text="Mô tả:"
+                android:text="Ngày nhập:"
                 android:textColor="#9A9A9A" />
-            <EditText
-                android:id="@+id/mota"
-                android:layout_width="200sp"
-                android:layout_marginLeft="10sp"
-                android:layout_height="wrap_content"/>
+
+            <DatePicker
+                android:id="@+id/datePicker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
         </TableRow>
     </TableLayout>
 

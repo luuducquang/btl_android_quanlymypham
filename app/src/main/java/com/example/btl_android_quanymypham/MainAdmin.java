@@ -20,6 +20,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.btl_android_quanymypham.fragment.HoaDonNhapFragmentAdmin;
 import com.example.btl_android_quanymypham.fragment.HomeFragmentUser;
 import com.example.btl_android_quanymypham.fragment.LoaiMyPhamFragmentAdmin;
 import com.example.btl_android_quanymypham.fragment.NhaCungCapFragmentAdmin;
@@ -66,6 +67,7 @@ public class MainAdmin extends AppCompatActivity implements NavigationView.OnNav
         navigationView.setNavigationItemSelectedListener(MainAdmin.this);
 
         replaceFragment(new TTMyPhamFragmentAdmin());
+        getSupportActionBar().setTitle("Thông tin mỹ phẩm");
         navigationView.getMenu().findItem(R.id.nav_ttmypham).setChecked(true);
 
         View headerView = navigationView.getHeaderView(0);
@@ -119,24 +121,35 @@ public class MainAdmin extends AppCompatActivity implements NavigationView.OnNav
             if (mCurrentFragment!=FragmentTTmypham){
                 replaceFragment(new TTMyPhamFragmentAdmin());
                 mCurrentFragment = FragmentTTmypham;
+                getSupportActionBar().setTitle("Thông tin mỹ phẩm");
             }
         }
         else if (id == R.id.nav_loaimypham){
             if (mCurrentFragment!=FragmentLoaimypham){
                 replaceFragment(new LoaiMyPhamFragmentAdmin());
                 mCurrentFragment = FragmentLoaimypham;
+                getSupportActionBar().setTitle("Loại mỹ phẩm");
             }
         }
         else if (id == R.id.nav_nhacungcap){
             if (mCurrentFragment!=FragmentNhaCungCap){
                 replaceFragment(new NhaCungCapFragmentAdmin());
                 mCurrentFragment = FragmentNhaCungCap;
+                getSupportActionBar().setTitle("Nhà cung cấp");
+            }
+        }
+        else if (id == R.id.nav_hoadonnhap){
+            if (mCurrentFragment!=FragmentHoaDonNhap){
+                replaceFragment(new HoaDonNhapFragmentAdmin());
+                mCurrentFragment = FragmentHoaDonNhap;
+                getSupportActionBar().setTitle("Hoá đơn nhập");
             }
         }
         else if (id == R.id.nav_taikhoan){
             if (mCurrentFragment!=FragmentTaiKhoan){
                 replaceFragment(new TaiKhoanFragmentAdmin());
                 mCurrentFragment = FragmentTaiKhoan;
+                getSupportActionBar().setTitle("Tài khoản");
             }
         }
         mDrawerLayout.closeDrawer(GravityCompat.START);
