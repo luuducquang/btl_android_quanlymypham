@@ -1,76 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    tools:context=".Login"
-    android:background="@drawable/login_bg">
+    android:layout_margin="8dp"
+    android:padding="15dp"
+    tools:context=".Login">
+    <ImageView
+        android:layout_width="250dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:src="@drawable/logo1"
+        android:scaleType="centerCrop"
+        />
 
-    <TableLayout
-        android:layout_width="300sp"
+    <TextView
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ĐĂNG NHẬP"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:textColor="#2196F3"
+        android:layout_marginBottom="15dp"
+        />
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:hint="Tên đăng nhập"
+        android:layout_marginBottom="15dp"
+        android:id="@+id/layout_username"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txt_username"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+        </com.google.android.material.textfield.TextInputEditText>
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:hint="Mật khẩu"
+        app:passwordToggleEnabled="true"
+        android:id="@+id/layout_password"
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txt_password"
+            android:layout_width="match_parent"
+            android:inputType="textPassword"
+            android:layout_height="50dp">
+
+        </com.google.android.material.textfield.TextInputEditText>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <CheckBox
+        android:id="@+id/login_remember"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:text="Lưu Mật Khẩu"
+        android:layout_gravity="end"/>
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="300sp">
-
-        <TableRow>
-
-            <TextView
-                android:layout_marginBottom="30sp"
-                android:fontFamily="sans-serif-black"
-                android:text="ĐĂNG NHẬP"
-                android:textSize="35sp" />
-        </TableRow>
-
-        <TableRow>
-            <EditText
-                android:id="@+id/taikhoan"
-                android:layout_height="50sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:hint="Tài khoản" />
-        </TableRow>
-
-        <TableRow>
-            <EditText
-                android:id="@+id/matkhau"
-                android:layout_height="50sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:hint="Mật khẩu" />
-        </TableRow>
-
-
-        <Button
-            android:id="@+id/login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="10sp"
-            android:backgroundTint="#000"
-            android:text="Đăng nhập"
-            app:cornerRadius="@dimen/cardview_compat_inset_shadow" />
-
-
-        <TableRow android:layout_marginTop="50sp">
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Quên mật khẩu ?"
-                android:fontFamily="sans-serif-black"
-                android:textSize="15sp"/>
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Tạo tài khoản"
-                android:textSize="15sp"
-                android:fontFamily="sans-serif-black"
-                android:gravity="right"/>
-        </TableRow>
-    </TableLayout>
-
+        android:layout_marginTop="10sp"
+        android:backgroundTint="#03A9F4"
+        android:text="Đăng nhập"
+        app:cornerRadius="@dimen/cardview_compat_inset_shadow" />
+    <TextView
+        android:id="@+id/register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Đăng ký tài khoản "
+        android:layout_marginTop="10dp"
+        android:textAlignment="center"
+        android:textColor="@color/blue"
+        />
 </LinearLayout>

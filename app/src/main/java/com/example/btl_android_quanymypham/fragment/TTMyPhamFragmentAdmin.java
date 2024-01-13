@@ -77,6 +77,7 @@ public class TTMyPhamFragmentAdmin extends Fragment {
         listMaLoaiMP = new ArrayList<>();
         listTenLoaiMP = new ArrayList<>();
 
+
         Init(view);
         Getspinner();
         HandlerImg();

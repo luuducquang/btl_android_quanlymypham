@@ -158,7 +158,7 @@
                 android:id="@+id/btn_img_delete_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/baseline_delete_24"/>
+                android:src="@drawable/delete"/>
         </LinearLayout>
 
     </LinearLayout>

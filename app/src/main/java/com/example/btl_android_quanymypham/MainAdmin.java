@@ -96,23 +96,20 @@ public class MainAdmin extends AppCompatActivity implements NavigationView.OnNav
         nameUser.setText(taiKhoanAdmin.getHoten());
         emailUser.setText(taiKhoanAdmin.getEmail());
 
-        Bundle bundle2 = new Bundle();
-        bundle2.putSerializable("ObjectUser", taiKhoanAdmin);
-        Fragment fragment = new TTMyPhamFragmentAdmin();
-        fragment.setArguments(bundle2);
-        replaceFragment(fragment);
-
-//        Bundle bundle = getArguments();
-//        if (bundle != null) {
-//            TaiKhoanAdmin taiKhoanAdmin = (TaiKhoanAdmin) bundle.getSerializable("ObjectUser");
-//            if (taiKhoanAdmin != null) {
-//                Toast.makeText(requireContext(), ""+taiKhoanAdmin.getHoten(), Toast.LENGTH_SHORT).show();
-//            }
-//            else {
-//                Toast.makeText(requireContext(), "khong co du lieu", Toast.LENGTH_SHORT).show();
-//            }
-//        }
     }
+
+    private void replaceFragment(Fragment fragment) {
+        TaiKhoanAdmin taiKhoanAdmin = (TaiKhoanAdmin) getIntent().getSerializableExtra("ObjectUser");
+
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("ObjectUser", taiKhoanAdmin);
+        fragment.setArguments(bundle);
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.content_frame, fragment);
+        transaction.commit();
+    }
+
+
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -166,9 +163,9 @@ public class MainAdmin extends AppCompatActivity implements NavigationView.OnNav
         }
     }
 
-    private void replaceFragment(Fragment fragment){
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.content_frame,fragment);
-        transaction.commit();
-    }
+//    private void replaceFragment(Fragment fragment){
+//        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+//        transaction.replace(R.id.content_frame,fragment);
+//        transaction.commit();
+//    }
 }
