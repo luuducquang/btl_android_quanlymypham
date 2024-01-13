@@ -20,6 +20,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.btl_android_quanymypham.fragment.ChiTietHoaDonNhapFragmentAdmin;
 import com.example.btl_android_quanymypham.fragment.HoaDonNhapFragmentAdmin;
 import com.example.btl_android_quanymypham.fragment.HomeFragmentUser;
 import com.example.btl_android_quanymypham.fragment.LoaiMyPhamFragmentAdmin;
@@ -133,6 +134,13 @@ public class MainAdmin extends AppCompatActivity implements NavigationView.OnNav
                 replaceFragment(new NhaCungCapFragmentAdmin());
                 mCurrentFragment = FragmentNhaCungCap;
                 getSupportActionBar().setTitle("Nhà cung cấp");
+            }
+        }
+        else if (id == R.id.nav_hoadonban){
+            if (mCurrentFragment!=FragmentHoaDonBan){
+                replaceFragment(new ChiTietHoaDonNhapFragmentAdmin());
+                mCurrentFragment = FragmentHoaDonBan;
+                getSupportActionBar().setTitle("Hoá đơn bán");
             }
         }
         else if (id == R.id.nav_hoadonnhap){

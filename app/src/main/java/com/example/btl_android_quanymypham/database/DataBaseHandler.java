@@ -38,7 +38,7 @@ public class DataBaseHandler extends SQLiteOpenHelper {
                 "GiaBan LONG, " +
                 "MoTa TEXT, " +
                 "ChiTiet TEXT, " +
-                "FOREIGN KEY (LoaiMyPham) REFERENCES LoaiMyPham(id));";
+                "FOREIGN KEY (LoaiMyPham) REFERENCES LoaiMyPham(id)ON DELETE CASCADE);";
         db.execSQL(createTableQueryThongTinMyPham);
 
         String createTableQueryHoaDonBan = "CREATE TABLE IF NOT EXISTS HoaDonBan " +
@@ -59,8 +59,8 @@ public class DataBaseHandler extends SQLiteOpenHelper {
                 "SoLuong INTEGER, " +
                 "DonGia LONG, " +
                 "TongTien LONG, " +
-                "FOREIGN KEY (MaHDB) REFERENCES HoaDonBan(id), " +
-                "FOREIGN KEY (MaMP) REFERENCES ThongTinMyPham(id));";
+                "FOREIGN KEY (MaHDB) REFERENCES HoaDonBan(id) ON DELETE CASCADE, " +
+                "FOREIGN KEY (MaMP) REFERENCES ThongTinMyPham(id) ON DELETE CASCADE);";
         db.execSQL(createTableQueryChiTietHoaDonBan);
 
         String createTableQueryHoaDonNhap = "CREATE TABLE IF NOT EXISTS HoaDonNhap " +
@@ -70,7 +70,7 @@ public class DataBaseHandler extends SQLiteOpenHelper {
                 "NgayNhap TEXT, " +
                 "TongTien LONG, " +
                 "FOREIGN KEY (NguoiTao) REFERENCES DangNhap(id), " +
-                "FOREIGN KEY (MaNCC) REFERENCES NhaCungCap(id));";
+                "FOREIGN KEY (MaNCC) REFERENCES NhaCungCap(id) ON DELETE CASCADE);";
         db.execSQL(createTableQueryHoaDonNhap);
 
         String createTableQueryChiTietHoaDonNhap = "CREATE TABLE IF NOT EXISTS ChiTietHoaDonNhap " +
@@ -80,8 +80,8 @@ public class DataBaseHandler extends SQLiteOpenHelper {
                 "SoLuong INTEGER, " +
                 "DonGia LONG, " +
                 "TongTien LONG, " +
-                "FOREIGN KEY (MaHDN) REFERENCES HoaDonNhap(id), " +
-                "FOREIGN KEY (MaMP) REFERENCES ThongTinMyPham(id));";
+                "FOREIGN KEY (MaHDN) REFERENCES HoaDonNhap(id) ON DELETE CASCADE, " +
+                "FOREIGN KEY (MaMP) REFERENCES ThongTinMyPham(id) ON DELETE CASCADE);";
         db.execSQL(createTableQueryChiTietHoaDonNhap);
     }
 

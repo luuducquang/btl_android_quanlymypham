@@ -13,12 +13,31 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.btl_android_quanymypham.R;
 import com.example.btl_android_quanymypham.model.HoaDonNhapAdmin;
+import com.example.btl_android_quanymypham.model.TTMyPhamAdmin;
 
 import java.util.List;
 
 public class HoaDonNhapAdapterAdmin extends RecyclerView.Adapter<HoaDonNhapAdapterAdmin.HoaDonNhapViewHolder> {
     List<HoaDonNhapAdmin> hoaDonNhapAdminList;
     Context context;
+    private OnDelItemClickListener onDelItemClickListener;
+    private OnInfItemClickListener onInfItemClickListener;
+
+    public interface OnInfItemClickListener {
+        void onInfItemClick(HoaDonNhapAdmin hoaDonNhapAdmin);
+    }
+
+    public void setInfOnItemClickListener(HoaDonNhapAdapterAdmin.OnInfItemClickListener listener) {
+        this.onInfItemClickListener = listener;
+    }
+
+    public interface OnDelItemClickListener {
+        void onDelItemClick(HoaDonNhapAdmin hoaDonNhapAdmin);
+    }
+
+    public void setDelOnItemClickListener(HoaDonNhapAdapterAdmin.OnDelItemClickListener listener) {
+        this.onDelItemClickListener = listener;
+    }
 
     public HoaDonNhapAdapterAdmin(List<HoaDonNhapAdmin> hoaDonNhapAdminList, Context context) {
         this.hoaDonNhapAdminList = hoaDonNhapAdminList;
@@ -70,6 +89,28 @@ public class HoaDonNhapAdapterAdmin extends RecyclerView.Adapter<HoaDonNhapAdapt
             item_hoten = itemView.findViewById(R.id.item_nguoitao);
             img_inf = itemView.findViewById(R.id.img_info);
             img_del = itemView.findViewById(R.id.img_delete);
+
+            img_del.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION && onDelItemClickListener != null) {
+                        HoaDonNhapAdmin hoaDonNhapAdmin = hoaDonNhapAdminList.get(position);
+                        onDelItemClickListener.onDelItemClick(hoaDonNhapAdmin);
+                    }
+                }
+            });
+
+            img_inf.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION && onInfItemClickListener != null) {
+                        HoaDonNhapAdmin hoaDonNhapAdmin = hoaDonNhapAdminList.get(position);
+                        onInfItemClickListener.onInfItemClick(hoaDonNhapAdmin);
+                    }
+                }
+            });
         }
     }
 }

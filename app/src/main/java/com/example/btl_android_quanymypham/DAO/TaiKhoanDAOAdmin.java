@@ -92,4 +92,18 @@ public class TaiKhoanDAOAdmin extends DataBaseHandler {
         cursor.close();
         return taiKhoanAdmin;
     }
+
+    public boolean isUsernameExist(String taiKhoan) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT COUNT(*) FROM DangNhap WHERE TaiKhoan=?";
+        String[] selectionArgs = {taiKhoan};
+        Cursor cursor = db.rawQuery(query, selectionArgs);
+        int count = 0;
+        if (cursor.moveToFirst()) {
+            count = cursor.getInt(0);
+        }
+        cursor.close();
+        return count > 0;
+    }
+
 }

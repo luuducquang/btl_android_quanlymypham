@@ -1,16 +1,22 @@
 package com.example.btl_android_quanymypham.fragment;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.ContextMenu;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -59,6 +65,7 @@ public class HoaDonNhapFragmentAdmin extends Fragment {
     ImageView chonngaynhap;
     Spinner ncc,mp;
     private int selectedId;
+    private int DetailID;
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
     Calendar calendar =Calendar.getInstance();
@@ -200,9 +207,61 @@ public class HoaDonNhapFragmentAdmin extends Fragment {
         hoaDonNhapAdapterAdmin = new HoaDonNhapAdapterAdmin(data,requireContext());
 
         recyclerView.setAdapter(hoaDonNhapAdapterAdmin);
+
+        hoaDonNhapAdapterAdmin.setDelOnItemClickListener(new HoaDonNhapAdapterAdmin.OnDelItemClickListener() {
+            @Override
+            public void onDelItemClick(HoaDonNhapAdmin hoaDonNhapAdmin) {
+                selectedId = hoaDonNhapAdmin.getId();
+                DeleteItem();
+            }
+        });
+
+        hoaDonNhapAdapterAdmin.setInfOnItemClickListener(new HoaDonNhapAdapterAdmin.OnInfItemClickListener() {
+            @Override
+            public void onInfItemClick(HoaDonNhapAdmin hoaDonNhapAdmin) {
+                DetailID = hoaDonNhapAdmin.getId();
+
+                ChiTietHoaDonNhapFragmentAdmin chiTietDialog = ChiTietHoaDonNhapFragmentAdmin.newInstance(DetailID);
+                chiTietDialog.show(getFragmentManager(), "chi_tiet_dialog");
+
+            }
+        });
+    }
+
+    private void DeleteItem() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setTitle("Xác nhận xóa");
+        builder.setMessage("Bạn có chắc muốn xóa?");
+        builder.setPositiveButton("Xác nhận", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                db.deleteData(selectedId);
+                DataListView();
+                Toast.makeText(requireContext(), "Đã xóa" , Toast.LENGTH_SHORT).show();
+            }
+        });
+        builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        builder.create().show();
     }
 
     private void HandlerButton() {
+
+        lammoi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                soluong.setText("");
+                dongia.setText("");
+                tongtien.setText("");
+                ncc.requestFocus();
+                selectedId = 0;
+            }
+        });
         chonngaynhap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -260,7 +319,7 @@ public class HoaDonNhapFragmentAdmin extends Fragment {
         soluong = view.findViewById(R.id.txtSoLuong);
         dongia = view.findViewById(R.id.txtDonGia);
         tongtien = view.findViewById(R.id.txtTongTien);
-        lammoi = view.findViewById(R.id.btnLamMoi);
+        lammoi = view.findViewById(R.id.btnMoi);
         them = view.findViewById(R.id.btnThem);
         recyclerView = view.findViewById(R.id.rcv_hoadonnhap);
         chonngaynhap = view.findViewById(R.id.imgdate);

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/item_hoadonnhap_admin"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="6dp"
+    android:layout_margin="4dp">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/img_mp"
+                android:layout_width="75sp"
+                android:layout_gravity="center_vertical"
+                android:layout_height="75sp"
+                android:src="@drawable/anhfb"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="230sp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5sp">
+                <TextView
+                    android:id="@+id/item_tenmp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sữa rửa mặt Cerave"
+                    android:textStyle="bold"
+                    android:textSize="25sp"
+                    android:textColor="#6C6C6C"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5sp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Số lượng: "
+                    android:textSize="15sp"
+                    android:textColor="#7C7C7C"/>
+                <TextView
+                    android:id="@+id/item_soluong"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="10"
+                    android:textSize="15sp"
+                    android:textColor="#7C7C7C"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" | "
+                    android:textSize="15sp"
+                    android:textColor="#7C7C7C"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Đơn giá: "
+                    android:textSize="15sp"
+                    android:textColor="#7C7C7C"/>
+                <TextView
+                    android:id="@+id/item_dongia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="200000"
+                    android:textSize="15sp"
+                    android:textColor="#7C7C7C"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="đ"
+                    android:textSize="15sp"
+                    android:textColor="#7C7C7C"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5sp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tổng tiền: "
+                    android:textSize="15sp"
+                    android:textColor="#7C7C7C"/>
+                <TextView
+                    android:id="@+id/item_tongtien"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2000000"
+                    android:textSize="15sp"
+                    android:textColor="#7C7C7C"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="đ"
+                    android:textSize="15sp"
+                    android:textColor="#7C7C7C"/>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/img_delete"
+                android:layout_width="40sp"
+                android:layout_height="40sp"
+                android:src="@drawable/delete"
+                android:layout_gravity="center_vertical"/>
+        </LinearLayout>
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>

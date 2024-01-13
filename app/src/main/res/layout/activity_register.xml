@@ -5,118 +5,118 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:layout_margin="8dp"
     android:padding="15dp"
+    android:background="@drawable/login_bg"
     tools:context=".Register">
 
-<!--    <TextView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginBottom="15dp"-->
-<!--        android:gravity="center"-->
-<!--        android:text="Đăng ký"-->
-<!--        android:textColor="#2196F3"-->
-<!--        android:textSize="30dp"-->
-<!--        android:textStyle="bold" />-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:gravity="center"
+        android:text="ĐĂNG KÝ"
+        android:textColor="#2196F3"
+        android:textSize="30dp"
+        android:textStyle="bold" />
 
-<!--    <com.google.android.material.textfield.TextInputLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
-<!--        android:hint="Tên đăng nhập"-->
-<!--        android:id="@+id/username_register"-->
-<!--        android:layout_marginBottom="15dp"-->
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:hint="Tên đăng nhập"
+        android:id="@+id/username_register"
+        android:layout_marginBottom="15dp"
 
-<!--        >-->
+        >
 
-<!--        <com.google.android.material.textfield.TextInputEditText-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="50dp">-->
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
 
-<!--        </com.google.android.material.textfield.TextInputEditText>-->
-<!--    </com.google.android.material.textfield.TextInputLayout>-->
+        </com.google.android.material.textfield.TextInputEditText>
+    </com.google.android.material.textfield.TextInputLayout>
 
-<!--    <com.google.android.material.textfield.TextInputLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
-<!--        android:hint="Họ và tên"-->
-<!--        android:id="@+id/name_register"-->
-<!--        android:layout_marginBottom="15dp"-->
-<!--        >-->
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:hint="Họ và tên"
+        android:id="@+id/name_register"
+        android:layout_marginBottom="15dp"
+        >
 
-<!--        <com.google.android.material.textfield.TextInputEditText-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="50dp">-->
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
 
-<!--        </com.google.android.material.textfield.TextInputEditText>-->
-<!--    </com.google.android.material.textfield.TextInputLayout>-->
+        </com.google.android.material.textfield.TextInputEditText>
+    </com.google.android.material.textfield.TextInputLayout>
 
-<!--    <com.google.android.material.textfield.TextInputLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
-<!--        android:hint="Email"-->
-<!--        android:id="@+id/email_register"-->
-<!--        android:layout_marginBottom="15dp"-->
-<!--        >-->
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:hint="Email"
+        android:id="@+id/email_register"
+        android:layout_marginBottom="15dp"
+        >
 
-<!--        <com.google.android.material.textfield.TextInputEditText-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="50dp">-->
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
 
-<!--        </com.google.android.material.textfield.TextInputEditText>-->
-<!--    </com.google.android.material.textfield.TextInputLayout>-->
+        </com.google.android.material.textfield.TextInputEditText>
+    </com.google.android.material.textfield.TextInputLayout>
 
-<!--    <com.google.android.material.textfield.TextInputLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
-<!--        android:hint="Mật khẩu"-->
-<!--        app:passwordToggleEnabled="true"-->
-<!--        android:id="@+id/pass_register"-->
-<!--        android:layout_marginBottom="15dp"-->
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:hint="Mật khẩu"
+        app:passwordToggleEnabled="true"
+        android:id="@+id/pass_register"
+        android:layout_marginBottom="15dp"
 
-<!--        >-->
+        >
 
-<!--        <com.google.android.material.textfield.TextInputEditText-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:inputType="textPassword"-->
-<!--            android:layout_height="50dp">-->
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:inputType="textPassword"
+            android:layout_height="50dp">
 
-<!--        </com.google.android.material.textfield.TextInputEditText>-->
-<!--    </com.google.android.material.textfield.TextInputLayout>-->
+        </com.google.android.material.textfield.TextInputEditText>
+    </com.google.android.material.textfield.TextInputLayout>
 
-<!--    <com.google.android.material.textfield.TextInputLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
-<!--        android:hint="Xác nhận mật khẩu"-->
-<!--        app:passwordToggleEnabled="true"-->
-<!--        android:id="@+id/repass_register"-->
-<!--        >-->
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:hint="Xác nhận mật khẩu"
+        app:passwordToggleEnabled="true"
+        android:id="@+id/repass_register"
+        >
 
-<!--        <com.google.android.material.textfield.TextInputEditText-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:inputType="textPassword"-->
-<!--            android:layout_height="50dp">-->
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:inputType="textPassword"
+            android:layout_height="50dp">
 
-<!--        </com.google.android.material.textfield.TextInputEditText>-->
-<!--    </com.google.android.material.textfield.TextInputLayout>-->
-<!--    <Button-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="50dp"-->
-<!--        android:id="@+id/btn_register"-->
-<!--        android:text="Đăng ký"-->
-<!--        android:layout_marginTop="20dp"-->
-<!--        />-->
+        </com.google.android.material.textfield.TextInputEditText>
+    </com.google.android.material.textfield.TextInputLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/btn_register"
+        android:text="Đăng ký"
+        android:layout_marginTop="20dp"
+        />
 
-<!--    <TextView-->
-<!--        android:id="@+id/tv_login"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="10dp"-->
-<!--        android:text="<< Quay lại trang đăng nhập"-->
-<!--        android:textAlignment="center"-->
-<!--        android:textColor="@color/blue" />-->
+    <TextView
+        android:id="@+id/tv_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Quay lại trang đăng nhập"
+        android:gravity="center_horizontal"
+        android:textColor="#2196F3" />
 </LinearLayout>

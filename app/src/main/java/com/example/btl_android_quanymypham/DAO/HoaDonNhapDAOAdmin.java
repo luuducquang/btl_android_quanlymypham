@@ -66,4 +66,12 @@ public class HoaDonNhapDAOAdmin extends DataBaseHandler {
         return cursor;
     }
 
+    public void deleteData(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String whereClause = "id = ?";
+        String[] whereArgs = {String.valueOf(id)};
+        db.delete("HoaDonNhap", whereClause, whereArgs);
+        db.close();
+    }
+
 }

@@ -122,15 +122,20 @@ public class TaiKhoanFragmentAdmin extends Fragment {
                 if (strTaikhoan.isEmpty() || strMatkhau.isEmpty() || strHoten.isEmpty() || strEmail.isEmpty()) {
                     Toast.makeText(requireContext(), "Vui lòng nhập đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
                 } else {
-                    db.insertData(strTaikhoan, strMatkhau, strHoten, strEmail, hinhanh, strQuyen);
-                    DataListView();
-                    tk.setText("");
-                    mk.setText("");
-                    hoten.setText("");
-                    email.setText("");
-                    img.setImageBitmap(null);
-                    tk.requestFocus();
-                    Toast.makeText(requireContext(), "Thêm dữ liệu thành công", Toast.LENGTH_SHORT).show();
+                    if (db.isUsernameExist(strTaikhoan)){
+                        Toast.makeText(requireContext(), "Tài khoản đã tồn tại", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        db.insertData(strTaikhoan, strMatkhau, strHoten, strEmail, hinhanh, strQuyen);
+                        DataListView();
+                        tk.setText("");
+                        mk.setText("");
+                        hoten.setText("");
+                        email.setText("");
+                        img.setImageBitmap(null);
+                        tk.requestFocus();
+                        Toast.makeText(requireContext(), "Thêm dữ liệu thành công", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });

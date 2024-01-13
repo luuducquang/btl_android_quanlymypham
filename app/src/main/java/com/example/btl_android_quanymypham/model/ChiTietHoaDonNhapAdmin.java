@@ -9,14 +9,18 @@ public class ChiTietHoaDonNhapAdmin implements Serializable {
     private int SoLuong;
     private Long DonGia;
     private Long TongTien;
+    private String TenMP;
+    private byte[] HinhAnh;
 
-    public ChiTietHoaDonNhapAdmin(int id, int maHDN, int maMP, int soLuong, Long donGia, Long tongTien) {
+    public ChiTietHoaDonNhapAdmin(int id, int maHDN, int maMP, int soLuong, Long donGia, Long tongTien, String tenMP, byte[] hinhAnh) {
         this.id = id;
         MaHDN = maHDN;
         MaMP = maMP;
         SoLuong = soLuong;
         DonGia = donGia;
         TongTien = tongTien;
+        TenMP = tenMP;
+        HinhAnh = hinhAnh;
     }
 
     public int getId() {
@@ -65,5 +69,21 @@ public class ChiTietHoaDonNhapAdmin implements Serializable {
 
     public void setTongTien(Long tongTien) {
         TongTien = tongTien;
+    }
+
+    public String getTenMP() {
+        return TenMP;
+    }
+
+    public void setTenMP(String tenMP) {
+        TenMP = tenMP;
+    }
+
+    public byte[] getHinhAnh() {
+        return HinhAnh;
+    }
+
+    public void setHinhAnh(byte[] hinhAnh) {
+        HinhAnh = hinhAnh;
     }
 }

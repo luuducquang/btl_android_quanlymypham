@@ -26,7 +26,6 @@ public class TTMyPhamAdapterAdmin extends RecyclerView.Adapter<TTMyPhamAdapterAd
 
     Context context;
     private OnItemClickListener onItemClickListener;
-
     private OnDelItemClickListener onDelItemClickListener;
     private OnItemLongClickListener onItemLongClickListener;
 
