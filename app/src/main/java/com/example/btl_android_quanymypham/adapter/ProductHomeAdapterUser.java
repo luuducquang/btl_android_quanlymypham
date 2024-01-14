@@ -2,6 +2,8 @@ package com.example.btl_android_quanymypham.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,21 +12,22 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.btl_android_quanymypham.DetailProductUser;
-import com.example.btl_android_quanymypham.model.ProductHomeUser;
 import com.example.btl_android_quanymypham.R;
+import com.example.btl_android_quanymypham.fragment.DetailProductFragmentUser;
+import com.example.btl_android_quanymypham.model.TTMyPhamAdmin;
 
 import java.util.List;
 
 public class ProductHomeAdapterUser extends RecyclerView.Adapter<ProductHomeAdapterUser.ProductHomeViewHolder>{
-    private List<ProductHomeUser> productHomeList;
+    private List<TTMyPhamAdmin> ttMyPhamAdminList;
     private Context mConText;
-    public ProductHomeAdapterUser(Context mConText, List<ProductHomeUser> productHomeList) {
+    public ProductHomeAdapterUser(Context mConText, List<TTMyPhamAdmin> ttMyPhamAdminList) {
         this.mConText = mConText;
-        this.productHomeList = productHomeList;
+        this.ttMyPhamAdminList = ttMyPhamAdminList;
     }
 
     public void release(){
@@ -39,32 +42,43 @@ public class ProductHomeAdapterUser extends RecyclerView.Adapter<ProductHomeAdap
 
     @Override
     public void onBindViewHolder(@NonNull ProductHomeViewHolder holder, int position) {
-        ProductHomeUser productHome = productHomeList.get(position);
-        if (productHome==null){
+        TTMyPhamAdmin ttMyPhamAdmin = ttMyPhamAdminList.get(position);
+        if (ttMyPhamAdmin==null){
             return;
         }
-        holder.imgProductHome.setImageResource(productHome.getImage());
-        holder.nameProductHome.setText(productHome.getName());
-        holder.priceProductHome.setText(productHome.getPrice());
+        holder.nameProductHome.setText(ttMyPhamAdmin.getTenmypham());
+        holder.priceProductHome.setText(String.valueOf(ttMyPhamAdmin.getGia()));
+
+        byte[]anhsanpham = ttMyPhamAdmin.getAnhsanpham();
+        Bitmap bitmap = BitmapFactory.decodeByteArray(anhsanpham,0,anhsanpham.length);
+        holder.imgProductHome.setImageBitmap(bitmap);
+
         holder.idItemHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                gotoDetail(productHome);
+                gotoDetail(ttMyPhamAdmin);
             }
         });
     }
 
-    private void gotoDetail(ProductHomeUser productHome) {
-        Intent intent = new Intent(mConText, DetailProductUser.class);
+    private void gotoDetail(TTMyPhamAdmin ttMyPhamAdmin) {
+        DetailProductFragmentUser detailFragment = new DetailProductFragmentUser();
+
         Bundle bundle = new Bundle();
-        bundle.putSerializable("ObjectProduct",productHome);
-        intent.putExtras(bundle);
-        mConText.startActivity(intent);
+        bundle.putSerializable("ObjectProduct", ttMyPhamAdmin);
+        detailFragment.setArguments(bundle);
+
+        AppCompatActivity activity = (AppCompatActivity) mConText;
+        activity.getSupportFragmentManager().beginTransaction()
+                .replace(R.id.content_frame, detailFragment)
+                .addToBackStack(null)
+                .commit();
     }
+
     @Override
     public int getItemCount() {
-        if (productHomeList!=null){
-            return productHomeList.size();
+        if (ttMyPhamAdminList!=null){
+            return ttMyPhamAdminList.size();
         }
         return 0;
     }

@@ -19,7 +19,8 @@
                 android:id="@+id/item_anhdaidien"
                 android:layout_width="115sp"
                 android:layout_height="115sp"
-                android:src="@drawable/anhfb"/>
+                android:src="@drawable/anhfb"
+                android:scaleType="centerCrop"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"

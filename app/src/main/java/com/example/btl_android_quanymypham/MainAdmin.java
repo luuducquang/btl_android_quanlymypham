@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -20,20 +19,15 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.btl_android_quanymypham.fragment.ChiTietHoaDonNhapFragmentAdmin;
 import com.example.btl_android_quanymypham.fragment.HoaDonBanFragmentAdmin;
 import com.example.btl_android_quanymypham.fragment.HoaDonNhapFragmentAdmin;
-import com.example.btl_android_quanymypham.fragment.HomeFragmentUser;
 import com.example.btl_android_quanymypham.fragment.LoaiMyPhamFragmentAdmin;
 import com.example.btl_android_quanymypham.fragment.NhaCungCapFragmentAdmin;
 import com.example.btl_android_quanymypham.fragment.TTMyPhamFragmentAdmin;
 import com.example.btl_android_quanymypham.fragment.TaiKhoanFragmentAdmin;
 import com.example.btl_android_quanymypham.fragment.ThongKeFragmentAdmin;
-import com.example.btl_android_quanymypham.model.ProductHomeUser;
 import com.example.btl_android_quanymypham.model.TaiKhoanAdmin;
 import com.google.android.material.navigation.NavigationView;
-
-import java.util.List;
 
 public class MainAdmin extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout mDrawerLayout;

@@ -19,7 +19,8 @@
                 android:layout_gravity="center_vertical"
                 android:layout_height="75sp"
                 android:src="@drawable/anhfb"
-                android:layout_marginLeft="3sp"/>
+                android:layout_marginLeft="3sp"
+                android:scaleType="centerCrop"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="230sp"

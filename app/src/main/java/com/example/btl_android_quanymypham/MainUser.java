@@ -21,10 +21,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.btl_android_quanymypham.fragment.HomeFragmentUser;
+import com.example.btl_android_quanymypham.adapter.ProductHomeAdapterUser;
+import com.example.btl_android_quanymypham.fragment.DetailProductFragmentUser;
+import com.example.btl_android_quanymypham.fragment.ProductHomeFragmentUser;
 import com.example.btl_android_quanymypham.fragment.TTMyPhamFragmentAdmin;
+import com.example.btl_android_quanymypham.model.TTMyPhamAdmin;
 import com.example.btl_android_quanymypham.model.TaiKhoanAdmin;
 import com.google.android.material.navigation.NavigationView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainUser extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout mDrawerLayout;
@@ -55,7 +61,7 @@ public class MainUser extends AppCompatActivity implements NavigationView.OnNavi
         NavigationView  navigationView = findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(MainUser.this);
 
-        replaceFragment(new HomeFragmentUser());
+        replaceFragment(new ProductHomeFragmentUser());
         navigationView.getMenu().findItem(R.id.nav_home).setChecked(true);
 
         View headerView = navigationView.getHeaderView(0);
@@ -109,7 +115,7 @@ public class MainUser extends AppCompatActivity implements NavigationView.OnNavi
         int id = item.getItemId();
         if (id == R.id.nav_home){
             if (mCurrentFragment!=FragmentHome){
-                replaceFragment(new HomeFragmentUser());
+                replaceFragment(new ProductHomeFragmentUser());
                 mCurrentFragment = FragmentHome;
             }
         }
