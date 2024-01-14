@@ -230,9 +230,10 @@ public class TTMyPhamFragmentAdmin extends Fragment {
                 Long giaban = cursor.getLong(5);
                 String mota = cursor.getString(6);
                 String chitiet = cursor.getString(7);
-                String tenloai = cursor.getString(8);
+                Integer soluong = cursor.getInt(8);
+                String tenloai = cursor.getString(9);
 
-                TTMyPhamAdmin ttMyPhamAdmin = new TTMyPhamAdmin(id, tenmp,dungtich,loaimypham,anhsanpham,giaban,mota,chitiet,tenloai);
+                TTMyPhamAdmin ttMyPhamAdmin = new TTMyPhamAdmin(id, tenmp,dungtich,loaimypham,anhsanpham,giaban,mota,chitiet,soluong,tenloai);
                 data.add(ttMyPhamAdmin);
             } while (cursor.moveToNext());
             cursor.close();

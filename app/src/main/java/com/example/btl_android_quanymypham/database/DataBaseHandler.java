@@ -12,7 +12,7 @@ import com.example.btl_android_quanymypham.model.TaiKhoanAdmin;
 
 public class DataBaseHandler extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME = "btl_quanlymypham_luuducquang7.db";
+    private static final String DATABASE_NAME = "btl_quanlymypham_luuducquang8.db";
     private static final int DATABASE_VERSION = 1;
     public DataBaseHandler(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -38,6 +38,7 @@ public class DataBaseHandler extends SQLiteOpenHelper {
                 "GiaBan LONG, " +
                 "MoTa TEXT, " +
                 "ChiTiet TEXT, " +
+                "SoLuong INTEGER DEFAULT 0, " +
                 "FOREIGN KEY (LoaiMyPham) REFERENCES LoaiMyPham(id)ON DELETE CASCADE);";
         db.execSQL(createTableQueryThongTinMyPham);
 

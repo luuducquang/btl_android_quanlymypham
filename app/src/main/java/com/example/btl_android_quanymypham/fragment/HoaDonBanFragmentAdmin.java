@@ -1,22 +1,12 @@
 package com.example.btl_android_quanymypham.fragment;
 
 import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.view.ContextMenu;
-import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -33,20 +23,17 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.btl_android_quanymypham.DAO.HoaDonBanDAOAdmin;
 import com.example.btl_android_quanymypham.DAO.HoaDonNhapDAOAdmin;
-import com.example.btl_android_quanymypham.DAO.LoaiMyPhamDAOAdmin;
 import com.example.btl_android_quanymypham.DAO.NhaCungCapDAOAdmin;
 import com.example.btl_android_quanymypham.DAO.TTMyPhamDAOAdmin;
 import com.example.btl_android_quanymypham.R;
+import com.example.btl_android_quanymypham.adapter.HoaDonBanAdapterAdmin;
 import com.example.btl_android_quanymypham.adapter.HoaDonNhapAdapterAdmin;
-import com.example.btl_android_quanymypham.adapter.LoaiMyPhamAdapterAdmin;
-import com.example.btl_android_quanymypham.adapter.TTMyPhamAdapterAdmin;
+import com.example.btl_android_quanymypham.model.HoaDonBanAdmin;
 import com.example.btl_android_quanymypham.model.HoaDonNhapAdmin;
-import com.example.btl_android_quanymypham.model.LoaiMyPhamAdmin;
-import com.example.btl_android_quanymypham.model.TTMyPhamAdmin;
 import com.example.btl_android_quanymypham.model.TaiKhoanAdmin;
 
-import java.io.ByteArrayOutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -55,24 +42,20 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-public class HoaDonNhapFragmentAdmin extends Fragment {
+public class HoaDonBanFragmentAdmin extends Fragment {
     private RecyclerView recyclerView;
-    private HoaDonNhapAdapterAdmin hoaDonNhapAdapterAdmin;
-    HoaDonNhapDAOAdmin db;
-    NhaCungCapDAOAdmin nhaCungCapDAOAdmin;
+    private HoaDonBanAdapterAdmin hoaDonBanAdapterAdmin;
+    HoaDonBanDAOAdmin db;
     TTMyPhamDAOAdmin ttMyPhamDAOAdmin;
-    EditText soluong,dongia,tongtien,ngaynhap;
-    ImageView chonngaynhap;
-    Spinner ncc,mp;
+    EditText tenkh,diachi,sdt,soluong,dongia,tongtien,ngayban;
+    ImageView chonngayban;
+    Spinner mp;
     private int selectedId;
     private int DetailID;
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
     Calendar calendar =Calendar.getInstance();
     Button them,lammoi;
-    private List<String> listMaNCC;
-    private List<String> listTenNCC;
-    private int NCC_Value;
     private List<String> listMaMP;
     private List<String> listTenMP;
     private int MP_Value;
@@ -80,10 +63,9 @@ public class HoaDonNhapFragmentAdmin extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.hoadonnhap_fragment_admin,container,false);
+        View view = inflater.inflate(R.layout.hoadonban_fragment_admin,container,false);
 
-        db = new HoaDonNhapDAOAdmin(requireContext());
-        nhaCungCapDAOAdmin = new NhaCungCapDAOAdmin(requireContext());
+        db = new HoaDonBanDAOAdmin(requireContext());
         ttMyPhamDAOAdmin = new TTMyPhamDAOAdmin(requireContext());
 
 
@@ -91,7 +73,6 @@ public class HoaDonNhapFragmentAdmin extends Fragment {
         DataListView();
         HandlerButton();
         GetIDUser();
-        GetSpinnerNCC();
         GetSpinnerMP();
 
         return view;
@@ -129,10 +110,10 @@ public class HoaDonNhapFragmentAdmin extends Fragment {
             } while (cursor3.moveToNext());
             cursor3.close();
         }
-        ArrayAdapter adapterNCC = new ArrayAdapter(
+        ArrayAdapter adapterMP = new ArrayAdapter(
                 requireContext(), android.R.layout.simple_list_item_1,listTenMP
         );
-        mp.setAdapter(adapterNCC);
+        mp.setAdapter(adapterMP);
 
         mp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -147,83 +128,50 @@ public class HoaDonNhapFragmentAdmin extends Fragment {
         });
     }
 
-    private void GetSpinnerNCC() {
-        listMaNCC = new ArrayList<>();
-        listTenNCC = new ArrayList<>();
-
-        Cursor cursor2 = nhaCungCapDAOAdmin.getAllData();
-        if (cursor2 == null || cursor2.getCount() == 0) {
-            return;
-        }
-        if (cursor2 != null && cursor2.moveToFirst()) {
-            do {
-                listMaNCC.add(String.valueOf(cursor2.getInt(0)));
-                listTenNCC.add(cursor2.getString(1));
-            } while (cursor2.moveToNext());
-            cursor2.close();
-        }
-        ArrayAdapter adapterNCC = new ArrayAdapter(
-                requireContext(), android.R.layout.simple_list_item_1,listTenNCC
-        );
-        ncc.setAdapter(adapterNCC);
-
-        ncc.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                NCC_Value = Integer.parseInt(listMaNCC.get(position));
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-    }
-
     private void DataListView() {
-        Cursor cursor = db.getAllHoaDonNhap();
+        Cursor cursor = db.getAllHoaDonBan();
         if (cursor == null || cursor.getCount() == 0) {
             Toast.makeText(requireContext(), "Không có dữ liệu", Toast.LENGTH_SHORT).show();
             return;
         }
-        List<HoaDonNhapAdmin> data = new ArrayList<>();
+        List<HoaDonBanAdmin> data = new ArrayList<>();
         if (cursor != null && cursor.moveToFirst()) {
             do {
                 int id = cursor.getInt(0);
                 int nguoitao = cursor.getInt(1);
-                String hoten = cursor.getString(2);
-                int mancc = cursor.getInt(3);
-                String tenncc = cursor.getString(4);
-                String ngaynhap = cursor.getString(5);
+                String tenkh = cursor.getString(2);
+                String diachi = cursor.getString(3);
+                String sdt = cursor.getString(4);
+                String ngayban = cursor.getString(5);
                 Long tongtien = cursor.getLong(6);
+                String hoten = cursor.getString(7);
 
-                HoaDonNhapAdmin hoaDonNhapAdmin = new HoaDonNhapAdmin(id, nguoitao,hoten,mancc,tenncc,ngaynhap,tongtien);
-                data.add(hoaDonNhapAdmin);
+                HoaDonBanAdmin hoaDonBanAdmin = new HoaDonBanAdmin(id, nguoitao,tenkh,diachi,sdt,ngayban,tongtien,hoten);
+                data.add(hoaDonBanAdmin);
             } while (cursor.moveToNext());
             cursor.close();
         }
         recyclerView.setLayoutManager(new GridLayoutManager(requireContext(), 1));
 
-        hoaDonNhapAdapterAdmin = new HoaDonNhapAdapterAdmin(data,requireContext());
+        hoaDonBanAdapterAdmin = new HoaDonBanAdapterAdmin(data,requireContext());
 
-        recyclerView.setAdapter(hoaDonNhapAdapterAdmin);
+        recyclerView.setAdapter(hoaDonBanAdapterAdmin);
 
-        hoaDonNhapAdapterAdmin.setDelOnItemClickListener(new HoaDonNhapAdapterAdmin.OnDelItemClickListener() {
+        hoaDonBanAdapterAdmin.setDelOnItemClickListener(new HoaDonBanAdapterAdmin.OnDelItemClickListener() {
             @Override
-            public void onDelItemClick(HoaDonNhapAdmin hoaDonNhapAdmin) {
-                selectedId = hoaDonNhapAdmin.getId();
+            public void onDelItemClick(HoaDonBanAdmin hoaDonBanAdmin) {
+                selectedId = hoaDonBanAdmin.getId();
                 DeleteItem();
             }
         });
 
-        hoaDonNhapAdapterAdmin.setInfOnItemClickListener(new HoaDonNhapAdapterAdmin.OnInfItemClickListener() {
+        hoaDonBanAdapterAdmin.setInfOnItemClickListener(new HoaDonBanAdapterAdmin.OnInfItemClickListener() {
             @Override
-            public void onInfItemClick(HoaDonNhapAdmin hoaDonNhapAdmin) {
-                DetailID = hoaDonNhapAdmin.getId();
+            public void onInfItemClick(HoaDonBanAdmin hoaDonBanAdmin) {
+                DetailID = hoaDonBanAdmin.getId();
 
-                ChiTietHoaDonNhapFragmentAdmin chiTietDialog = ChiTietHoaDonNhapFragmentAdmin.newInstance(DetailID);
+                ChiTietHoaDonBanFragmentAdmin chiTietDialog = ChiTietHoaDonBanFragmentAdmin.newInstance(DetailID);
                 chiTietDialog.show(getFragmentManager(), "chi_tiet_dialog");
-
             }
         });
     }
@@ -255,14 +203,17 @@ public class HoaDonNhapFragmentAdmin extends Fragment {
         lammoi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                tenkh.setText("");
+                diachi.setText("");
+                sdt.setText("");
                 soluong.setText("");
                 dongia.setText("");
                 tongtien.setText("");
-                soluong.requestFocus();
+                tenkh.requestFocus();
                 selectedId = 0;
             }
         });
-        chonngaynhap.setOnClickListener(new View.OnClickListener() {
+        chonngayban.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DatePickerDialog dialog1 = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
@@ -272,7 +223,7 @@ public class HoaDonNhapFragmentAdmin extends Fragment {
                         int mmonth = month ;
                         int mdayOfMonth = dayOfMonth ;
                         GregorianCalendar c = new GregorianCalendar(myear,mmonth,mdayOfMonth);
-                        ngaynhap.setText(sdf.format(c.getTime()));
+                        ngayban.setText(sdf.format(c.getTime()));
                     }
                 },calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DATE));
                 dialog1.show();
@@ -283,26 +234,32 @@ public class HoaDonNhapFragmentAdmin extends Fragment {
             @Override
             public void onClick(View v) {
 
-                String strNgayNhap = ngaynhap.getText().toString();
+                String strTenKH = tenkh.getText().toString();
+                String strDiaChi = diachi.getText().toString();
+                String strSdt = sdt.getText().toString();
+                String strNgayBan = ngayban.getText().toString();
                 String strSoLuong = soluong.getText().toString();
                 String strDonGia = dongia.getText().toString();
                 String strTongTien = tongtien.getText().toString();
 
-                if (strNgayNhap.isEmpty() || strSoLuong.isEmpty() || strDonGia.isEmpty() || strTongTien.isEmpty() ) {
+                if (strTenKH.isEmpty() ||strDiaChi.isEmpty() ||strSdt.isEmpty() ||strNgayBan.isEmpty() || strSoLuong.isEmpty() || strDonGia.isEmpty() || strTongTien.isEmpty() ) {
                     Toast.makeText(requireContext(), "Vui lòng nhập đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
-                }else if(!(isValidFormat("dd/MM/yyyy",ngaynhap.getText().toString()))){
+                }else if(!(isValidFormat("dd/MM/yyyy",ngayban.getText().toString()))){
                     Toast.makeText(getContext(),"Không đúng định dạng ngày",Toast.LENGTH_SHORT).show();
                 }else {
                     try {
                         Integer SoLuong = Integer.valueOf(strSoLuong);
                         Long DonGia = Long.valueOf(strDonGia);
                         Long TongTien = Long.valueOf(strTongTien);
-                        db.InsertData(taiKhoanAdmin.getId(), NCC_Value, strNgayNhap, TongTien, MP_Value, SoLuong, DonGia,TongTien);
+                        db.InsertData(taiKhoanAdmin.getId(), strTenKH, strDiaChi, strSdt,strNgayBan,TongTien, MP_Value, SoLuong, DonGia,TongTien);
                         DataListView();
+                        tenkh.setText("");
+                        diachi.setText("");
+                        sdt.setText("");
                         soluong.setText("");
                         dongia.setText("");
                         tongtien.setText("");
-                        ncc.requestFocus();
+                        tenkh.requestFocus();
                         Toast.makeText(requireContext(), "Thêm dữ liệu thành công", Toast.LENGTH_SHORT).show();
                     } catch (NumberFormatException e) {
 
@@ -313,17 +270,19 @@ public class HoaDonNhapFragmentAdmin extends Fragment {
     }
 
     private void Innit(View view) {
-        ncc = view.findViewById(R.id.spinnerNCC);
-        ngaynhap = view.findViewById(R.id.edBirthday);
+        tenkh = view.findViewById(R.id.txtTenKH);
+        diachi = view.findViewById(R.id.txtDiaChi);
+        sdt = view.findViewById(R.id.txtSDT);
+        ngayban = view.findViewById(R.id.edBirthday);
         mp = view.findViewById(R.id.spinnerMP);
         soluong = view.findViewById(R.id.txtSoLuong);
         dongia = view.findViewById(R.id.txtDonGia);
         tongtien = view.findViewById(R.id.txtTongTien);
         lammoi = view.findViewById(R.id.btnMoi);
         them = view.findViewById(R.id.btnThem);
-        recyclerView = view.findViewById(R.id.rcv_hoadonnhap);
-        chonngaynhap = view.findViewById(R.id.imgdate);
-        ngaynhap.setText(sdf.format(calendar.getTime()));
+        recyclerView = view.findViewById(R.id.rcv_hoadonban);
+        chonngayban = view.findViewById(R.id.imgdate);
+        ngayban.setText(sdf.format(calendar.getTime()));
     }
     public boolean isValidFormat(String format, String value) {
         Date date = null;

@@ -74,6 +74,7 @@ public class TTMyPhamAdapterAdmin extends RecyclerView.Adapter<TTMyPhamAdapterAd
         holder.item_dungtich.setText(ttMyPhamAdmin.getDungtich());
         holder.item_loaimp.setText(ttMyPhamAdmin.getTenloaimypham());
         holder.item_giaban.setText(String.valueOf(ttMyPhamAdmin.getGia()));
+        holder.item_soluong.setText(String.valueOf(ttMyPhamAdmin.getSoluong()));
         holder.item_mota.setText(ttMyPhamAdmin.getMota());
         holder.item_chitiet.setText(ttMyPhamAdmin.getChitiet());
         byte[]anhsanpham = ttMyPhamAdmin.getAnhsanpham();
@@ -95,6 +96,7 @@ public class TTMyPhamAdapterAdmin extends RecyclerView.Adapter<TTMyPhamAdapterAd
         private TextView item_dungtich;
         private TextView item_loaimp;
         private ImageView item_anh;
+        private TextView item_soluong;
         private TextView item_giaban;
         private TextView item_mota;
         private TextView item_chitiet;
@@ -107,6 +109,7 @@ public class TTMyPhamAdapterAdmin extends RecyclerView.Adapter<TTMyPhamAdapterAd
             item_dungtich = itemView.findViewById(R.id.item_dungtich);
             item_loaimp = itemView.findViewById(R.id.item_loaimypham);
             item_anh = itemView.findViewById(R.id.item_anhsanpham);
+            item_soluong = itemView.findViewById(R.id.item_soluong);
             item_giaban = itemView.findViewById(R.id.item_gia);
             item_mota = itemView.findViewById(R.id.item_mota);
             item_chitiet = itemView.findViewById(R.id.item_chitiet);

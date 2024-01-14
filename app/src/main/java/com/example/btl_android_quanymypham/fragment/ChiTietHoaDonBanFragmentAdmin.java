@@ -1,13 +1,9 @@
 package com.example.btl_android_quanymypham.fragment;
 
-import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.database.Cursor;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +13,6 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -27,35 +22,27 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.btl_android_quanymypham.DAO.ChiTietHoaDonBanDAOAdmin;
 import com.example.btl_android_quanymypham.DAO.ChiTietHoaDonNhapDAOAdmin;
-import com.example.btl_android_quanymypham.DAO.HoaDonNhapDAOAdmin;
-import com.example.btl_android_quanymypham.DAO.NhaCungCapDAOAdmin;
 import com.example.btl_android_quanymypham.DAO.TTMyPhamDAOAdmin;
 import com.example.btl_android_quanymypham.R;
+import com.example.btl_android_quanymypham.adapter.ChiTietHoaDonBanAdapterAdmin;
 import com.example.btl_android_quanymypham.adapter.ChiTietHoaDonNhapAdapterAdmin;
-import com.example.btl_android_quanymypham.adapter.HoaDonNhapAdapterAdmin;
+import com.example.btl_android_quanymypham.model.ChiTietHoaDonBanAdmin;
 import com.example.btl_android_quanymypham.model.ChiTietHoaDonNhapAdmin;
-import com.example.btl_android_quanymypham.model.HoaDonNhapAdmin;
-import com.example.btl_android_quanymypham.model.TaiKhoanAdmin;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
-public class ChiTietHoaDonNhapFragmentAdmin extends DialogFragment {
+public class ChiTietHoaDonBanFragmentAdmin extends DialogFragment {
     private RecyclerView recyclerView;
-    private ChiTietHoaDonNhapAdapterAdmin chiTietHoaDonNhapAdapterAdmin;
-    ChiTietHoaDonNhapDAOAdmin db;
+    private ChiTietHoaDonBanAdapterAdmin chiTietHoaDonBanAdapterAdmin;
+    ChiTietHoaDonBanDAOAdmin db;
     TTMyPhamDAOAdmin ttMyPhamDAOAdmin;
     EditText soluong,dongia,tongtien;
     ImageView back;
@@ -67,8 +54,8 @@ public class ChiTietHoaDonNhapFragmentAdmin extends DialogFragment {
     private int MP_Value;
     private int DetailID;
     private  int index;
-    public static ChiTietHoaDonNhapFragmentAdmin newInstance(int detailID) {
-        ChiTietHoaDonNhapFragmentAdmin fragment = new ChiTietHoaDonNhapFragmentAdmin();
+    public static ChiTietHoaDonBanFragmentAdmin newInstance(int detailID) {
+        ChiTietHoaDonBanFragmentAdmin fragment = new ChiTietHoaDonBanFragmentAdmin();
         Bundle args = new Bundle();
         args.putInt("DetailID", detailID);
         fragment.setArguments(args);
@@ -99,9 +86,9 @@ public class ChiTietHoaDonNhapFragmentAdmin extends DialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.chitiethoadonnhap_fragment_admin,container,false);
+        View view = inflater.inflate(R.layout.chitiethoadonban_fragment_admin,container,false);
 
-        db = new ChiTietHoaDonNhapDAOAdmin(requireContext());
+        db = new ChiTietHoaDonBanDAOAdmin(requireContext());
         ttMyPhamDAOAdmin = new TTMyPhamDAOAdmin(requireContext());
 
         Bundle args = getArguments();
@@ -143,7 +130,7 @@ public class ChiTietHoaDonNhapFragmentAdmin extends DialogFragment {
                         Integer SoLuong = Integer.valueOf(strSoLuong);
                         Long DonGia = Long.valueOf(strDonGia);
                         Long TongTien = Long.valueOf(strTongTien);
-                        db.insertChiTietHoaDonNhap(DetailID, MP_Value, SoLuong, DonGia,TongTien);
+                        db.insertChiTietHoaDonBan(DetailID, MP_Value, SoLuong, DonGia,TongTien);
                         DataListView();
                         soluong.setText("");
                         dongia.setText("");
@@ -171,7 +158,7 @@ public class ChiTietHoaDonNhapFragmentAdmin extends DialogFragment {
                         Integer SoLuong = Integer.valueOf(strSoLuong);
                         Long DonGia = Long.valueOf(strDonGia);
                         Long TongTien = Long.valueOf(strTongTien);
-                        db.updateChiTietHoaDonNhap(selectedId,DetailID, MP_Value, SoLuong, DonGia,TongTien);
+                        db.updateChiTietHoaDonBan(selectedId,DetailID, MP_Value, SoLuong, DonGia,TongTien);
                         DataListView();
                         mp.requestFocus();
                         Toast.makeText(requireContext(), "Sửa dữ liệu thành công", Toast.LENGTH_SHORT).show();
@@ -187,7 +174,7 @@ public class ChiTietHoaDonNhapFragmentAdmin extends DialogFragment {
             public void onClick(View v) {
                 FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.remove(ChiTietHoaDonNhapFragmentAdmin.this);
+                fragmentTransaction.remove(ChiTietHoaDonBanFragmentAdmin.this);
                 fragmentTransaction.commit();
             }
         });
@@ -230,16 +217,16 @@ public class ChiTietHoaDonNhapFragmentAdmin extends DialogFragment {
 
 
     private void DataListView() {
-        Cursor cursor = db.getAllChiTietHoaDonNhapByMaHDN(DetailID);
+        Cursor cursor = db.getAllChiTietHoaDonNhapByMaHDB(DetailID);
         if (cursor == null || cursor.getCount() == 0) {
             Toast.makeText(requireContext(), "Không có dữ liệu", Toast.LENGTH_SHORT).show();
             return;
         }
-        List<ChiTietHoaDonNhapAdmin> data = new ArrayList<>();
+        List<ChiTietHoaDonBanAdmin> data = new ArrayList<>();
         if (cursor != null && cursor.moveToFirst()) {
             do {
                 int id = cursor.getInt(0);
-                int mahdn = cursor.getInt(1);
+                int mahdb = cursor.getInt(1);
                 int mamp = cursor.getInt(2);
                 int soluong = cursor.getInt(3);
                 Long dongia = cursor.getLong(4);
@@ -247,33 +234,33 @@ public class ChiTietHoaDonNhapFragmentAdmin extends DialogFragment {
                 String tenmp = cursor.getString(6);
                 byte[] hinhanh = cursor.getBlob(7);
 
-                ChiTietHoaDonNhapAdmin chiTietHoaDonNhapAdmin = new ChiTietHoaDonNhapAdmin(id, mahdn,mamp,soluong,dongia,tonggia,tenmp,hinhanh);
-                data.add(chiTietHoaDonNhapAdmin);
+                ChiTietHoaDonBanAdmin chiTietHoaDonBanAdmin = new ChiTietHoaDonBanAdmin(id, mahdb,mamp,soluong,dongia,tonggia,tenmp,hinhanh);
+                data.add(chiTietHoaDonBanAdmin);
             } while (cursor.moveToNext());
             cursor.close();
         }
         recyclerView.setLayoutManager(new GridLayoutManager(requireContext(), 1));
 
-        chiTietHoaDonNhapAdapterAdmin = new ChiTietHoaDonNhapAdapterAdmin(data,requireContext());
+        chiTietHoaDonBanAdapterAdmin = new ChiTietHoaDonBanAdapterAdmin(data,requireContext());
 
-        recyclerView.setAdapter(chiTietHoaDonNhapAdapterAdmin);
+        recyclerView.setAdapter(chiTietHoaDonBanAdapterAdmin);
 
-        chiTietHoaDonNhapAdapterAdmin.setDelOnItemClickListener(new ChiTietHoaDonNhapAdapterAdmin.OnDelItemClickListener() {
+        chiTietHoaDonBanAdapterAdmin.setDelOnItemClickListener(new ChiTietHoaDonBanAdapterAdmin.OnDelItemClickListener() {
             @Override
-            public void onDelItemClick(ChiTietHoaDonNhapAdmin chiTietHoaDonNhapAdmin) {
-                selectedId = chiTietHoaDonNhapAdmin.getId();
+            public void onDelItemClick(ChiTietHoaDonBanAdmin chiTietHoaDonBanAdmin) {
+                selectedId = chiTietHoaDonBanAdmin.getId();
                 DeleteItem();
             }
         });
 
-        chiTietHoaDonNhapAdapterAdmin.setOnItemClickListener(new ChiTietHoaDonNhapAdapterAdmin.OnItemClickListener() {
+        chiTietHoaDonBanAdapterAdmin.setOnItemClickListener(new ChiTietHoaDonBanAdapterAdmin.OnItemClickListener() {
             @Override
-            public void onItemClick(ChiTietHoaDonNhapAdmin chiTietHoaDonNhapAdmin) {
-                selectedId=chiTietHoaDonNhapAdmin.getId();
-                soluong.setText(String.valueOf(chiTietHoaDonNhapAdmin.getSoLuong()));
-                dongia.setText(String.valueOf(chiTietHoaDonNhapAdmin.getDonGia()));
-                tongtien.setText(String.valueOf(chiTietHoaDonNhapAdmin.getTongTien()));
-                index = findIndex(listTenMP, String.valueOf(chiTietHoaDonNhapAdmin.getTenMP()));
+            public void onItemClick(ChiTietHoaDonBanAdmin chiTietHoaDonBanAdmin) {
+                selectedId=chiTietHoaDonBanAdmin.getId();
+                soluong.setText(String.valueOf(chiTietHoaDonBanAdmin.getSoLuong()));
+                dongia.setText(String.valueOf(chiTietHoaDonBanAdmin.getDonGia()));
+                tongtien.setText(String.valueOf(chiTietHoaDonBanAdmin.getTongTien()));
+                index = findIndex(listTenMP, String.valueOf(chiTietHoaDonBanAdmin.getTenMP()));
                 mp.setSelection(index);
             }
         });
@@ -295,7 +282,7 @@ public class ChiTietHoaDonNhapFragmentAdmin extends DialogFragment {
         builder.setPositiveButton("Xác nhận", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                db.deleteChiTietHoaDonNhap(selectedId);
+                db.deleteChiTietHoaDonBan(selectedId);
                 DataListView();
                 Toast.makeText(requireContext(), "Đã xóa" , Toast.LENGTH_SHORT).show();
             }
@@ -319,6 +306,6 @@ public class ChiTietHoaDonNhapFragmentAdmin extends DialogFragment {
         them = view.findViewById(R.id.btnThem);
         sua = view.findViewById(R.id.btnSua);
         back = view.findViewById(R.id.back);
-        recyclerView = view.findViewById(R.id.rcv_chitiethoadonnhap);
+        recyclerView = view.findViewById(R.id.rcv_chitiethoadonban);
     }
 }

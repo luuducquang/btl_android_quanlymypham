@@ -20,19 +20,49 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
-                    android:text="Nhà cung cấp:"
+                    android:text="Tên khách hàng:"
                     android:textColor="#9A9A9A" />
-                <Spinner
-                    android:id="@+id/spinnerNCC"
-                android:layout_width="250sp"
-                android:layout_height="30sp"/>
+                <EditText
+                    android:id="@+id/txtTenKH"
+                    android:inputType="text"
+                    android:layout_width="200sp"
+                    android:layout_marginLeft="10sp"
+                    android:layout_height="40sp"/>
             </TableRow>
             <TableRow>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
-                    android:text="Ngày nhập:"
+                    android:text="Địa chỉ:"
+                    android:textColor="#9A9A9A" />
+                <EditText
+                    android:id="@+id/txtDiaChi"
+                    android:inputType="text"
+                    android:layout_width="200sp"
+                    android:layout_marginLeft="10sp"
+                    android:layout_height="40sp"/>
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:text="Số điện thoại:"
+                    android:textColor="#9A9A9A" />
+                <EditText
+                    android:id="@+id/txtSDT"
+                    android:inputType="text"
+                    android:layout_width="200sp"
+                    android:layout_marginLeft="10sp"
+                    android:layout_height="40sp"/>
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:text="Ngày bán:"
                     android:textColor="#9A9A9A"
                     android:layout_gravity="center_vertical"/>
                 <LinearLayout
@@ -43,7 +73,7 @@
                     <EditText
                         android:padding="6dp"
                         android:id="@+id/edBirthday"
-                        android:hint="Ngày nhập"
+                        android:hint="Ngày bán"
                         android:layout_width="190sp"
                         android:layout_height="40dp"/>
                     <ImageView
@@ -136,7 +166,7 @@
 
         </LinearLayout>
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rcv_hoadonnhap"
+            android:id="@+id/rcv_hoadonban"
             android:layout_width="match_parent"
             android:layout_height="600sp"/>
     </LinearLayout>

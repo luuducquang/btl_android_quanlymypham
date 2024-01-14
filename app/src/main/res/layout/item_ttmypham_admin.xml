@@ -12,7 +12,8 @@
         android:orientation="horizontal">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginLeft="3sp">
 
             <ImageView
                 android:id="@+id/item_anhsanpham"
@@ -26,17 +27,15 @@
             android:orientation="vertical"
             android:layout_marginLeft="3sp">
             <TableLayout
-                xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp">
+                android:layout_height="wrap_content">
                 <TableRow
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
                     <TextView
                         android:id="@+id/item_tenmypham"
-                        android:layout_width="100sp"
+                        android:layout_width="90sp"
                         android:layout_height="wrap_content"
                         android:text="Sữa rửa mặt Cerave SA cho da dầu"
                         android:layout_span="2"
@@ -60,7 +59,7 @@
 
                     <TextView
                         android:id="@+id/item_dungtich"
-                        android:layout_width="165sp"
+                        android:layout_width="155sp"
                         android:layout_height="wrap_content"
                         android:text="200 ml"
                         android:textSize="15sp"
@@ -80,9 +79,29 @@
 
                     <TextView
                         android:id="@+id/item_loaimypham"
-                        android:layout_width="165sp"
+                        android:layout_width="155sp"
                         android:layout_height="wrap_content"
                         android:text="Sửa rửa mặt"
+                        android:textSize="15sp"
+                        android:textColor="#7C7C7C"/>
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Số lượng: "
+                        android:textSize="15sp"
+                        android:textColor="#7C7C7C"/>
+
+                    <TextView
+                        android:id="@+id/item_soluong"
+                        android:layout_width="155sp"
+                        android:layout_height="wrap_content"
+                        android:text="100"
                         android:textSize="15sp"
                         android:textColor="#7C7C7C"/>
                 </TableRow>
@@ -100,11 +119,11 @@
 
                     <TextView
                         android:id="@+id/item_gia"
-                        android:layout_width="165sp"
-                        android:layout_height="wrap_content"
+                        android:layout_width="155sp"
+                        android:layout_height="match_parent"
                         android:text="200000"
-                        android:textSize="15sp"
-                        android:textColor="#7C7C7C"/>
+                        android:textColor="#7C7C7C"
+                        android:textSize="15sp" />
                 </TableRow>
 
                 <TableRow
@@ -120,7 +139,7 @@
 
                     <TextView
                         android:id="@+id/item_mota"
-                        android:layout_width="165sp"
+                        android:layout_width="155sp"
                         android:layout_height="wrap_content"
                         android:text="Sữa rửa mặt dành cho da dầu"
                         android:textSize="15sp"
@@ -129,7 +148,8 @@
 
                 <TableRow
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="3sp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -140,7 +160,7 @@
 
                     <TextView
                         android:id="@+id/item_chitiet"
-                        android:layout_width="165sp"
+                        android:layout_width="155sp"
                         android:layout_height="wrap_content"
                         android:text="Sữa rửa mặt dành cho da dầu mụn và các loại da"
                         android:textSize="15sp"
@@ -153,11 +173,12 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginRight="3sp"
             android:gravity="center_vertical">
             <ImageView
                 android:id="@+id/btn_img_delete_item"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="40sp"
+                android:layout_height="40sp"
                 android:src="@drawable/delete"/>
         </LinearLayout>
 

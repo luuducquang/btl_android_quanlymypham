@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#BCE0FF"
     android:orientation="vertical">
 
     <TableLayout
@@ -19,7 +20,7 @@
                 android:textColor="#9A9A9A" />
             <EditText
                 android:id="@+id/tenloai"
-                android:layout_width="200sp"
+                android:layout_width="290sp"
                 android:layout_marginLeft="10sp"
                 android:layout_height="wrap_content"/>
         </TableRow>
@@ -32,7 +33,6 @@
                 android:textColor="#9A9A9A" />
             <EditText
                 android:id="@+id/mota"
-                android:layout_width="200sp"
                 android:layout_marginLeft="10sp"
                 android:layout_height="wrap_content"/>
         </TableRow>

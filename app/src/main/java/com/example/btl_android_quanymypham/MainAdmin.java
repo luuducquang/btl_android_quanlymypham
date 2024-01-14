@@ -21,12 +21,14 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.btl_android_quanymypham.fragment.ChiTietHoaDonNhapFragmentAdmin;
+import com.example.btl_android_quanymypham.fragment.HoaDonBanFragmentAdmin;
 import com.example.btl_android_quanymypham.fragment.HoaDonNhapFragmentAdmin;
 import com.example.btl_android_quanymypham.fragment.HomeFragmentUser;
 import com.example.btl_android_quanymypham.fragment.LoaiMyPhamFragmentAdmin;
 import com.example.btl_android_quanymypham.fragment.NhaCungCapFragmentAdmin;
 import com.example.btl_android_quanymypham.fragment.TTMyPhamFragmentAdmin;
 import com.example.btl_android_quanymypham.fragment.TaiKhoanFragmentAdmin;
+import com.example.btl_android_quanymypham.fragment.ThongKeFragmentAdmin;
 import com.example.btl_android_quanymypham.model.ProductHomeUser;
 import com.example.btl_android_quanymypham.model.TaiKhoanAdmin;
 import com.google.android.material.navigation.NavigationView;
@@ -138,7 +140,7 @@ public class MainAdmin extends AppCompatActivity implements NavigationView.OnNav
         }
         else if (id == R.id.nav_hoadonban){
             if (mCurrentFragment!=FragmentHoaDonBan){
-                replaceFragment(new ChiTietHoaDonNhapFragmentAdmin());
+                replaceFragment(new HoaDonBanFragmentAdmin());
                 mCurrentFragment = FragmentHoaDonBan;
                 getSupportActionBar().setTitle("Hoá đơn bán");
             }
@@ -148,6 +150,13 @@ public class MainAdmin extends AppCompatActivity implements NavigationView.OnNav
                 replaceFragment(new HoaDonNhapFragmentAdmin());
                 mCurrentFragment = FragmentHoaDonNhap;
                 getSupportActionBar().setTitle("Hoá đơn nhập");
+            }
+        }
+        else if (id == R.id.nav_thongke){
+            if (mCurrentFragment!=FragmentThongKe){
+                replaceFragment(new ThongKeFragmentAdmin());
+                mCurrentFragment = FragmentThongKe;
+                getSupportActionBar().setTitle("Thống kê");
             }
         }
         else if (id == R.id.nav_taikhoan){

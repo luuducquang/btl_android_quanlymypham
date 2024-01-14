@@ -11,9 +11,10 @@ public class TTMyPhamAdmin implements Serializable {
     private Long gia;
     private String mota;
     private String chitiet;
+    private int soluong;
     private String tenloaimypham;
 
-    public TTMyPhamAdmin(int id, String tenmypham, String dungtich, int loaimypham, byte[] anhsanpham, Long gia, String mota, String chitiet, String tenloaimypham) {
+    public TTMyPhamAdmin(int id, String tenmypham, String dungtich, int loaimypham, byte[] anhsanpham, Long gia, String mota, String chitiet, int soluong, String tenloaimypham) {
         this.id = id;
         this.tenmypham = tenmypham;
         this.dungtich = dungtich;
@@ -22,6 +23,7 @@ public class TTMyPhamAdmin implements Serializable {
         this.gia = gia;
         this.mota = mota;
         this.chitiet = chitiet;
+        this.soluong = soluong;
         this.tenloaimypham = tenloaimypham;
     }
 
@@ -87,6 +89,14 @@ public class TTMyPhamAdmin implements Serializable {
 
     public void setChitiet(String chitiet) {
         this.chitiet = chitiet;
+    }
+
+    public int getSoluong() {
+        return soluong;
+    }
+
+    public void setSoluong(int soluong) {
+        this.soluong = soluong;
     }
 
     public String getTenloaimypham() {
