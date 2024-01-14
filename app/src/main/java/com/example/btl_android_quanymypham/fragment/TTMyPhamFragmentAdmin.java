@@ -9,7 +9,10 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.ContextMenu;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,6 +29,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -37,6 +41,7 @@ import com.example.btl_android_quanymypham.adapter.TTMyPhamAdapterAdmin;
 import com.example.btl_android_quanymypham.adapter.TaiKhoanAdapterAdmin;
 import com.example.btl_android_quanymypham.model.TTMyPhamAdmin;
 import com.example.btl_android_quanymypham.model.TaiKhoanAdmin;
+import com.google.android.material.search.SearchBar;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.ByteArrayOutputStream;
@@ -46,7 +51,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TTMyPhamFragmentAdmin extends Fragment {
-    EditText tenmp,dungtich,giaban;
+    EditText tenmp,dungtich,giaban,searchEdt;
     TextInputLayout mota,chitiet;
     ImageButton camera,folder;
     Spinner spinnerLoaiMP;
@@ -212,6 +217,24 @@ public class TTMyPhamFragmentAdmin extends Fragment {
 
             }
         });
+
+        searchEdt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                ttMyPhamAdapterAdmin.getFilter().filter(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
     }
 
     private void DataListView() {
@@ -380,5 +403,6 @@ public class TTMyPhamFragmentAdmin extends Fragment {
         sua = view.findViewById(R.id.btnSua);
         recyclerView = view.findViewById(R.id.rcv_ttmypham);
         registerForContextMenu(recyclerView);
+        searchEdt = view.findViewById(R.id.searchbar);
     }
 }

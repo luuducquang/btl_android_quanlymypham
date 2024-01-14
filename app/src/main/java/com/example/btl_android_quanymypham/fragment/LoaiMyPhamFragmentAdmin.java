@@ -3,6 +3,8 @@ package com.example.btl_android_quanymypham.fragment;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -31,7 +33,7 @@ public class LoaiMyPhamFragmentAdmin extends Fragment {
     private RecyclerView recyclerView;
     private LoaiMyPhamAdapterAdmin loaiMyPhamAdapterAdmin;
     LoaiMyPhamDAOAdmin db;
-    EditText tenloai,mota;
+    EditText tenloai,mota,search;
     private int selectedId;
 
     Button them,sua,lammoi;
@@ -93,6 +95,23 @@ public class LoaiMyPhamFragmentAdmin extends Fragment {
                     DataListView();
                     Toast.makeText(requireContext(), "Sửa dữ liệu thành công", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                loaiMyPhamAdapterAdmin.getFilter().filter(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
 
@@ -177,5 +196,6 @@ public class LoaiMyPhamFragmentAdmin extends Fragment {
         lammoi = view.findViewById(R.id.btnMoi);
         recyclerView = view.findViewById(R.id.rcv_loaimypham);
         registerForContextMenu(recyclerView);
+        search = view.findViewById(R.id.searchbar);
     }
 }

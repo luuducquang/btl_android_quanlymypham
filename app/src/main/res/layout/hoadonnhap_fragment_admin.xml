@@ -44,14 +44,14 @@
                         android:padding="6dp"
                         android:id="@+id/edBirthday"
                         android:hint="Ngày nhập"
-                        android:layout_width="190sp"
+                        android:layout_width="202sp"
                         android:layout_height="40dp"/>
                     <ImageView
                         android:id="@+id/imgdate"
                         android:layout_marginTop="2dp"
                         android:src="@drawable/calendar"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"/>
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"/>
                 </LinearLayout>
             </TableRow>
             <TableRow>
@@ -135,9 +135,27 @@
                 android:backgroundTint="#00BCD4"/>
 
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/searchbar"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:hint="Search Here"
+                android:padding="5dp"
+                android:imeOptions="actionSearch"
+                android:maxLines="1"
+                android:layout_margin="8dp"
+                android:background="@drawable/search"
+                android:drawableLeft="@drawable/baseline_search_24"
+                />
+        </LinearLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcv_hoadonnhap"
             android:layout_width="match_parent"
-            android:layout_height="600sp"/>
+            android:layout_height="500sp"/>
     </LinearLayout>
 </ScrollView>

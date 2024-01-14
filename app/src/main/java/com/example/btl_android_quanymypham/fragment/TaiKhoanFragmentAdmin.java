@@ -9,6 +9,8 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -41,7 +43,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaiKhoanFragmentAdmin extends Fragment {
-    EditText tk,mk,hoten,email;
+    EditText tk,mk,hoten,email,search;
     ImageButton camera,folder;
     Spinner quyen;
     Button lammoi,them,sua;
@@ -169,6 +171,23 @@ public class TaiKhoanFragmentAdmin extends Fragment {
                 }
             }
         });
+
+        search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                taiKhoanAdapterAdmin.getFilter().filter(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
     @Override
@@ -225,6 +244,7 @@ public class TaiKhoanFragmentAdmin extends Fragment {
         img = view.findViewById(R.id.imgPreview);
         recyclerView = view.findViewById(R.id.rcv_taikhoan);
         registerForContextMenu(recyclerView);
+        search = view.findViewById(R.id.searchbar);
     }
 
     @Override

@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -12,16 +14,52 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.btl_android_quanymypham.R;
+import com.example.btl_android_quanymypham.model.HoaDonBanAdmin;
 import com.example.btl_android_quanymypham.model.HoaDonNhapAdmin;
 import com.example.btl_android_quanymypham.model.TTMyPhamAdmin;
+import com.example.btl_android_quanymypham.model.TaiKhoanAdmin;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class HoaDonNhapAdapterAdmin extends RecyclerView.Adapter<HoaDonNhapAdapterAdmin.HoaDonNhapViewHolder> {
+public class HoaDonNhapAdapterAdmin extends RecyclerView.Adapter<HoaDonNhapAdapterAdmin.HoaDonNhapViewHolder> implements Filterable {
     List<HoaDonNhapAdmin> hoaDonNhapAdminList;
+    List<HoaDonNhapAdmin> hoaDonNhapAdminListOld;
     Context context;
     private OnDelItemClickListener onDelItemClickListener;
     private OnInfItemClickListener onInfItemClickListener;
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                String strSearch = constraint.toString();
+                if (strSearch.isEmpty()){
+                    hoaDonNhapAdminList = hoaDonNhapAdminListOld;
+                }
+                else {
+                    List<HoaDonNhapAdmin> list = new ArrayList<>();
+                    for (HoaDonNhapAdmin hoaDonNhapAdmin : hoaDonNhapAdminList){
+                        if (hoaDonNhapAdmin.getTenNCC().toLowerCase().contains(strSearch.toLowerCase())){
+                            list.add(hoaDonNhapAdmin);
+                        }
+                    }
+
+                    hoaDonNhapAdminList = list;
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = hoaDonNhapAdminList;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                hoaDonNhapAdminList = (List<HoaDonNhapAdmin>) results.values;
+                notifyDataSetChanged();
+            }
+        };
+    }
 
     public interface OnInfItemClickListener {
         void onInfItemClick(HoaDonNhapAdmin hoaDonNhapAdmin);
@@ -41,6 +79,7 @@ public class HoaDonNhapAdapterAdmin extends RecyclerView.Adapter<HoaDonNhapAdapt
 
     public HoaDonNhapAdapterAdmin(List<HoaDonNhapAdmin> hoaDonNhapAdminList, Context context) {
         this.hoaDonNhapAdminList = hoaDonNhapAdminList;
+        this.hoaDonNhapAdminListOld = hoaDonNhapAdminList;
         this.context = context;
     }
 

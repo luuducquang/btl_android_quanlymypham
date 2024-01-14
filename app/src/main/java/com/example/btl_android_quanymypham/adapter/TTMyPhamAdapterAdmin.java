@@ -6,6 +6,8 @@ import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,16 +20,50 @@ import com.example.btl_android_quanymypham.R;
 import com.example.btl_android_quanymypham.model.TTMyPhamAdmin;
 import com.example.btl_android_quanymypham.model.TaiKhoanAdmin;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class TTMyPhamAdapterAdmin extends RecyclerView.Adapter<TTMyPhamAdapterAdmin.TTMyPhamViewHolder>{
+public class TTMyPhamAdapterAdmin extends RecyclerView.Adapter<TTMyPhamAdapterAdmin.TTMyPhamViewHolder> implements Filterable {
 
     private List<TTMyPhamAdmin> ttMyPhamAdminList;
+    private List<TTMyPhamAdmin> ttMyPhamAdminListOld;
 
     Context context;
     private OnItemClickListener onItemClickListener;
     private OnDelItemClickListener onDelItemClickListener;
     private OnItemLongClickListener onItemLongClickListener;
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                String strSearch = constraint.toString();
+                if (strSearch.isEmpty()){
+                    ttMyPhamAdminList = ttMyPhamAdminListOld;
+                }
+                else {
+                    List<TTMyPhamAdmin> list = new ArrayList<>();
+                    for (TTMyPhamAdmin ttMyPhamAdmin2 : ttMyPhamAdminListOld){
+                        if (ttMyPhamAdmin2.getTenmypham().toLowerCase().contains(strSearch.toLowerCase())){
+                            list.add(ttMyPhamAdmin2);
+                        }
+                    }
+
+                    ttMyPhamAdminList = list;
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = ttMyPhamAdminList;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                ttMyPhamAdminList = (List<TTMyPhamAdmin>) results.values;
+                notifyDataSetChanged();
+            }
+        };
+    }
 
     public interface OnDelItemClickListener {
         void onDelItemClick(TTMyPhamAdmin ttMyPhamAdmin);
@@ -54,6 +90,7 @@ public class TTMyPhamAdapterAdmin extends RecyclerView.Adapter<TTMyPhamAdapterAd
     }
     public TTMyPhamAdapterAdmin(List<TTMyPhamAdmin> ttMyPhamAdminList, Context context) {
         this.ttMyPhamAdminList = ttMyPhamAdminList;
+        this.ttMyPhamAdminListOld = ttMyPhamAdminList;
         this.context = context;
     }
 

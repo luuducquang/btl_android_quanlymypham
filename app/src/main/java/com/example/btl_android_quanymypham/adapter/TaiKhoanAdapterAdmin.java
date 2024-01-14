@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,16 +18,51 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.btl_android_quanymypham.R;
 import com.example.btl_android_quanymypham.model.LoaiMyPhamAdmin;
+import com.example.btl_android_quanymypham.model.TTMyPhamAdmin;
 import com.example.btl_android_quanymypham.model.TaiKhoanAdmin;
 
 import java.sql.Blob;
+import java.util.ArrayList;
 import java.util.List;
 
-public class TaiKhoanAdapterAdmin extends RecyclerView.Adapter<TaiKhoanAdapterAdmin.TaiKhoanViewHolder>{
+public class TaiKhoanAdapterAdmin extends RecyclerView.Adapter<TaiKhoanAdapterAdmin.TaiKhoanViewHolder> implements Filterable {
     private List<TaiKhoanAdmin> taiKhoanAdmins;
+    private List<TaiKhoanAdmin> taiKhoanAdminsOld;
     Context context;
     private OnItemClickListener onItemClickListener;
     private OnItemLongClickListener onItemLongClickListener;
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                String strSearch = constraint.toString();
+                if (strSearch.isEmpty()){
+                    taiKhoanAdmins = taiKhoanAdminsOld;
+                }
+                else {
+                    List<TaiKhoanAdmin> list = new ArrayList<>();
+                    for (TaiKhoanAdmin taiKhoanAdmin : taiKhoanAdminsOld){
+                        if (taiKhoanAdmin.getTaikhoan().toLowerCase().contains(strSearch.toLowerCase())){
+                            list.add(taiKhoanAdmin);
+                        }
+                    }
+
+                    taiKhoanAdmins = list;
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = taiKhoanAdmins;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                taiKhoanAdmins = (List<TaiKhoanAdmin>) results.values;
+                notifyDataSetChanged();
+            }
+        };
+    }
 
     public interface OnItemClickListener {
         void onItemClick(TaiKhoanAdmin taiKhoanAdmin);
@@ -46,6 +83,7 @@ public class TaiKhoanAdapterAdmin extends RecyclerView.Adapter<TaiKhoanAdapterAd
     public TaiKhoanAdapterAdmin(Context context, List<TaiKhoanAdmin> taiKhoanAdmins) {
         this.context = context;
         this.taiKhoanAdmins = taiKhoanAdmins;
+        this.taiKhoanAdminsOld = taiKhoanAdmins;
     }
     @NonNull
     @Override

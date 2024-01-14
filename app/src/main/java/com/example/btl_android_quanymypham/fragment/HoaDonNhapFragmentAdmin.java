@@ -9,6 +9,8 @@ import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.ContextMenu;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -61,7 +63,7 @@ public class HoaDonNhapFragmentAdmin extends Fragment {
     HoaDonNhapDAOAdmin db;
     NhaCungCapDAOAdmin nhaCungCapDAOAdmin;
     TTMyPhamDAOAdmin ttMyPhamDAOAdmin;
-    EditText soluong,dongia,tongtien,ngaynhap;
+    EditText soluong,dongia,tongtien,ngaynhap,search;
     ImageView chonngaynhap;
     Spinner ncc,mp;
     private int selectedId;
@@ -310,6 +312,23 @@ public class HoaDonNhapFragmentAdmin extends Fragment {
                 }
             }
         });
+
+        search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                hoaDonNhapAdapterAdmin.getFilter().filter(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
     private void Innit(View view) {
@@ -324,6 +343,7 @@ public class HoaDonNhapFragmentAdmin extends Fragment {
         recyclerView = view.findViewById(R.id.rcv_hoadonnhap);
         chonngaynhap = view.findViewById(R.id.imgdate);
         ngaynhap.setText(sdf.format(calendar.getTime()));
+        search = view.findViewById(R.id.searchbar);
     }
     public boolean isValidFormat(String format, String value) {
         Date date = null;

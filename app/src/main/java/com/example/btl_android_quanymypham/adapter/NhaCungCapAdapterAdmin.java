@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,14 +14,49 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.btl_android_quanymypham.R;
 import com.example.btl_android_quanymypham.model.NhaCungCapAdmin;
+import com.example.btl_android_quanymypham.model.TaiKhoanAdmin;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class NhaCungCapAdapterAdmin extends RecyclerView.Adapter<NhaCungCapAdapterAdmin.NhaCungCapViewHolder> {
+public class NhaCungCapAdapterAdmin extends RecyclerView.Adapter<NhaCungCapAdapterAdmin.NhaCungCapViewHolder> implements Filterable {
     List<NhaCungCapAdmin> nhaCungCapAdminList;
+    List<NhaCungCapAdmin> nhaCungCapAdminListOld;
     private OnItemClickListener onItemClickListener;
     private OnItemLongClickListener onItemLongClickListener;
     Context context;
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                String strSearch = constraint.toString();
+                if (strSearch.isEmpty()){
+                    nhaCungCapAdminList = nhaCungCapAdminListOld;
+                }
+                else {
+                    List<NhaCungCapAdmin> list = new ArrayList<>();
+                    for (NhaCungCapAdmin nhaCungCapAdmin : nhaCungCapAdminListOld){
+                        if (nhaCungCapAdmin.getTen().toLowerCase().contains(strSearch.toLowerCase())){
+                            list.add(nhaCungCapAdmin);
+                        }
+                    }
+
+                    nhaCungCapAdminList = list;
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = nhaCungCapAdminList;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                nhaCungCapAdminList = (List<NhaCungCapAdmin>) results.values;
+                notifyDataSetChanged();
+            }
+        };
+    }
 
     public interface OnItemClickListener {
         void onItemClick(NhaCungCapAdmin nhaCungCapAdmin);
@@ -39,6 +76,7 @@ public class NhaCungCapAdapterAdmin extends RecyclerView.Adapter<NhaCungCapAdapt
 
     public NhaCungCapAdapterAdmin(List<NhaCungCapAdmin> nhaCungCapAdminList, Context context) {
         this.nhaCungCapAdminList = nhaCungCapAdminList;
+        this.nhaCungCapAdminListOld = nhaCungCapAdminList;
         this.context = context;
     }
 

@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,20 +16,56 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.btl_android_quanymypham.R;
 import com.example.btl_android_quanymypham.model.HoaDonBanAdmin;
 import com.example.btl_android_quanymypham.model.HoaDonNhapAdmin;
+import com.example.btl_android_quanymypham.model.TaiKhoanAdmin;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class HoaDonBanAdapterAdmin extends RecyclerView.Adapter<HoaDonBanAdapterAdmin.HoaDonBanViewHolder>{
+public class HoaDonBanAdapterAdmin extends RecyclerView.Adapter<HoaDonBanAdapterAdmin.HoaDonBanViewHolder> implements Filterable {
     List<HoaDonBanAdmin> hoaDonBanAdminList;
+    List<HoaDonBanAdmin> hoaDonBanAdminListOld;
     Context context;
 
     public HoaDonBanAdapterAdmin(List<HoaDonBanAdmin> hoaDonBanAdminList, Context context) {
         this.hoaDonBanAdminList = hoaDonBanAdminList;
+        this.hoaDonBanAdminListOld = hoaDonBanAdminList;
         this.context = context;
     }
 
     private OnDelItemClickListener onDelItemClickListener;
     private OnInfItemClickListener onInfItemClickListener;
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                String strSearch = constraint.toString();
+                if (strSearch.isEmpty()){
+                    hoaDonBanAdminList = hoaDonBanAdminListOld;
+                }
+                else {
+                    List<HoaDonBanAdmin> list = new ArrayList<>();
+                    for (HoaDonBanAdmin hoaDonBanAdmin : hoaDonBanAdminListOld){
+                        if (hoaDonBanAdmin.getTenKH().toLowerCase().contains(strSearch.toLowerCase())){
+                            list.add(hoaDonBanAdmin);
+                        }
+                    }
+
+                    hoaDonBanAdminList = list;
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = hoaDonBanAdminList;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                hoaDonBanAdminList = (List<HoaDonBanAdmin>) results.values;
+                notifyDataSetChanged();
+            }
+        };
+    }
 
     public interface OnInfItemClickListener {
         void onInfItemClick(HoaDonBanAdmin hoaDonBanAdmin);

@@ -13,11 +13,13 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.btl_android_quanymypham.fragment.HomeFragmentUser;
 import com.example.btl_android_quanymypham.fragment.TTMyPhamFragmentAdmin;
@@ -39,6 +41,8 @@ public class MainUser extends AppCompatActivity implements NavigationView.OnNavi
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        getSupportActionBar().setTitle("");
 
         mDrawerLayout = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -64,6 +68,7 @@ public class MainUser extends AppCompatActivity implements NavigationView.OnNavi
                 startActivity(it);
             }
         });
+        
 
         imgUser = headerView.findViewById(R.id.img_user);
         nameUser = headerView.findViewById(R.id.name_user);
@@ -80,6 +85,23 @@ public class MainUser extends AppCompatActivity implements NavigationView.OnNavi
         nameUser.setText(taiKhoanAdmin.getHoten());
         emailUser.setText(taiKhoanAdmin.getEmail());
 
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_search,menu);
+        getMenuInflater().inflate(R.menu.menu_shop_user,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if (id==R.id.action_cart){
+            Toast.makeText(MainUser.this,"Quan ly cua hang",Toast.LENGTH_SHORT).show();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

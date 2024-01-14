@@ -3,6 +3,8 @@ package com.example.btl_android_quanymypham.fragment;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -31,7 +33,7 @@ public class NhaCungCapFragmentAdmin extends Fragment {
     private RecyclerView recyclerView;
     private NhaCungCapAdapterAdmin nhaCungCapAdapterAdmin;
     NhaCungCapDAOAdmin db;
-    EditText tenncc,diachincc,sdtncc;
+    EditText tenncc,diachincc,sdtncc,search;
     private int selectedId;
 
     Button them,sua,lammoi;
@@ -97,6 +99,23 @@ public class NhaCungCapFragmentAdmin extends Fragment {
                     DataListView();
                     Toast.makeText(requireContext(), "Sửa dữ liệu thành công", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                nhaCungCapAdapterAdmin.getFilter().filter(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
     }
@@ -185,5 +204,6 @@ public class NhaCungCapFragmentAdmin extends Fragment {
         sua = view.findViewById(R.id.btnSua);
         recyclerView = view.findViewById(R.id.rcv_nhacungcap);
         registerForContextMenu(recyclerView);
+        search = view.findViewById(R.id.searchbar);
     }
 }

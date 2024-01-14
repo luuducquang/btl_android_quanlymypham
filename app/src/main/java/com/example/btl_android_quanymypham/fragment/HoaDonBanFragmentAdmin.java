@@ -4,6 +4,8 @@ import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,7 +49,7 @@ public class HoaDonBanFragmentAdmin extends Fragment {
     private HoaDonBanAdapterAdmin hoaDonBanAdapterAdmin;
     HoaDonBanDAOAdmin db;
     TTMyPhamDAOAdmin ttMyPhamDAOAdmin;
-    EditText tenkh,diachi,sdt,soluong,dongia,tongtien,ngayban;
+    EditText tenkh,diachi,sdt,soluong,dongia,tongtien,ngayban,search;
     ImageView chonngayban;
     Spinner mp;
     private int selectedId;
@@ -267,6 +269,23 @@ public class HoaDonBanFragmentAdmin extends Fragment {
                 }
             }
         });
+
+        search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                hoaDonBanAdapterAdmin.getFilter().filter(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
     private void Innit(View view) {
@@ -283,6 +302,7 @@ public class HoaDonBanFragmentAdmin extends Fragment {
         recyclerView = view.findViewById(R.id.rcv_hoadonban);
         chonngayban = view.findViewById(R.id.imgdate);
         ngayban.setText(sdf.format(calendar.getTime()));
+        search = view.findViewById(R.id.searchbar);
     }
     public boolean isValidFormat(String format, String value) {
         Date date = null;

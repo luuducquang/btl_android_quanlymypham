@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,17 +15,52 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.btl_android_quanymypham.model.LoaiMyPhamAdmin;
 import com.example.btl_android_quanymypham.R;
+import com.example.btl_android_quanymypham.model.TaiKhoanAdmin;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class LoaiMyPhamAdapterAdmin extends RecyclerView.Adapter<LoaiMyPhamAdapterAdmin.LoaiMyPhamViewHolder> {
+public class LoaiMyPhamAdapterAdmin extends RecyclerView.Adapter<LoaiMyPhamAdapterAdmin.LoaiMyPhamViewHolder> implements Filterable {
     private List<LoaiMyPhamAdmin> loaiMyPhams;
+    private List<LoaiMyPhamAdmin> loaiMyPhamsOld;
     private OnItemClickListener onItemClickListener;
     private OnItemLongClickListener onItemLongClickListener;
 
     Context context;
     EditText tenloai;
     EditText mota;
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                String strSearch = constraint.toString();
+                if (strSearch.isEmpty()){
+                    loaiMyPhams = loaiMyPhamsOld;
+                }
+                else {
+                    List<LoaiMyPhamAdmin> list = new ArrayList<>();
+                    for (LoaiMyPhamAdmin loaiMyPhamAdmin : loaiMyPhamsOld){
+                        if (loaiMyPhamAdmin.getTenloai().toLowerCase().contains(strSearch.toLowerCase())){
+                            list.add(loaiMyPhamAdmin);
+                        }
+                    }
+
+                    loaiMyPhams = list;
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = loaiMyPhams;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                loaiMyPhams = (List<LoaiMyPhamAdmin>) results.values;
+                notifyDataSetChanged();
+            }
+        };
+    }
 
     public interface OnItemClickListener {
         void onItemClick(int id);
@@ -44,6 +81,7 @@ public class LoaiMyPhamAdapterAdmin extends RecyclerView.Adapter<LoaiMyPhamAdapt
     public LoaiMyPhamAdapterAdmin(Context context, List<LoaiMyPhamAdmin> loaiMyPhams, EditText tenloai, EditText mota) {
         this.context = context;
         this.loaiMyPhams = loaiMyPhams;
+        this.loaiMyPhamsOld = loaiMyPhams;
         this.tenloai = tenloai;
         this.mota = mota;
     }
