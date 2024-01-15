@@ -4,7 +4,8 @@
     android:id="@+id/id_item_home"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="6dp">
+    app:cardCornerRadius="6dp"
+    android:layout_margin="5dp">
 
     <LinearLayout
         android:layout_width="match_parent"

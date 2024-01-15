@@ -12,7 +12,7 @@ import com.example.btl_android_quanymypham.model.TaiKhoanAdmin;
 
 public class DataBaseHandler extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME = "btl_quanlymypham_luuducquang8.db";
+    private static final String DATABASE_NAME = "btl_quanlymypham_luuducquang9.db";
     private static final int DATABASE_VERSION = 1;
     public DataBaseHandler(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -84,6 +84,15 @@ public class DataBaseHandler extends SQLiteOpenHelper {
                 "FOREIGN KEY (MaHDN) REFERENCES HoaDonNhap(id) ON DELETE CASCADE, " +
                 "FOREIGN KEY (MaMP) REFERENCES ThongTinMyPham(id) ON DELETE CASCADE);";
         db.execSQL(createTableQueryChiTietHoaDonNhap);
+
+        String createTableQueryGioHang = "CREATE TABLE IF NOT EXISTS GioHang " +
+                "(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "MaMP INTEGER, " +
+                "NguoiTao INTEGER, " +
+                "SoLuong INTEGER, " +
+                "FOREIGN KEY (MaMP) REFERENCES ThongTinMyPham(id) ON DELETE CASCADE, " +
+                "FOREIGN KEY (NguoiTao) REFERENCES DangNhap(id) ON DELETE CASCADE);";
+        db.execSQL(createTableQueryGioHang);
     }
 
     @Override

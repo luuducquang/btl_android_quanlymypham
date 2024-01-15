@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.example.btl_android_quanymypham.adapter.ProductHomeAdapterUser;
 import com.example.btl_android_quanymypham.fragment.DetailProductFragmentUser;
+import com.example.btl_android_quanymypham.fragment.GioHangFragmentUser;
 import com.example.btl_android_quanymypham.fragment.ProductHomeFragmentUser;
 import com.example.btl_android_quanymypham.fragment.TTMyPhamFragmentAdmin;
 import com.example.btl_android_quanymypham.model.TTMyPhamAdmin;
@@ -39,6 +40,7 @@ public class MainUser extends AppCompatActivity implements NavigationView.OnNavi
     private int mCurrentFragment = FragmentHome;
     TextView nameUser,emailUser;
     ImageView imgUser;
+    TaiKhoanAdmin taiKhoanAdmin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,9 +63,6 @@ public class MainUser extends AppCompatActivity implements NavigationView.OnNavi
         NavigationView  navigationView = findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(MainUser.this);
 
-        replaceFragment(new ProductHomeFragmentUser());
-        navigationView.getMenu().findItem(R.id.nav_home).setChecked(true);
-
         View headerView = navigationView.getHeaderView(0);
         Button logout = headerView.findViewById(R.id.btn_logout);
         logout.setOnClickListener(new View.OnClickListener() {
@@ -84,12 +83,15 @@ public class MainUser extends AppCompatActivity implements NavigationView.OnNavi
         if (bundle==null){
             return;
         }
-        TaiKhoanAdmin taiKhoanAdmin = (TaiKhoanAdmin) bundle.get("ObjectUser");
+        taiKhoanAdmin = (TaiKhoanAdmin) bundle.get("ObjectUser");
         byte[]anhdaidien = taiKhoanAdmin.getAnhdaidien();
         Bitmap bitmap = BitmapFactory.decodeByteArray(anhdaidien,0,anhdaidien.length);
         imgUser.setImageBitmap(bitmap);
         nameUser.setText(taiKhoanAdmin.getHoten());
         emailUser.setText(taiKhoanAdmin.getEmail());
+
+        replaceFragment(new ProductHomeFragmentUser());
+        navigationView.getMenu().findItem(R.id.nav_home).setChecked(true);
 
     }
 
@@ -105,7 +107,16 @@ public class MainUser extends AppCompatActivity implements NavigationView.OnNavi
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id==R.id.action_cart){
-            Toast.makeText(MainUser.this,"Quan ly cua hang",Toast.LENGTH_SHORT).show();
+            GioHangFragmentUser gioHangFragmentUser = new GioHangFragmentUser();
+            AppCompatActivity activity = (AppCompatActivity) this;
+            activity.getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.content_frame, gioHangFragmentUser)
+                    .addToBackStack(null)
+                    .commit();
+
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("ObjectUser", taiKhoanAdmin);
+            gioHangFragmentUser.setArguments(bundle);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -114,16 +125,14 @@ public class MainUser extends AppCompatActivity implements NavigationView.OnNavi
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.nav_home){
-            if (mCurrentFragment!=FragmentHome){
-                replaceFragment(new ProductHomeFragmentUser());
-                mCurrentFragment = FragmentHome;
-            }
+            replaceFragment(new ProductHomeFragmentUser());
+            mCurrentFragment = FragmentHome;
+
         }
         else if (id == R.id.nav_ttmypham){
-            if (mCurrentFragment!=FragmentCategory){
-                replaceFragment(new TTMyPhamFragmentAdmin());
-                mCurrentFragment = FragmentCategory;
-            }
+            replaceFragment(new TTMyPhamFragmentAdmin());
+            mCurrentFragment = FragmentCategory;
+
         }
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
@@ -140,6 +149,10 @@ public class MainUser extends AppCompatActivity implements NavigationView.OnNavi
     }
 
     private void replaceFragment(Fragment fragment){
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("ObjectUser", taiKhoanAdmin);
+        fragment.setArguments(bundle);
+
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.content_frame,fragment);
         transaction.commit();

@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.btl_android_quanymypham.R;
 import com.example.btl_android_quanymypham.fragment.DetailProductFragmentUser;
+import com.example.btl_android_quanymypham.model.ChiTietHoaDonNhapAdmin;
 import com.example.btl_android_quanymypham.model.TTMyPhamAdmin;
 
 import java.util.List;
@@ -25,6 +26,14 @@ import java.util.List;
 public class ProductHomeAdapterUser extends RecyclerView.Adapter<ProductHomeAdapterUser.ProductHomeViewHolder>{
     private List<TTMyPhamAdmin> ttMyPhamAdminList;
     private Context mConText;
+    private OnItemClickListener onItemClickListener;
+    public interface OnItemClickListener {
+        void onItemClick(TTMyPhamAdmin ttMyPhamAdmin);
+    }
+
+    public void setOnItemClickListener(ProductHomeAdapterUser.OnItemClickListener listener) {
+        this.onItemClickListener = listener;
+    }
     public ProductHomeAdapterUser(Context mConText, List<TTMyPhamAdmin> ttMyPhamAdminList) {
         this.mConText = mConText;
         this.ttMyPhamAdminList = ttMyPhamAdminList;
@@ -53,26 +62,6 @@ public class ProductHomeAdapterUser extends RecyclerView.Adapter<ProductHomeAdap
         Bitmap bitmap = BitmapFactory.decodeByteArray(anhsanpham,0,anhsanpham.length);
         holder.imgProductHome.setImageBitmap(bitmap);
 
-        holder.idItemHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                gotoDetail(ttMyPhamAdmin);
-            }
-        });
-    }
-
-    private void gotoDetail(TTMyPhamAdmin ttMyPhamAdmin) {
-        DetailProductFragmentUser detailFragment = new DetailProductFragmentUser();
-
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("ObjectProduct", ttMyPhamAdmin);
-        detailFragment.setArguments(bundle);
-
-        AppCompatActivity activity = (AppCompatActivity) mConText;
-        activity.getSupportFragmentManager().beginTransaction()
-                .replace(R.id.content_frame, detailFragment)
-                .addToBackStack(null)
-                .commit();
     }
 
     @Override
@@ -95,6 +84,17 @@ public class ProductHomeAdapterUser extends RecyclerView.Adapter<ProductHomeAdap
             imgProductHome = itemView.findViewById(R.id.img_product_home);
             nameProductHome = itemView.findViewById(R.id.name_product_home);
             priceProductHome = itemView.findViewById(R.id.price_product_home);
+
+            idItemHome.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION && onItemClickListener != null) {
+                        TTMyPhamAdmin ttMyPhamAdmin = ttMyPhamAdminList.get(position);
+                        onItemClickListener.onItemClick(ttMyPhamAdmin);
+                    }
+                }
+            });
         }
     }
 

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/id_item_giohang"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="6dp"
+    android:layout_margin="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5sp">
+
+        <CheckBox
+            android:id="@+id/cb_select_giohang"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+
+        <ImageView
+            android:id="@+id/anh_giohang"
+            android:layout_width="100sp"
+            android:layout_height="100sp"
+            android:src="@drawable/centella"
+            android:scaleType="centerCrop"/>
+
+        <LinearLayout
+            android:layout_width="202sp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="5sp">
+            <TextView
+                android:id="@+id/ten_giohang"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tên sản phẩm"
+                android:textStyle="bold"
+                android:maxLines="3"
+                android:ellipsize="end"
+                android:textSize="17sp"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/gia_giohang"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="150000"
+                    android:textSize="13sp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="đ"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="#FFFFFF">
+
+                <ImageView
+                    android:id="@+id/minus_giohang"
+                    android:src="@drawable/minus"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:padding="4dp"/>
+
+                <TextView
+                    android:id="@+id/soluong_giohang"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1"
+                    android:textSize="15sp"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:background="#FFC107"/>
+
+                <ImageView
+                    android:id="@+id/plus_giohang"
+                    android:src="@drawable/plus"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:padding="4dp"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5sp">
+            <ImageView
+                android:id="@+id/item_delete"
+                android:layout_width="40sp"
+                android:layout_height="40sp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/delete"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
