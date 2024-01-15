@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -37,6 +38,8 @@ public class GioHangFragmentUser extends Fragment {
     GioHangAdapterUser gioHangAdapterUser;
     TaiKhoanAdmin taiKhoanAdmin;
     GioHangDAOUser db;
+    List<GioHangUser> gioHangUserList = new ArrayList<>();
+    private Long TongTien ;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -51,8 +54,36 @@ public class GioHangFragmentUser extends Fragment {
 
         Innit(view);
         DataListView();
+        HandlerButtoon();
 
         return view;
+    }
+
+    private void HandlerButtoon() {
+        muangay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (gioHangUserList.size()!=0){
+                    DatHangFragmentUser datHangFragmentUser = new DatHangFragmentUser();
+                    AppCompatActivity activity = (AppCompatActivity) requireContext();
+                    activity.getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.content_frame, datHangFragmentUser)
+                            .addToBackStack(null)
+                            .commit();
+
+                    GioHangUser[] gioHangArray = new GioHangUser[gioHangUserList.size()];
+                    gioHangArray = gioHangUserList.toArray(gioHangArray);
+
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("ObjectListProduct", gioHangArray);
+                    bundle.putSerializable("ObjectUser", taiKhoanAdmin);
+                    datHangFragmentUser.setArguments(bundle);
+                }
+                else{
+                    Toast.makeText(requireContext(), "Không có sản phẩm nào được mua", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     private void DataListView() {
@@ -84,7 +115,65 @@ public class GioHangFragmentUser extends Fragment {
 
         recyclerView.setAdapter(gioHangAdapterUser);
 
+        gioHangAdapterUser.setOnCheckedChangeListener(new GioHangAdapterUser.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(boolean isChecked, GioHangUser gioHangUser) {
+                if (isChecked){
+                    gioHangUserList.add(gioHangUser);
+                }else {
+                    for (int i = 0; i < gioHangUserList.size(); i++) {
+                        if (gioHangUserList.get(i).getMamp() == gioHangUser.getMamp()) {
+                            gioHangUserList.remove(i);
+                            break;
+                        }
+                    }
+                }
+                Tinhtien();
+            }
+        });
+
+        gioHangAdapterUser.setDelOnItemClickListener(new GioHangAdapterUser.OnDelItemClickListener() {
+            @Override
+            public void onDelItemClick(GioHangUser gioHangUser) {
+                db.deleteGioHang(gioHangUser.getId());
+                Tinhtien();
+                DataListView();
+            }
+        });
+
+        gioHangAdapterUser.setOnItemClickListener(new GioHangAdapterUser.OnPlusItemClickListener() {
+            @Override
+            public void onPlusItemClick(GioHangUser gioHangUser) {
+                db.Tangsoluong(gioHangUser.getId());
+                gioHangUser.setSoluong(gioHangUser.getSoluong() + 1);
+                Tinhtien();
+                gioHangAdapterUser.notifyDataSetChanged();
+            }
+        });
+
+        gioHangAdapterUser.setOnItemClickListener(new GioHangAdapterUser.OnMinusItemClickListener() {
+            @Override
+            public void onMinusItemClick(GioHangUser gioHangUser) {
+                db.Giamsoluong(gioHangUser.getId());
+                if (gioHangUser.getSoluong()>1){
+                    gioHangUser.setSoluong(gioHangUser.getSoluong() - 1);
+                }
+                Tinhtien();
+                gioHangAdapterUser.notifyDataSetChanged();
+            }
+        });
+
     }
+
+    private void Tinhtien() {
+        TongTien = 0L;
+        for (int i = 0; i < gioHangUserList.size(); i++) {
+            TongTien += (gioHangUserList.get(i).getGia() * gioHangUserList.get(i).getSoluong());
+        }
+        tongtientamtinh.setText(String.valueOf(TongTien));
+        gioHangAdapterUser.notifyDataSetChanged();
+    }
+
 
     private void Innit(View view) {
         muangay = view.findViewById(R.id.btn_muangay);

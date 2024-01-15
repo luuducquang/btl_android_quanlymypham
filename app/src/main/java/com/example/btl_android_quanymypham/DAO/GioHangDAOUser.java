@@ -43,4 +43,36 @@ public class GioHangDAOUser extends DataBaseHandler {
         return db.rawQuery(query, null);
     }
 
+    public void Tangsoluong(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int currentQuantity = getCurrentQuantity(db, id);
+
+        ContentValues values = new ContentValues();
+        values.put("SoLuong", currentQuantity + 1);
+        db.update("GioHang", values, "id = ?", new String[]{String.valueOf(id)});
+
+        db.close();
+    }
+    public void Giamsoluong(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int currentQuantity = getCurrentQuantity(db, id);
+        ContentValues values = new ContentValues();
+        if (currentQuantity > 1) {
+            values.put("SoLuong", currentQuantity - 1);
+            db.update("GioHang", values, "id = ?", new String[]{String.valueOf(id)});
+        }
+        db.close();
+    }
+
+    private int getCurrentQuantity(SQLiteDatabase db, int id) {
+        String query = "SELECT SoLuong FROM GioHang WHERE id = " + id;
+        Cursor cursor = db.rawQuery(query, null);
+        int currentQuantity = 0;
+        if (cursor != null && cursor.moveToFirst()) {
+            currentQuantity = cursor.getInt(0);
+            cursor.close();
+        }
+        return currentQuantity;
+    }
+
 }

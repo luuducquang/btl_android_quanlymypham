@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,13 +16,56 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.btl_android_quanymypham.R;
+import com.example.btl_android_quanymypham.model.ChiTietHoaDonNhapAdmin;
 import com.example.btl_android_quanymypham.model.GioHangUser;
+import com.example.btl_android_quanymypham.model.NhaCungCapAdmin;
 
 import java.util.List;
 
 public class GioHangAdapterUser extends RecyclerView.Adapter<GioHangAdapterUser.GioHangViewHolder>{
     private List<GioHangUser> gioHangUsers;
     private Context mConText;
+
+    private OnDelItemClickListener onDelItemClickListener;
+
+    private OnCheckedChangeListener onCheckedChangeListener;
+    private OnPlusItemClickListener onPlusItemClickListener;
+    private OnMinusItemClickListener onMinusItemClickListener;
+
+    public interface OnPlusItemClickListener {
+        void onPlusItemClick(GioHangUser gioHangUser);
+    }
+
+    public void setOnItemClickListener(GioHangAdapterUser.OnPlusItemClickListener listener) {
+        this.onPlusItemClickListener = listener;
+    }
+
+    public interface OnMinusItemClickListener {
+        void onMinusItemClick(GioHangUser gioHangUser);
+    }
+
+    public void setOnItemClickListener(GioHangAdapterUser.OnMinusItemClickListener listener) {
+        this.onMinusItemClickListener = listener;
+    }
+
+    public interface OnCheckedChangeListener {
+        void onCheckedChanged(boolean isChecked, GioHangUser gioHangUser);
+    }
+
+
+    public void setOnCheckedChangeListener(OnCheckedChangeListener listener) {
+        this.onCheckedChangeListener = listener;
+    }
+
+
+
+    public interface OnDelItemClickListener {
+        void onDelItemClick(GioHangUser gioHangUser);
+    }
+
+    public void setDelOnItemClickListener(GioHangAdapterUser.OnDelItemClickListener listener) {
+        this.onDelItemClickListener = listener;
+    }
 
     public GioHangAdapterUser(List<GioHangUser> gioHangUsers, Context mConText) {
         this.gioHangUsers = gioHangUsers;
@@ -81,6 +125,52 @@ public class GioHangAdapterUser extends RecyclerView.Adapter<GioHangAdapterUser.
             item_soluong = itemView.findViewById(R.id.soluong_giohang);
             item_plus = itemView.findViewById(R.id.plus_giohang);
             item_delete = itemView.findViewById(R.id.item_delete);
+
+            item_select.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    final int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION && onCheckedChangeListener != null) {
+                        final GioHangUser gioHangUser = gioHangUsers.get(position);
+                        onCheckedChangeListener.onCheckedChanged(isChecked, gioHangUser);
+                    }
+                }
+            });
+
+            item_delete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION && onDelItemClickListener != null) {
+                        GioHangUser gioHangUser = gioHangUsers.get(position);
+                        onDelItemClickListener.onDelItemClick(gioHangUser);
+                    }
+                }
+            });
+
+            item_plus.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION && onPlusItemClickListener != null) {
+                        GioHangUser gioHangUser = gioHangUsers.get(position);
+                        onPlusItemClickListener.onPlusItemClick(gioHangUser);
+                    }
+                }
+            });
+
+            item_minus.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION && onMinusItemClickListener != null) {
+                        GioHangUser gioHangUser = gioHangUsers.get(position);
+                        onMinusItemClickListener.onMinusItemClick(gioHangUser);
+                    }
+                }
+            });
+
+
         }
     }
 }

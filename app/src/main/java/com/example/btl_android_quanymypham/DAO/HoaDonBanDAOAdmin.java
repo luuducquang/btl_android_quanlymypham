@@ -8,6 +8,9 @@ import android.database.sqlite.SQLiteDatabase;
 import androidx.annotation.Nullable;
 
 import com.example.btl_android_quanymypham.database.DataBaseHandler;
+import com.example.btl_android_quanymypham.model.GioHangUser;
+
+import java.util.List;
 
 public class HoaDonBanDAOAdmin extends DataBaseHandler {
     public HoaDonBanDAOAdmin(@Nullable Context context) {
@@ -49,6 +52,45 @@ public class HoaDonBanDAOAdmin extends DataBaseHandler {
             db.close();
         }
     }
+
+    public void InsertListData(Integer NguoiTao, String TenKH, String DiaChi, String Sdt, String NgayBan, Long TongTien, List<GioHangUser> gioHangUserList) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        try {
+            db.beginTransaction();
+
+            ContentValues HoaDonBanValues = new ContentValues();
+            HoaDonBanValues.put("NguoiTao", NguoiTao);
+            HoaDonBanValues.put("TenKH", TenKH);
+            HoaDonBanValues.put("DiaChi", DiaChi);
+            HoaDonBanValues.put("Sdt", Sdt);
+            HoaDonBanValues.put("NgayBan", NgayBan);
+            HoaDonBanValues.put("TongTien", TongTien);
+
+            long hoaDonBanId = db.insert("HoaDonBan", null, HoaDonBanValues);
+
+            if (hoaDonBanId != -1) {
+                for (GioHangUser gioHangUser : gioHangUserList) {
+                    ContentValues chiTietValues = new ContentValues();
+                    chiTietValues.put("MaHDB", hoaDonBanId);
+                    chiTietValues.put("MaMP", gioHangUser.getMamp());
+                    chiTietValues.put("SoLuong", gioHangUser.getSoluong());
+                    chiTietValues.put("DonGia", gioHangUser.getGia());
+                    chiTietValues.put("TongTien", gioHangUser.getSoluong()* gioHangUser.getGia());
+
+                    db.insert("ChiTietHoaDonBan", null, chiTietValues);
+                }
+
+                db.setTransactionSuccessful();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            db.endTransaction();
+            db.close();
+        }
+    }
+
 
     public Cursor getAllHoaDonBan() {
         SQLiteDatabase db = this.getReadableDatabase();
