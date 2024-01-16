@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
@@ -23,9 +24,11 @@ import android.widget.Toast;
 
 import com.example.btl_android_quanymypham.adapter.ProductHomeAdapterUser;
 import com.example.btl_android_quanymypham.fragment.DetailProductFragmentUser;
+import com.example.btl_android_quanymypham.fragment.DoiMatKhauFragmentUser;
 import com.example.btl_android_quanymypham.fragment.GioHangFragmentUser;
 import com.example.btl_android_quanymypham.fragment.ProductHomeFragmentUser;
 import com.example.btl_android_quanymypham.fragment.TTMyPhamFragmentAdmin;
+import com.example.btl_android_quanymypham.fragment.ThongTinTaiKhoanFragmentUser;
 import com.example.btl_android_quanymypham.model.TTMyPhamAdmin;
 import com.example.btl_android_quanymypham.model.TaiKhoanAdmin;
 import com.google.android.material.navigation.NavigationView;
@@ -36,7 +39,9 @@ import java.util.List;
 public class MainUser extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout mDrawerLayout;
     private static final int FragmentHome = 0;
-    private static final int FragmentCategory = 1;
+    private static final int FragmentDonHang = 1;
+    private static final int FragmentThongtinTK = 2;
+    private static final int FragmentDoiMK = 3;
     private int mCurrentFragment = FragmentHome;
     TextView nameUser,emailUser;
     ImageView imgUser;
@@ -126,12 +131,19 @@ public class MainUser extends AppCompatActivity implements NavigationView.OnNavi
         if (id == R.id.nav_home){
             replaceFragment(new ProductHomeFragmentUser());
             mCurrentFragment = FragmentHome;
-//            this.getSupportFragmentManager().popBackStack();
+            this.getSupportFragmentManager().popBackStack();
 
         }
-        else if (id == R.id.nav_ttmypham){
-            replaceFragment(new TTMyPhamFragmentAdmin());
-            mCurrentFragment = FragmentCategory;
+        else if (id == R.id.nav_taikhoan){
+            replaceFragment(new ThongTinTaiKhoanFragmentUser());
+            mCurrentFragment = FragmentThongtinTK;
+            this.getSupportFragmentManager().popBackStack();
+
+        }
+        else if (id == R.id.nav_changepass){
+            replaceFragment(new DoiMatKhauFragmentUser());
+            mCurrentFragment = FragmentDoiMK;
+            this.getSupportFragmentManager().popBackStack();
 
         }
         mDrawerLayout.closeDrawer(GravityCompat.START);
@@ -149,6 +161,8 @@ public class MainUser extends AppCompatActivity implements NavigationView.OnNavi
     }
 
     private void replaceFragment(Fragment fragment){
+        getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
         Bundle bundle = new Bundle();
         bundle.putSerializable("ObjectUser", taiKhoanAdmin);
         fragment.setArguments(bundle);

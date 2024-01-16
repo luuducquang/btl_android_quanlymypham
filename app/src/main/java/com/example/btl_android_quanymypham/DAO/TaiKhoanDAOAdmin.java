@@ -106,4 +106,35 @@ public class TaiKhoanDAOAdmin extends DataBaseHandler {
         return count > 0;
     }
 
+    public void changePassword(int accountId, String newPassword) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("MatKhau", newPassword);
+
+        db.update("DangNhap", values, "ID=?", new String[]{String.valueOf(accountId)});
+
+        db.close();
+    }
+
+    public boolean isLoginValid(int accountId, String password) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String query = "SELECT COUNT(*) FROM DangNhap WHERE ID=? AND MatKhau=?";
+        String[] selectionArgs = {String.valueOf(accountId), password};
+
+        Cursor cursor = db.rawQuery(query, selectionArgs);
+        boolean isValid = false;
+
+        if (cursor != null) {
+            cursor.moveToFirst();
+            int count = cursor.getInt(0);
+            isValid = count > 0;
+            cursor.close();
+        }
+
+        return isValid;
+    }
+
+
+
 }

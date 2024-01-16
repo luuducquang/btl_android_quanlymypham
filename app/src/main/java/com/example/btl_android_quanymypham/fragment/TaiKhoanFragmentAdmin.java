@@ -94,7 +94,6 @@ public class TaiKhoanFragmentAdmin extends Fragment {
                 mk.setText("");
                 hoten.setText("");
                 email.setText("");
-                img.setImageBitmap(null);
                 tk.requestFocus();
                 DataListView();
                 Toast.makeText(requireContext(), "Làm mới thành công", Toast.LENGTH_SHORT).show();

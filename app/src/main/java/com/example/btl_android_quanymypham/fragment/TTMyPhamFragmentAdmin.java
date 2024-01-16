@@ -132,7 +132,6 @@ public class TTMyPhamFragmentAdmin extends Fragment {
                 giaban.setText("");
                 mota.getEditText().setText("");
                 chitiet.getEditText().setText("");
-                img.setImageBitmap(null);
                 tenmp.requestFocus();
                 DataListView();
                 Toast.makeText(requireContext(), "Làm mới thành công", Toast.LENGTH_SHORT).show();
