@@ -9,6 +9,8 @@ import androidx.annotation.Nullable;
 
 import com.example.btl_android_quanymypham.database.DataBaseHandler;
 
+import java.util.List;
+
 public class GioHangDAOUser extends DataBaseHandler {
     public GioHangDAOUser(@Nullable Context context) {
         super(context);
@@ -74,5 +76,54 @@ public class GioHangDAOUser extends DataBaseHandler {
         }
         return currentQuantity;
     }
+
+    public boolean checkProductExist(String tenSanPham, int nguoiTao) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = null;
+
+        try {
+            String query = "SELECT COUNT(*) FROM GioHang " +
+                    "JOIN ThongTinMyPham ON GioHang.MaMP = ThongTinMyPham.id " +
+                    "WHERE ThongTinMyPham.TenMyPham = ? AND GioHang.NguoiTao = ?";
+            cursor = db.rawQuery(query, new String[]{tenSanPham, String.valueOf(nguoiTao)});
+
+            if (cursor != null && cursor.moveToFirst()) {
+                int count = cursor.getInt(0);
+                return count > 0;
+            }
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+            db.close();
+        }
+
+        return false;
+    }
+
+    public void Tangsoluongbymamp(int maSanPham) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "UPDATE GioHang SET SoLuong = SoLuong + 1 WHERE MaMP = ?";
+        db.execSQL(query, new String[]{String.valueOf(maSanPham)});
+        db.close();
+    }
+
+    public void deleteProducts(List<Integer> ids) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        try {
+            db.beginTransaction();
+
+            for (int id : ids) {
+                db.delete("GioHang", "id = ?", new String[]{String.valueOf(id)});
+            }
+
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
+            db.close();
+        }
+    }
+
 
 }

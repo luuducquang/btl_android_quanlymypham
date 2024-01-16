@@ -98,7 +98,6 @@ public class MainUser extends AppCompatActivity implements NavigationView.OnNavi
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_search,menu);
         getMenuInflater().inflate(R.menu.menu_shop_user,menu);
         return super.onCreateOptionsMenu(menu);
     }
@@ -127,6 +126,7 @@ public class MainUser extends AppCompatActivity implements NavigationView.OnNavi
         if (id == R.id.nav_home){
             replaceFragment(new ProductHomeFragmentUser());
             mCurrentFragment = FragmentHome;
+//            this.getSupportFragmentManager().popBackStack();
 
         }
         else if (id == R.id.nav_ttmypham){

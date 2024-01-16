@@ -82,8 +82,15 @@ public class GioHangFragmentUser extends Fragment {
                 else{
                     Toast.makeText(requireContext(), "Không có sản phẩm nào được mua", Toast.LENGTH_SHORT).show();
                 }
+
+                handleExit();
             }
         });
+    }
+
+    private void handleExit() {
+        TongTien = 0L;
+        gioHangUserList.clear();
     }
 
     private void DataListView() {
@@ -171,7 +178,6 @@ public class GioHangFragmentUser extends Fragment {
             TongTien += (gioHangUserList.get(i).getGia() * gioHangUserList.get(i).getSoluong());
         }
         tongtientamtinh.setText(String.valueOf(TongTien));
-        gioHangAdapterUser.notifyDataSetChanged();
     }
 
 

@@ -3,9 +3,13 @@ package com.example.btl_android_quanymypham.fragment;
 import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -28,6 +32,8 @@ import java.util.List;
 public class ProductHomeFragmentUser extends Fragment {
     private RecyclerView recyclerView;
     private ProductHomeAdapterUser productHomeAdapter;
+
+    EditText search;
     private int IdMyPham;
     TTMyPhamDAOAdmin db;
     TaiKhoanAdmin taiKhoanAdmin;
@@ -45,9 +51,30 @@ public class ProductHomeFragmentUser extends Fragment {
 
         Innit(view);
         DataListView();
+        handlerbutton();
 
         return view;
     }
+
+    private void handlerbutton() {
+        search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                productHomeAdapter.getFilter().filter(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+    }
+
 
     private void DataListView() {
         Cursor cursor = db.getTenLoaiThongTinMyPham();
@@ -105,6 +132,7 @@ public class ProductHomeFragmentUser extends Fragment {
 
     private void Innit(View view) {
         recyclerView = view.findViewById(R.id.rcv_home);
+        search = view.findViewById(R.id.searchbar);
     }
 
     @Override

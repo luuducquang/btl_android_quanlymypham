@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,14 +21,51 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.btl_android_quanymypham.R;
 import com.example.btl_android_quanymypham.fragment.DetailProductFragmentUser;
 import com.example.btl_android_quanymypham.model.ChiTietHoaDonNhapAdmin;
+import com.example.btl_android_quanymypham.model.LoaiMyPhamAdmin;
 import com.example.btl_android_quanymypham.model.TTMyPhamAdmin;
+import com.example.btl_android_quanymypham.model.TaiKhoanAdmin;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class ProductHomeAdapterUser extends RecyclerView.Adapter<ProductHomeAdapterUser.ProductHomeViewHolder>{
+public class ProductHomeAdapterUser extends RecyclerView.Adapter<ProductHomeAdapterUser.ProductHomeViewHolder> implements Filterable {
     private List<TTMyPhamAdmin> ttMyPhamAdminList;
+    private List<TTMyPhamAdmin> ttMyPhamAdminListOld;
     private Context mConText;
     private OnItemClickListener onItemClickListener;
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                String strSearch = constraint.toString();
+                if (strSearch.isEmpty()){
+                    ttMyPhamAdminList = ttMyPhamAdminListOld;
+                }
+                else {
+                    List<TTMyPhamAdmin> list = new ArrayList<>();
+                    for (TTMyPhamAdmin ttMyPhamAdmin : ttMyPhamAdminListOld){
+                        if (ttMyPhamAdmin.getTenmypham().toLowerCase().contains(strSearch.toLowerCase())){
+                            list.add(ttMyPhamAdmin);
+                        }
+                    }
+
+                    ttMyPhamAdminList = list;
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = ttMyPhamAdminList;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                ttMyPhamAdminList = (List<TTMyPhamAdmin>) results.values;
+                notifyDataSetChanged();
+            }
+        };
+    }
+
     public interface OnItemClickListener {
         void onItemClick(TTMyPhamAdmin ttMyPhamAdmin);
     }
@@ -37,6 +76,7 @@ public class ProductHomeAdapterUser extends RecyclerView.Adapter<ProductHomeAdap
     public ProductHomeAdapterUser(Context mConText, List<TTMyPhamAdmin> ttMyPhamAdminList) {
         this.mConText = mConText;
         this.ttMyPhamAdminList = ttMyPhamAdminList;
+        this.ttMyPhamAdminListOld = ttMyPhamAdminList;
     }
 
     public void release(){

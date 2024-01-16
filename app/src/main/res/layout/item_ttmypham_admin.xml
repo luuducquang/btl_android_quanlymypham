@@ -36,7 +36,7 @@
 
                     <TextView
                         android:id="@+id/item_tenmypham"
-                        android:layout_width="90sp"
+                        android:layout_width="80sp"
                         android:layout_height="wrap_content"
                         android:text="Sữa rửa mặt Cerave SA cho da dầu"
                         android:layout_span="2"
@@ -60,7 +60,7 @@
 
                     <TextView
                         android:id="@+id/item_dungtich"
-                        android:layout_width="155sp"
+                        android:layout_width="145sp"
                         android:layout_height="wrap_content"
                         android:text="200 ml"
                         android:textSize="15sp"
@@ -80,7 +80,6 @@
 
                     <TextView
                         android:id="@+id/item_loaimypham"
-                        android:layout_width="155sp"
                         android:layout_height="wrap_content"
                         android:text="Sửa rửa mặt"
                         android:textSize="15sp"
@@ -100,7 +99,7 @@
 
                     <TextView
                         android:id="@+id/item_soluong"
-                        android:layout_width="155sp"
+                        android:layout_width="145sp"
                         android:layout_height="wrap_content"
                         android:text="100"
                         android:textSize="15sp"
@@ -120,7 +119,7 @@
 
                     <TextView
                         android:id="@+id/item_gia"
-                        android:layout_width="155sp"
+                        android:layout_width="145sp"
                         android:layout_height="match_parent"
                         android:text="200000"
                         android:textColor="#7C7C7C"
@@ -140,7 +139,7 @@
 
                     <TextView
                         android:id="@+id/item_mota"
-                        android:layout_width="155sp"
+                        android:layout_width="145sp"
                         android:layout_height="wrap_content"
                         android:text="Sữa rửa mặt dành cho da dầu"
                         android:textSize="15sp"
@@ -161,7 +160,7 @@
 
                     <TextView
                         android:id="@+id/item_chitiet"
-                        android:layout_width="155sp"
+                        android:layout_width="145sp"
                         android:layout_height="wrap_content"
                         android:text="Sữa rửa mặt dành cho da dầu mụn và các loại da"
                         android:textSize="15sp"

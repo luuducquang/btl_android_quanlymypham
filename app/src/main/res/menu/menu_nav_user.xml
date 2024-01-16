@@ -7,7 +7,17 @@
             android:icon="@drawable/ic_home"/>
         <item
             android:id="@+id/nav_category"
-            android:title="@string/nav_category"
-            android:icon="@drawable/ic_home"/>
+            android:title="Đơn hàng của bạn"
+            android:icon="@drawable/baseline_shopping_bag_24"/>
+
+        <item
+            android:id="@+id/nav_taikhoan"
+            android:title="Thông tin tài khoản"
+            android:icon="@drawable/baseline_account_circle_24"/>
+
+        <item
+            android:id="@+id/nav_changepass"
+            android:title="Đổi mật khẩu"
+            android:icon="@drawable/baseline_account_circle_24"/>
     </group>
 </menu>

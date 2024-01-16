@@ -26,6 +26,7 @@ import com.example.btl_android_quanymypham.DAO.GioHangDAOUser;
 import com.example.btl_android_quanymypham.DAO.TTMyPhamDAOAdmin;
 import com.example.btl_android_quanymypham.R;
 import com.example.btl_android_quanymypham.adapter.ProductHomeAdapterUser;
+import com.example.btl_android_quanymypham.model.GioHangUser;
 import com.example.btl_android_quanymypham.model.TTMyPhamAdmin;
 import com.example.btl_android_quanymypham.model.TaiKhoanAdmin;
 
@@ -41,6 +42,7 @@ public class DetailProductFragmentUser extends Fragment {
     GioHangDAOUser gioHangDAOUser;
     TaiKhoanAdmin taiKhoanAdmin;
     TTMyPhamAdmin productHome;
+    List<GioHangUser> gioHangUserList = new ArrayList<>();
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -69,7 +71,9 @@ public class DetailProductFragmentUser extends Fragment {
         }
 
 
-
+        gioHangUserList.clear();
+        GioHangUser gioHangUser = new GioHangUser(1, productHome.getId(), taiKhoanAdmin.getId(), 1, productHome.getGia(), productHome.getAnhsanpham(), productHome.getTenmypham(), taiKhoanAdmin.getHoten());
+        gioHangUserList.add(gioHangUser);
 
         return view;
     }
@@ -84,6 +88,10 @@ public class DetailProductFragmentUser extends Fragment {
                         .replace(R.id.content_frame, productHomeFragmentUser)
                         .addToBackStack(null)
                         .commit();
+
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("ObjectUser", taiKhoanAdmin);
+                productHomeFragmentUser.setArguments(bundle);
             }
         });
 
@@ -91,12 +99,38 @@ public class DetailProductFragmentUser extends Fragment {
             @Override
             public void onClick(View v) {
                 if (productHome!=null && taiKhoanAdmin!=null){
-                    gioHangDAOUser.insertGioHang(productHome.getId(),taiKhoanAdmin.getId(),1);
-                    Toast.makeText(requireContext(), "Đã thêm vào giỏ hàng", Toast.LENGTH_SHORT).show();
+                    if (gioHangDAOUser.checkProductExist(productHome.getTenmypham(),taiKhoanAdmin.getId())){
+                        gioHangDAOUser.Tangsoluongbymamp(productHome.getId());
+                        Toast.makeText(requireContext(), "Đã tăng số lượng", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        gioHangDAOUser.insertGioHang(productHome.getId(),taiKhoanAdmin.getId(),1);
+                        Toast.makeText(requireContext(), "Đã thêm vào giỏ hàng", Toast.LENGTH_SHORT).show();
+                    }
                 }
                 else{
                     Toast.makeText(requireContext(), "Có lỗi khi thêm vui lòng quay lại trang chủ", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        muangay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatHangFragmentUser datHangFragmentUser = new DatHangFragmentUser();
+                AppCompatActivity activity = (AppCompatActivity) requireContext();
+                activity.getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.content_frame, datHangFragmentUser)
+                        .addToBackStack(null)
+                        .commit();
+
+                GioHangUser[] gioHangArray = new GioHangUser[gioHangUserList.size()];
+                gioHangArray = gioHangUserList.toArray(gioHangArray);
+
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("ObjectListProduct", gioHangArray);
+                bundle.putSerializable("ObjectUser", taiKhoanAdmin);
+                datHangFragmentUser.setArguments(bundle);
             }
         });
     }

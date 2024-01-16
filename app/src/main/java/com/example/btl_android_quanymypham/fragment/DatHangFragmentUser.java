@@ -44,9 +44,12 @@ public class DatHangFragmentUser extends Fragment {
     TextView tongphu,tongtien,somathang,tongthanhtoan;
     Button btn_dathang;
     List<GioHangUser> gioHangUserList = new ArrayList<>();
+    List<Integer> id_mp = new ArrayList<>();;
     DatHangAdapterUser datHangAdapterUser;
     TaiKhoanAdmin taiKhoanAdmin;
     HoaDonBanDAOAdmin db;
+
+    GioHangDAOUser gioHangDAOUser;
     private Long TongTien = 0L;
     @Nullable
     @Override
@@ -54,12 +57,17 @@ public class DatHangFragmentUser extends Fragment {
         View view = inflater.inflate(R.layout.dathang_fragment_user, container, false);
         
         db = new HoaDonBanDAOAdmin(requireContext());
+        gioHangDAOUser = new GioHangDAOUser(requireContext());
 
         Bundle bundle = getArguments();
         if (bundle != null) {
             GioHangUser[] gioHangArray = (GioHangUser[]) bundle.getSerializable("ObjectListProduct");
             taiKhoanAdmin = (TaiKhoanAdmin) bundle.getSerializable("ObjectUser");
             gioHangUserList = new ArrayList<>(Arrays.asList(gioHangArray));
+        }
+
+        for (GioHangUser gioHangUser : gioHangUserList) {
+            id_mp.add(gioHangUser.getId());
         }
 
         Innit(view);
@@ -77,8 +85,26 @@ public class DatHangFragmentUser extends Fragment {
                 String strSDT = sdt.getEditText().getText().toString();
                 Calendar calendar =Calendar.getInstance();
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-                db.InsertListData(taiKhoanAdmin.getId(),taiKhoanAdmin.getHoten(),strDiachi,strSDT,sdf.format(calendar.getTime()),TongTien+30000,gioHangUserList);
-                Toast.makeText(requireContext(), "Đặt hàng thành công", Toast.LENGTH_SHORT).show();
+                if (strDiachi.isEmpty()||strSDT.isEmpty()){
+                    Toast.makeText(requireContext(), "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    db.InsertListData(taiKhoanAdmin.getId(),taiKhoanAdmin.getHoten(),strDiachi,strSDT,sdf.format(calendar.getTime()),TongTien+30000,gioHangUserList);
+                    Toast.makeText(requireContext(), "Đặt hàng thành công", Toast.LENGTH_SHORT).show();
+
+                    ProductHomeFragmentUser productHomeFragmentUser = new ProductHomeFragmentUser();
+                    AppCompatActivity activity = (AppCompatActivity) requireContext();
+                    activity.getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.content_frame, productHomeFragmentUser)
+                            .addToBackStack(null)
+                            .commit();
+
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("ObjectUser", taiKhoanAdmin);
+                    productHomeFragmentUser.setArguments(bundle);
+
+                    gioHangDAOUser.deleteProducts(id_mp);
+                }
             }
         });
     }
