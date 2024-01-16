@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -37,6 +38,7 @@ public class GioHangFragmentUser extends Fragment {
     private RecyclerView recyclerView;
     GioHangAdapterUser gioHangAdapterUser;
     TaiKhoanAdmin taiKhoanAdmin;
+    TTMyPhamAdmin productHome;
     GioHangDAOUser db;
     List<GioHangUser> gioHangUserList = new ArrayList<>();
     private Long TongTien ;
@@ -55,6 +57,11 @@ public class GioHangFragmentUser extends Fragment {
         Innit(view);
         DataListView();
         HandlerButtoon();
+
+        ActionBar actionBar = ((AppCompatActivity) requireActivity()).getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle("Giỏ hàng");
+        }
 
         return view;
     }
@@ -167,6 +174,28 @@ public class GioHangFragmentUser extends Fragment {
                 }
                 Tinhtien();
                 gioHangAdapterUser.notifyDataSetChanged();
+            }
+        });
+
+        gioHangAdapterUser.setOnItemClickListener(new GioHangAdapterUser.OnItemClickListener() {
+            @Override
+            public void onItemClick(GioHangUser gioHangUser) {
+
+                productHome = db.getThongTinMyPham(gioHangUser.getMamp());
+
+
+                DetailProductFragmentUser detailFragment = new DetailProductFragmentUser();
+
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("ObjectProduct", productHome);
+                bundle.putSerializable("ObjectUser", taiKhoanAdmin);
+                detailFragment.setArguments(bundle);
+
+                AppCompatActivity activity = (AppCompatActivity) requireContext();
+                activity.getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.content_frame, detailFragment)
+                        .addToBackStack(null)
+                        .commit();
             }
         });
 

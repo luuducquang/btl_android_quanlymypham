@@ -38,11 +38,11 @@
             android:text="đ"
             android:textSize="20sp"
             android:layout_marginLeft="2sp"
-            android:layout_marginRight="2sp"/>
+            android:layout_marginRight="5sp"/>
 
         <Button
             android:id="@+id/btn_muangay"
-            android:layout_width="200sp"
+            android:layout_width="180sp"
             android:layout_height="wrap_content"
             android:text="Mua ngay"
             android:background="#3498db"

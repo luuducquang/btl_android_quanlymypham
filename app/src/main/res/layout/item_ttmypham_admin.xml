@@ -18,8 +18,9 @@
             <ImageView
                 android:id="@+id/item_anhsanpham"
                 android:layout_width="100sp"
-                android:layout_height="match_parent"
+                android:layout_height="120sp"
                 android:src="@drawable/anhfb"
+                android:layout_gravity="center_vertical"
                 android:scaleType="centerCrop"/>
         </LinearLayout>
         <LinearLayout

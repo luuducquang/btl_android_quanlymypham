@@ -27,10 +27,18 @@ public class GioHangAdapterUser extends RecyclerView.Adapter<GioHangAdapterUser.
     private Context mConText;
 
     private OnDelItemClickListener onDelItemClickListener;
-
     private OnCheckedChangeListener onCheckedChangeListener;
     private OnPlusItemClickListener onPlusItemClickListener;
     private OnMinusItemClickListener onMinusItemClickListener;
+    private OnItemClickListener onItemClickListener;
+
+    public interface OnItemClickListener {
+        void onItemClick(GioHangUser gioHangUser);
+    }
+
+    public void setOnItemClickListener(GioHangAdapterUser.OnItemClickListener listener) {
+        this.onItemClickListener = listener;
+    }
 
     public interface OnPlusItemClickListener {
         void onPlusItemClick(GioHangUser gioHangUser);
@@ -170,6 +178,16 @@ public class GioHangAdapterUser extends RecyclerView.Adapter<GioHangAdapterUser.
                 }
             });
 
+            item_ten.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION && onItemClickListener != null) {
+                        GioHangUser gioHangUser = gioHangUsers.get(position);
+                        onItemClickListener.onItemClick(gioHangUser);
+                    }
+                }
+            });
 
         }
     }

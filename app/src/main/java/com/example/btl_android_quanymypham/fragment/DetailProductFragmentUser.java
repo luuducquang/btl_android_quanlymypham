@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -50,7 +51,6 @@ public class DetailProductFragmentUser extends Fragment {
 
         gioHangDAOUser = new GioHangDAOUser(requireContext());
 
-
         Innit(view);
         HandlerButton();
 
@@ -68,6 +68,11 @@ public class DetailProductFragmentUser extends Fragment {
                 Bitmap bitmap = BitmapFactory.decodeByteArray(productHome.getAnhsanpham(), 0, productHome.getAnhsanpham().length);
                 img_detail.setImageBitmap(bitmap);
             }
+        }
+
+        ActionBar actionBar = ((AppCompatActivity) requireActivity()).getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle(""+productHome.getTenmypham());
         }
 
 
@@ -92,6 +97,7 @@ public class DetailProductFragmentUser extends Fragment {
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("ObjectUser", taiKhoanAdmin);
                 productHomeFragmentUser.setArguments(bundle);
+
             }
         });
 
@@ -131,6 +137,7 @@ public class DetailProductFragmentUser extends Fragment {
                 bundle.putSerializable("ObjectListProduct", gioHangArray);
                 bundle.putSerializable("ObjectUser", taiKhoanAdmin);
                 datHangFragmentUser.setArguments(bundle);
+
             }
         });
     }

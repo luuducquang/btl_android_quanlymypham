@@ -102,6 +102,19 @@ public class HoaDonBanDAOAdmin extends DataBaseHandler {
         return db.rawQuery(selectQuery, null);
     }
 
+    public Cursor getHoaDonByNguoiTao(int nguoiTaoId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String selectQuery = "SELECT HoaDonBan.*, DangNhap.HoTen " +
+                "FROM HoaDonBan " +
+                "INNER JOIN DangNhap ON HoaDonBan.NguoiTao = DangNhap.id " +
+                "WHERE HoaDonBan.NguoiTao = ?";
+
+        String[] selectionArgs = {String.valueOf(nguoiTaoId)};
+        return db.rawQuery(selectQuery, selectionArgs);
+    }
+
+
     public void deleteData(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
         String whereClause = "id = ?";

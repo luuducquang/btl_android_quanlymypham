@@ -26,6 +26,7 @@ import com.example.btl_android_quanymypham.adapter.ProductHomeAdapterUser;
 import com.example.btl_android_quanymypham.fragment.DetailProductFragmentUser;
 import com.example.btl_android_quanymypham.fragment.DoiMatKhauFragmentUser;
 import com.example.btl_android_quanymypham.fragment.GioHangFragmentUser;
+import com.example.btl_android_quanymypham.fragment.HoaDonFragmentUser;
 import com.example.btl_android_quanymypham.fragment.ProductHomeFragmentUser;
 import com.example.btl_android_quanymypham.fragment.TTMyPhamFragmentAdmin;
 import com.example.btl_android_quanymypham.fragment.ThongTinTaiKhoanFragmentUser;
@@ -55,7 +56,7 @@ public class MainUser extends AppCompatActivity implements NavigationView.OnNavi
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setTitle("");
+        getSupportActionBar().setTitle("Trang chủ");
 
         mDrawerLayout = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -132,18 +133,28 @@ public class MainUser extends AppCompatActivity implements NavigationView.OnNavi
             replaceFragment(new ProductHomeFragmentUser());
             mCurrentFragment = FragmentHome;
             this.getSupportFragmentManager().popBackStack();
+            getSupportActionBar().setTitle("Trang chủ");
+
+        }
+        else if (id == R.id.nav_donhang){
+            replaceFragment(new HoaDonFragmentUser());
+            mCurrentFragment = FragmentDonHang;
+            this.getSupportFragmentManager().popBackStack();
+            getSupportActionBar().setTitle("Đơn hàng của bạn");
 
         }
         else if (id == R.id.nav_taikhoan){
             replaceFragment(new ThongTinTaiKhoanFragmentUser());
             mCurrentFragment = FragmentThongtinTK;
             this.getSupportFragmentManager().popBackStack();
+            getSupportActionBar().setTitle("Thông tin tài khoản");
 
         }
         else if (id == R.id.nav_changepass){
             replaceFragment(new DoiMatKhauFragmentUser());
             mCurrentFragment = FragmentDoiMK;
             this.getSupportFragmentManager().popBackStack();
+            getSupportActionBar().setTitle("Đổi mật khẩu");
 
         }
         mDrawerLayout.closeDrawer(GravityCompat.START);

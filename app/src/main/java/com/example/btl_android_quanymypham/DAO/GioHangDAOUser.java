@@ -8,7 +8,9 @@ import android.database.sqlite.SQLiteDatabase;
 import androidx.annotation.Nullable;
 
 import com.example.btl_android_quanymypham.database.DataBaseHandler;
+import com.example.btl_android_quanymypham.model.TTMyPhamAdmin;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GioHangDAOUser extends DataBaseHandler {
@@ -76,6 +78,38 @@ public class GioHangDAOUser extends DataBaseHandler {
         }
         return currentQuantity;
     }
+
+    public TTMyPhamAdmin getThongTinMyPham(int mamp) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String selectQuery = "SELECT ThongTinMyPham.*, LoaiMyPham.TenLoai " +
+                "FROM ThongTinMyPham " +
+                "JOIN LoaiMyPham ON ThongTinMyPham.LoaiMyPham = LoaiMyPham.id " +
+                "WHERE ThongTinMyPham.id = " + mamp;
+
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        TTMyPhamAdmin ttMyPhamAdmin = null;
+
+        if (cursor.moveToFirst()) {
+            int id = cursor.getInt(0);
+            String tenmp = cursor.getString(1);
+            String dungtich = cursor.getString(2);
+            int loaimypham = cursor.getInt(3);
+            byte[] anhsanpham = cursor.getBlob(4);
+            long giaban = cursor.getLong(5);
+            String mota = cursor.getString(6);
+            String chitiet = cursor.getString(7);
+            int soluong = cursor.getInt(8);
+            String tenloai = cursor.getString(9);
+
+            ttMyPhamAdmin = new TTMyPhamAdmin(id, tenmp, dungtich, loaimypham, anhsanpham, giaban, mota, chitiet, soluong, tenloai);
+        }
+
+        cursor.close();
+        return ttMyPhamAdmin;
+    }
+
+
+
 
     public boolean checkProductExist(String tenSanPham, int nguoiTao) {
         SQLiteDatabase db = this.getReadableDatabase();

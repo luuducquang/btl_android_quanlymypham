@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -68,6 +69,11 @@ public class DatHangFragmentUser extends Fragment {
 
         for (GioHangUser gioHangUser : gioHangUserList) {
             id_mp.add(gioHangUser.getId());
+        }
+
+        ActionBar actionBar = ((AppCompatActivity) requireActivity()).getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle("Đặt hàng");
         }
 
         Innit(view);
