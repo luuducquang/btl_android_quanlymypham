@@ -263,6 +263,8 @@ public class HoaDonBanFragmentAdmin extends Fragment {
                         tongtien.setText("");
                         tenkh.requestFocus();
                         Toast.makeText(requireContext(), "Thêm dữ liệu thành công", Toast.LENGTH_SHORT).show();
+
+                        db.updateDownSoluongThongTinMyPham(MP_Value,SoLuong);
                     } catch (NumberFormatException e) {
 
                     }

@@ -74,4 +74,10 @@ public class HoaDonNhapDAOAdmin extends DataBaseHandler {
         db.close();
     }
 
+    public void updateUpSoluongThongTinMyPham(int maMP, int soLuongMoi) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String updateQuery = "UPDATE ThongTinMyPham SET SoLuong = SoLuong + " + soLuongMoi + " WHERE id = " + maMP;
+        db.execSQL(updateQuery);
+    }
+
 }

@@ -183,7 +183,7 @@ public class ThongKeFragmentAdmin extends Fragment {
 
                         data.add(tenmp
                                 +"\n"+"Dung tích: "+dungtich
-                                +"\n"+"Số lượng: "+soluong
+                                +"\n"+"Số lượng còn: "+soluong
                                 +" | "+"Giá bán: "+giaban+" đ");
                     } while (cursor.moveToNext());
                     cursor.close();
@@ -217,7 +217,7 @@ public class ThongKeFragmentAdmin extends Fragment {
 
                         data.add(tenmp
                                 +"\n"+"Dung tích: "+dungtich
-                                +"\n"+"Số lượng: "+soluong
+                                +"\n"+"Số lượng còn: "+soluong
                                 +" | "+"Giá bán: "+giaban+" đ");
                     } while (cursor.moveToNext());
                     cursor.close();
@@ -249,7 +249,7 @@ public class ThongKeFragmentAdmin extends Fragment {
 
                         data.add(tenmp
                                 +"\n"+"Dung tích: "+dungtich
-                                +"\n"+"Số lượng: "+soluong
+                                +"\n"+"Số lượng còn: "+soluong
                                 +" | "+"Giá bán: "+giaban+" đ");
                     } while (cursor.moveToNext());
                     cursor.close();

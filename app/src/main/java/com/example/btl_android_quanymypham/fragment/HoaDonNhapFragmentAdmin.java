@@ -306,6 +306,7 @@ public class HoaDonNhapFragmentAdmin extends Fragment {
                         tongtien.setText("");
                         ncc.requestFocus();
                         Toast.makeText(requireContext(), "Thêm dữ liệu thành công", Toast.LENGTH_SHORT).show();
+                        db.updateUpSoluongThongTinMyPham(MP_Value,SoLuong);
                     } catch (NumberFormatException e) {
 
                     }

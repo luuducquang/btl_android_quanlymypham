@@ -123,4 +123,10 @@ public class HoaDonBanDAOAdmin extends DataBaseHandler {
         db.close();
     }
 
+    public void updateDownSoluongThongTinMyPham(int maMP, int soLuongMoi) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String updateQuery = "UPDATE ThongTinMyPham SET SoLuong = SoLuong - " + soLuongMoi + " WHERE id = " + maMP;
+        db.execSQL(updateQuery);
+    }
+
 }

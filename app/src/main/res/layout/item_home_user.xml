@@ -18,7 +18,7 @@
             android:src="@drawable/centella"
             android:layout_marginLeft="5sp"
             android:layout_marginRight="5sp"
-            android:scaleType="centerCrop"/>
+            android:scaleType="fitXY"/>
 
         <TextView
             android:id="@+id/name_product_home"
