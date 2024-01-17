@@ -77,6 +77,8 @@ public class HoaDonNhapFragmentAdmin extends Fragment {
     private int NCC_Value;
     private List<String> listMaMP;
     private List<String> listTenMP;
+    private List<String> listgia;
+    private Long Gia_Value;
     private int MP_Value;
     TaiKhoanAdmin taiKhoanAdmin;
     @Nullable
@@ -95,8 +97,39 @@ public class HoaDonNhapFragmentAdmin extends Fragment {
         GetIDUser();
         GetSpinnerNCC();
         GetSpinnerMP();
+        updatetotal();
 
         return view;
+    }
+
+    private void updatetotal() {
+        soluong.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String soluongString = soluong.getText().toString().trim();
+                String dongiaString = dongia.getText().toString().trim();
+
+                if (!soluongString.isEmpty() && !dongiaString.isEmpty()) {
+                    int soluongValue = Integer.parseInt(soluongString);
+                    int dongiaValue = Integer.parseInt(dongiaString);
+
+                    tongtien.setText(String.valueOf(soluongValue * dongiaValue));
+                }
+                if (soluongString.isEmpty()){
+                    tongtien.setText("");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
     private void GetIDUser() {
@@ -119,6 +152,7 @@ public class HoaDonNhapFragmentAdmin extends Fragment {
     private void GetSpinnerMP() {
         listMaMP = new ArrayList<>();
         listTenMP = new ArrayList<>();
+        listgia = new ArrayList<>();
 
         Cursor cursor3 = ttMyPhamDAOAdmin.getAllThongTinMyPham();
         if (cursor3 == null || cursor3.getCount() == 0) {
@@ -128,6 +162,7 @@ public class HoaDonNhapFragmentAdmin extends Fragment {
             do {
                 listMaMP.add(String.valueOf(cursor3.getInt(0)));
                 listTenMP.add(cursor3.getString(1));
+                listgia.add(cursor3.getString(5));
             } while (cursor3.moveToNext());
             cursor3.close();
         }
@@ -140,6 +175,8 @@ public class HoaDonNhapFragmentAdmin extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 MP_Value = Integer.parseInt(listMaMP.get(position));
+                Gia_Value = Long.parseLong(listgia.get(position));
+                dongia.setText(""+Gia_Value);
             }
 
             @Override

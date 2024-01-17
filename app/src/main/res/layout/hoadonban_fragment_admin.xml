@@ -6,7 +6,6 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#BCE0FF"
         android:orientation="vertical">
 
         <TableLayout
@@ -123,7 +122,8 @@
                     android:inputType="number"
                     android:layout_width="200sp"
                     android:layout_marginLeft="10sp"
-                    android:layout_height="40sp"/>
+                    android:layout_height="40sp"
+                    android:enabled="false"/>
             </TableRow>
             <TableRow>
                 <TextView
@@ -137,7 +137,8 @@
                     android:inputType="number"
                     android:layout_width="200sp"
                     android:layout_marginLeft="10sp"
-                    android:layout_height="40sp"/>
+                    android:layout_height="40sp"
+                    android:enabled="false"/>
             </TableRow>
         </TableLayout>
 

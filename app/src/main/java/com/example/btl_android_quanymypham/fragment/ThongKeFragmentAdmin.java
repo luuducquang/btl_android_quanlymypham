@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.btl_android_quanymypham.DAO.ThongKeDAOAdmin;
@@ -89,6 +91,10 @@ public class ThongKeFragmentAdmin extends Fragment {
         hdn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ActionBar actionBar = ((AppCompatActivity) requireActivity()).getSupportActionBar();
+                if (actionBar != null) {
+                    actionBar.setTitle("Thống kê hoá đơn nhập");
+                }
                 String ngayBatDau = tungay.getText().toString();
                 String ngayKetThuc = denngay.getText().toString();
 
@@ -125,6 +131,10 @@ public class ThongKeFragmentAdmin extends Fragment {
         hdb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ActionBar actionBar = ((AppCompatActivity) requireActivity()).getSupportActionBar();
+                if (actionBar != null) {
+                    actionBar.setTitle("Thống kê hoá đơn bán");
+                }
                 String ngayBatDau = tungay.getText().toString();
                 String ngayKetThuc = denngay.getText().toString();
 
@@ -165,6 +175,10 @@ public class ThongKeFragmentAdmin extends Fragment {
         banchay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ActionBar actionBar = ((AppCompatActivity) requireActivity()).getSupportActionBar();
+                if (actionBar != null) {
+                    actionBar.setTitle("Thống kê sản phẩm bán chạy");
+                }
                 String ngayBatDau = tungay.getText().toString();
                 String ngayKetThuc = denngay.getText().toString();
 
@@ -199,6 +213,10 @@ public class ThongKeFragmentAdmin extends Fragment {
         bancham.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ActionBar actionBar = ((AppCompatActivity) requireActivity()).getSupportActionBar();
+                if (actionBar != null) {
+                    actionBar.setTitle("Thống kê sản phẩm bán chậm");
+                }
                 String ngayBatDau = tungay.getText().toString();
                 String ngayKetThuc = denngay.getText().toString();
 
@@ -233,6 +251,10 @@ public class ThongKeFragmentAdmin extends Fragment {
         saphet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ActionBar actionBar = ((AppCompatActivity) requireActivity()).getSupportActionBar();
+                if (actionBar != null) {
+                    actionBar.setTitle("Thống kê sản phẩm sắp hết");
+                }
 
                 Cursor cursor = db.thongKeSanPhamSapHet();
                 if (cursor == null || cursor.getCount() == 0) {
