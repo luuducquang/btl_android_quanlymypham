@@ -7,7 +7,8 @@
         android:id="@+id/rcv_giohang"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/line1"/>
+        android:layout_above="@+id/line1"
+        android:background="#fff"/>
 
 
     <LinearLayout
@@ -17,7 +18,7 @@
         android:orientation="horizontal"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:background="#fff"
+        android:background="#F1F1F1"
         android:gravity="end">
 
         <TextView

@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#fff">
 
     <TableLayout
         android:layout_width="wrap_content"
@@ -17,11 +18,22 @@
                 android:textSize="20sp"
                 android:text="Tên nhà cung cấp:"
                 android:textColor="#9A9A9A" />
+<!--            <EditText-->
+<!--                android:id="@+id/ten_ncc"-->
+<!--                android:layout_width="200sp"-->
+<!--                android:layout_marginLeft="10sp"-->
+<!--                android:layout_height="wrap_content"/>-->
             <EditText
                 android:id="@+id/ten_ncc"
                 android:layout_width="200sp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/search"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:padding="6dp"
                 android:layout_marginLeft="10sp"
-                android:layout_height="wrap_content"/>
+                android:hint="Tên nhà cung cấp"
+                android:inputType="text"/>
         </TableRow>
         <TableRow>
             <TextView
@@ -30,11 +42,23 @@
                 android:textSize="20sp"
                 android:text="Địa chỉ:"
                 android:textColor="#9A9A9A" />
+<!--            <EditText-->
+<!--                android:id="@+id/diachi_ncc"-->
+<!--                android:layout_width="200sp"-->
+<!--                android:layout_marginLeft="10sp"-->
+<!--                android:layout_height="wrap_content"/>-->
             <EditText
                 android:id="@+id/diachi_ncc"
                 android:layout_width="200sp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/search"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:padding="6dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginLeft="10sp"
-                android:layout_height="wrap_content"/>
+                android:hint="Địa chỉ"
+                android:inputType="text"/>
         </TableRow>
         <TableRow>
             <TextView
@@ -43,12 +67,24 @@
                 android:textSize="20sp"
                 android:text="Số điện thoại:"
                 android:textColor="#9A9A9A" />
+<!--            <EditText-->
+<!--                android:id="@+id/sdt_ncc"-->
+<!--                android:inputType="number"-->
+<!--                android:layout_width="200sp"-->
+<!--                android:layout_marginLeft="10sp"-->
+<!--                android:layout_height="wrap_content"/>-->
             <EditText
                 android:id="@+id/sdt_ncc"
-                android:inputType="number"
                 android:layout_width="200sp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/search"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:padding="6dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginLeft="10sp"
-                android:layout_height="wrap_content"/>
+                android:hint="Số điện thoại"
+                android:inputType="text"/>
         </TableRow>
     </TableLayout>
 
@@ -65,7 +101,7 @@
             android:layout_height="wrap_content"
             android:text="Làm mới"
             android:textSize="15sp"
-            android:backgroundTint="#00BCD4"/>
+            android:backgroundTint="#2196F3"/>
 
         <Button
             android:id="@+id/btnThem"
@@ -74,7 +110,7 @@
             android:text="Thêm"
             android:textSize="15sp"
             android:layout_marginLeft="10sp"
-            android:backgroundTint="#00BCD4"/>
+            android:backgroundTint="#4CAF50"/>
 
         <Button
             android:id="@+id/btnSua"
@@ -83,7 +119,7 @@
             android:text="Sửa"
             android:textSize="15sp"
             android:layout_marginLeft="10sp"
-            android:backgroundTint="#00BCD4"/>
+            android:backgroundTint="#FF9800"/>
     </LinearLayout>
 
     <LinearLayout

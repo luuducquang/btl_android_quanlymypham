@@ -79,6 +79,8 @@ public class HoaDonBanDAOAdmin extends DataBaseHandler {
                     chiTietValues.put("TongTien", gioHangUser.getSoluong()* gioHangUser.getGia());
 
                     db.insert("ChiTietHoaDonBan", null, chiTietValues);
+
+                    updateSoLuongThongTinMyPham(db,gioHangUserList);
                 }
 
                 db.setTransactionSuccessful();
@@ -91,6 +93,20 @@ public class HoaDonBanDAOAdmin extends DataBaseHandler {
         }
     }
 
+    public void updateSoLuongThongTinMyPham(SQLiteDatabase db,List<GioHangUser> gioHangUserList) {
+
+        try {
+            for (GioHangUser gioHangUser : gioHangUserList) {
+                int maMP = gioHangUser.getMamp();
+                int soLuongMoi = gioHangUser.getSoluong();
+
+                String updateQuery = "UPDATE ThongTinMyPham SET SoLuong = SoLuong - " + soLuongMoi + " WHERE id = " + maMP;
+                db.execSQL(updateQuery);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public Cursor getAllHoaDonBan() {
         SQLiteDatabase db = this.getReadableDatabase();

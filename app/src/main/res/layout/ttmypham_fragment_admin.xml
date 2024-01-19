@@ -6,7 +6,8 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="#fff">
 
         <TableLayout
             android:layout_width="wrap_content"
@@ -25,11 +26,24 @@
                     android:textSize="20sp"
                     android:textColor="#9A9A9A"/>
 
+<!--                <EditText-->
+<!--                    android:id="@+id/txtTenMP"-->
+<!--                    android:layout_width="240sp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    />-->
+<!--                -->
+
                 <EditText
                     android:id="@+id/txtTenMP"
                     android:layout_width="240sp"
                     android:layout_height="wrap_content"
-                    />
+                    android:background="@drawable/search"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:padding="6dp"
+                    android:hint="Tên mỹ phẩm"
+                    android:inputType="text"/>
+
             </TableRow>
 
             <TableRow
@@ -42,11 +56,23 @@
                     android:textSize="20sp"
                     android:textColor="#9A9A9A"/>
 
+<!--                <EditText-->
+<!--                    android:id="@+id/txtDungTich"-->
+<!--                    android:layout_width="240sp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    />-->
+
                 <EditText
                     android:id="@+id/txtDungTich"
                     android:layout_width="240sp"
                     android:layout_height="wrap_content"
-                    />
+                    android:background="@drawable/search"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:padding="6dp"
+                    android:layout_marginTop="5dp"
+                    android:hint="Dung tích"
+                    android:inputType="text"/>
             </TableRow>
 
             <TableRow
@@ -63,6 +89,8 @@
                     android:id="@+id/spinnerLoaiMP"
                     android:layout_width="240sp"
                     android:layout_height="40sp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/search"
                     />
             </TableRow>
 
@@ -108,12 +136,23 @@
                     android:textSize="20sp"
                     android:textColor="#9A9A9A"/>
 
+<!--                <EditText-->
+<!--                    android:id="@+id/txtGiaBan"-->
+<!--                    android:layout_width="240sp"-->
+<!--                    android:inputType="number"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    />-->
+
                 <EditText
                     android:id="@+id/txtGiaBan"
                     android:layout_width="240sp"
-                    android:inputType="number"
                     android:layout_height="wrap_content"
-                    />
+                    android:background="@drawable/search"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:padding="6dp"
+                    android:hint="Giá bán"
+                    android:inputType="text"/>
             </TableRow>
 
             <TableRow
@@ -173,7 +212,7 @@
                 android:layout_height="wrap_content"
                 android:text="Làm mới"
                 android:textSize="15sp"
-                android:backgroundTint="#00BCD4"/>
+                android:backgroundTint="#2196F3"/>
 
             <Button
                 android:id="@+id/btnThem"
@@ -182,7 +221,7 @@
                 android:text="Thêm"
                 android:textSize="15sp"
                 android:layout_marginLeft="10sp"
-                android:backgroundTint="#00BCD4"/>
+                android:backgroundTint="#4CAF50"/>
 
             <Button
                 android:id="@+id/btnSua"
@@ -191,7 +230,7 @@
                 android:text="Sửa"
                 android:textSize="15sp"
                 android:layout_marginLeft="10sp"
-                android:backgroundTint="#00BCD4"/>
+                android:backgroundTint="#FF9800"/>
 
         </LinearLayout>
 

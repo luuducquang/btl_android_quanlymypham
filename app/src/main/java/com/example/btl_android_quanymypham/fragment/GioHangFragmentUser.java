@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.btl_android_quanymypham.DAO.GioHangDAOUser;
+import com.example.btl_android_quanymypham.DAO.TTMyPhamDAOAdmin;
 import com.example.btl_android_quanymypham.R;
 import com.example.btl_android_quanymypham.adapter.GioHangAdapterUser;
 import com.example.btl_android_quanymypham.adapter.ProductHomeAdapterUser;
@@ -39,6 +40,7 @@ public class GioHangFragmentUser extends Fragment {
     GioHangAdapterUser gioHangAdapterUser;
     TaiKhoanAdmin taiKhoanAdmin;
     TTMyPhamAdmin productHome;
+    TTMyPhamDAOAdmin ttMyPhamDAOAdmin;
     GioHangDAOUser db;
     List<GioHangUser> gioHangUserList = new ArrayList<>();
     private Long TongTien ;
@@ -48,6 +50,7 @@ public class GioHangFragmentUser extends Fragment {
         View view = inflater.inflate(R.layout.giohang_fragment_user, container, false);
 
         db = new GioHangDAOUser(requireContext());
+        ttMyPhamDAOAdmin = new TTMyPhamDAOAdmin(requireContext());
 
         Bundle bundle = getArguments();
         if (bundle != null) {
@@ -158,10 +161,15 @@ public class GioHangFragmentUser extends Fragment {
         gioHangAdapterUser.setOnItemClickListener(new GioHangAdapterUser.OnPlusItemClickListener() {
             @Override
             public void onPlusItemClick(GioHangUser gioHangUser) {
-                db.Tangsoluong(gioHangUser.getId());
-                gioHangUser.setSoluong(gioHangUser.getSoluong() + 1);
-                Tinhtien();
-                gioHangAdapterUser.notifyDataSetChanged();
+               if (ttMyPhamDAOAdmin.kiemTraSoLuong(gioHangUser.getMamp(),1)){
+                   db.Tangsoluong(gioHangUser.getId());
+                   gioHangUser.setSoluong(gioHangUser.getSoluong() + 1);
+                   Tinhtien();
+                   gioHangAdapterUser.notifyDataSetChanged();
+               }
+               else {
+                   Toast.makeText(requireContext(), "Số lượng tồn kho không đủ", Toast.LENGTH_SHORT).show();
+               }
             }
         });
 

@@ -43,6 +43,7 @@ public class DetailProductFragmentUser extends Fragment {
     GioHangDAOUser gioHangDAOUser;
     TaiKhoanAdmin taiKhoanAdmin;
     TTMyPhamAdmin productHome;
+    TTMyPhamDAOAdmin ttMyPhamDAOAdmin;
     List<GioHangUser> gioHangUserList = new ArrayList<>();
     @Nullable
     @Override
@@ -50,6 +51,7 @@ public class DetailProductFragmentUser extends Fragment {
         View view = inflater.inflate(R.layout.detailproduct_fragment_user, container, false);
 
         gioHangDAOUser = new GioHangDAOUser(requireContext());
+        ttMyPhamDAOAdmin = new TTMyPhamDAOAdmin(requireContext());
 
         Innit(view);
         HandlerButton();
@@ -106,12 +108,22 @@ public class DetailProductFragmentUser extends Fragment {
             public void onClick(View v) {
                 if (productHome!=null && taiKhoanAdmin!=null){
                     if (gioHangDAOUser.checkProductExist(productHome.getTenmypham(),taiKhoanAdmin.getId())){
-                        gioHangDAOUser.Tangsoluongbymamp(productHome.getId());
-                        Toast.makeText(requireContext(), "Đã tăng số lượng", Toast.LENGTH_SHORT).show();
+                        if (ttMyPhamDAOAdmin.kiemTraSoLuong(productHome.getId(), 1)){
+                            gioHangDAOUser.Tangsoluongbymamp(productHome.getId());
+                            Toast.makeText(requireContext(), "Đã tăng số lượng", Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            Toast.makeText(requireContext(), "Số lượng tồn kho không đủ", Toast.LENGTH_SHORT).show();
+                        }
                     }
                     else{
-                        gioHangDAOUser.insertGioHang(productHome.getId(),taiKhoanAdmin.getId(),1);
-                        Toast.makeText(requireContext(), "Đã thêm vào giỏ hàng", Toast.LENGTH_SHORT).show();
+                        if (ttMyPhamDAOAdmin.kiemTraSoLuong(productHome.getId(), 1)){
+                            gioHangDAOUser.insertGioHang(productHome.getId(),taiKhoanAdmin.getId(),1);
+                            Toast.makeText(requireContext(), "Đã thêm vào giỏ hàng", Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            Toast.makeText(requireContext(), "Số lượng tồn kho không đủ", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }
                 else{

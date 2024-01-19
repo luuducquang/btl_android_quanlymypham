@@ -68,5 +68,28 @@ public class TTMyPhamDAOAdmin extends DataBaseHandler {
         return db.rawQuery(selectQuery, null);
     }
 
+    public boolean kiemTraSoLuong(int maMP, int soLuongCanKiemTra) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = null;
+
+        try {
+            String query = "SELECT SoLuong FROM ThongTinMyPham WHERE id = ?";
+            cursor = db.rawQuery(query, new String[]{String.valueOf(maMP)});
+
+            if (cursor.moveToFirst()) {
+                int soLuongTrongKho = cursor.getInt(0);
+
+                return soLuongTrongKho >= soLuongCanKiemTra;
+            }
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+            db.close();
+        }
+
+        return false;
+    }
+
 
 }

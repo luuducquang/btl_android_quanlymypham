@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#fff">
 
     <TableLayout
         android:layout_width="wrap_content"
@@ -23,15 +24,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10sp">
+<!--                <EditText-->
+<!--                    android:padding="6dp"-->
+<!--                    android:id="@+id/edBirthday"-->
+<!--                    android:hint="Từ ngày"-->
+<!--                    android:layout_width="190sp"-->
+<!--                    android:layout_height="40dp"/>-->
                 <EditText
-                    android:padding="6dp"
                     android:id="@+id/edBirthday"
+                    android:layout_width="190dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/search"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:padding="6dp"
                     android:hint="Từ ngày"
-                    android:layout_width="190sp"
-                    android:layout_height="40dp"/>
+                    android:inputType="text"/>
                 <ImageView
                     android:id="@+id/imgdate"
-                    android:layout_marginTop="2dp"
                     android:src="@drawable/calendar"
                     android:layout_width="40dp"
                     android:layout_height="40dp"/>
@@ -50,12 +60,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10sp">
+<!--                <EditText-->
+<!--                    android:padding="6dp"-->
+<!--                    android:id="@+id/edBirthday1"-->
+<!--                    android:hint="Đến ngày"-->
+<!--                    android:layout_width="190sp"-->
+<!--                    android:layout_height="40dp"/>-->
                 <EditText
-                    android:padding="6dp"
                     android:id="@+id/edBirthday1"
+                    android:layout_width="190dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/search"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:padding="6dp"
                     android:hint="Đến ngày"
-                    android:layout_width="190sp"
-                    android:layout_height="40dp"/>
+                    android:layout_marginTop="3dp"
+                    android:inputType="text"/>
                 <ImageView
                     android:id="@+id/imgdate1"
                     android:layout_marginTop="2dp"

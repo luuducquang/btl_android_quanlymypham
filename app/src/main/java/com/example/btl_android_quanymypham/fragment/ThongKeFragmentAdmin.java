@@ -194,9 +194,11 @@ public class ThongKeFragmentAdmin extends Fragment {
                         String dungtich = cursor.getString(2);
                         String giaban = cursor.getString(5);
                         String soluong = cursor.getString(8);
+                        Long daban = cursor.getLong(9);
 
                         data.add(tenmp
                                 +"\n"+"Dung tích: "+dungtich
+                                +" | "+"Đã bán: "+daban
                                 +"\n"+"Số lượng còn: "+soluong
                                 +" | "+"Giá bán: "+giaban+" đ");
                     } while (cursor.moveToNext());
@@ -232,9 +234,11 @@ public class ThongKeFragmentAdmin extends Fragment {
                         String dungtich = cursor.getString(2);
                         String giaban = cursor.getString(5);
                         String soluong = cursor.getString(8);
+                        Long daban = cursor.getLong(9);
 
                         data.add(tenmp
                                 +"\n"+"Dung tích: "+dungtich
+                                +" | "+"Đã bán: "+daban
                                 +"\n"+"Số lượng còn: "+soluong
                                 +" | "+"Giá bán: "+giaban+" đ");
                     } while (cursor.moveToNext());

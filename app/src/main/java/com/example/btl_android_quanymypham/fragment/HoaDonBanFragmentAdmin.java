@@ -292,18 +292,23 @@ public class HoaDonBanFragmentAdmin extends Fragment {
                         Integer SoLuong = Integer.valueOf(strSoLuong);
                         Long DonGia = Long.valueOf(strDonGia);
                         Long TongTien = Long.valueOf(strTongTien);
-                        db.InsertData(taiKhoanAdmin.getId(), strTenKH, strDiaChi, strSdt,strNgayBan,TongTien, MP_Value, SoLuong, DonGia,TongTien);
-                        DataListView();
-                        tenkh.setText("");
-                        diachi.setText("");
-                        sdt.setText("");
-                        soluong.setText("");
-                        dongia.setText("");
-                        tongtien.setText("");
-                        tenkh.requestFocus();
-                        Toast.makeText(requireContext(), "Thêm dữ liệu thành công", Toast.LENGTH_SHORT).show();
+                        if (ttMyPhamDAOAdmin.kiemTraSoLuong(MP_Value,SoLuong)){
+                            db.InsertData(taiKhoanAdmin.getId(), strTenKH, strDiaChi, strSdt,strNgayBan,TongTien, MP_Value, SoLuong, DonGia,TongTien);
+                            DataListView();
+                            tenkh.setText("");
+                            diachi.setText("");
+                            sdt.setText("");
+                            soluong.setText("");
+                            dongia.setText("");
+                            tongtien.setText("");
+                            tenkh.requestFocus();
+                            Toast.makeText(requireContext(), "Thêm dữ liệu thành công", Toast.LENGTH_SHORT).show();
+                            db.updateDownSoluongThongTinMyPham(MP_Value,SoLuong);
+                        }
+                        else {
+                            Toast.makeText(requireContext(), "Số lượng tồn kho không đủ", Toast.LENGTH_SHORT).show();
+                        }
 
-                        db.updateDownSoluongThongTinMyPham(MP_Value,SoLuong);
                     } catch (NumberFormatException e) {
 
                     }

@@ -6,7 +6,8 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="#fff">
 
         <TableLayout
             android:layout_width="wrap_content"
@@ -24,7 +25,9 @@
                 <Spinner
                     android:id="@+id/spinnerNCC"
                 android:layout_width="250sp"
-                android:layout_height="30sp"/>
+                android:layout_height="40dp"
+                    android:background="@drawable/search"
+                    android:layout_marginLeft="10dp"/>
             </TableRow>
             <TableRow>
                 <TextView
@@ -36,21 +39,32 @@
                     android:layout_gravity="center_vertical"/>
                 <LinearLayout
                     android:orientation="horizontal"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10sp">
+<!--                    <EditText-->
+<!--                        android:padding="6dp"-->
+<!--                        android:id="@+id/edBirthday"-->
+<!--                        android:hint="Ngày nhập"-->
+<!--                        android:layout_width="202sp"-->
+<!--                        android:layout_height="40dp"/>-->
                     <EditText
-                        android:padding="6dp"
                         android:id="@+id/edBirthday"
+                        android:layout_width="202dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/search"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp"
+                        android:padding="6dp"
                         android:hint="Ngày nhập"
-                        android:layout_width="202sp"
-                        android:layout_height="40dp"/>
+                        android:layout_marginTop="5dp"
+                        android:inputType="text"/>
                     <ImageView
                         android:id="@+id/imgdate"
                         android:layout_marginTop="2dp"
                         android:src="@drawable/calendar"
                         android:layout_width="30dp"
-                        android:layout_height="30dp"/>
+                        android:layout_height="40dp"/>
                 </LinearLayout>
             </TableRow>
             <TableRow>
@@ -63,7 +77,11 @@
                 <Spinner
                     android:id="@+id/spinnerMP"
                     android:layout_width="200sp"
-                    android:layout_height="30sp"/>
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:background="@drawable/search"/>
             </TableRow>
             <TableRow>
                 <TextView
@@ -72,12 +90,24 @@
                     android:textSize="20sp"
                     android:text="Số lượng:"
                     android:textColor="#9A9A9A" />
+<!--                <EditText-->
+<!--                    android:id="@+id/txtSoLuong"-->
+<!--                    android:inputType="number"-->
+<!--                    android:layout_width="200sp"-->
+<!--                    android:layout_marginLeft="10sp"-->
+<!--                    android:layout_height="40sp"/>-->
                 <EditText
                     android:id="@+id/txtSoLuong"
-                    android:inputType="number"
-                    android:layout_width="200sp"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/search"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:padding="6dp"
                     android:layout_marginLeft="10sp"
-                    android:layout_height="40sp"/>
+                    android:hint="Số lượng"
+                    android:layout_marginTop="5dp"
+                    android:inputType="text"/>
             </TableRow>
             <TableRow>
                 <TextView
@@ -86,12 +116,25 @@
                     android:textSize="20sp"
                     android:text="Đơn giá:"
                     android:textColor="#9A9A9A" />
+<!--                <EditText-->
+<!--                    android:id="@+id/txtDonGia"-->
+<!--                    android:inputType="number"-->
+<!--                    android:layout_width="200sp"-->
+<!--                    android:layout_marginLeft="10sp"-->
+<!--                    android:layout_height="40sp"-->
+<!--                    android:enabled="false"/>-->
                 <EditText
                     android:id="@+id/txtDonGia"
-                    android:inputType="number"
-                    android:layout_width="200sp"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/search"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:padding="6dp"
                     android:layout_marginLeft="10sp"
-                    android:layout_height="40sp"
+                    android:hint="Đơn giá"
+                    android:layout_marginTop="5dp"
+                    android:inputType="text"
                     android:enabled="false"/>
             </TableRow>
             <TableRow>
@@ -101,12 +144,26 @@
                     android:textSize="20sp"
                     android:text="Tổng tiền:"
                     android:textColor="#9A9A9A" />
+<!--                <EditText-->
+<!--                    android:id="@+id/txtTongTien"-->
+<!--                    android:inputType="number"-->
+<!--                    android:layout_width="200sp"-->
+<!--                    android:layout_marginLeft="10sp"-->
+<!--                    android:layout_height="40sp"-->
+<!--                    android:enabled="false"/>-->
+
                 <EditText
                     android:id="@+id/txtTongTien"
-                    android:inputType="number"
-                    android:layout_width="200sp"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/search"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:padding="6dp"
                     android:layout_marginLeft="10sp"
-                    android:layout_height="40sp"
+                    android:hint="Tổng tiền"
+                    android:layout_marginTop="5dp"
+                    android:inputType="text"
                     android:enabled="false"/>
             </TableRow>
         </TableLayout>
@@ -124,7 +181,7 @@
                 android:layout_height="wrap_content"
                 android:text="Làm mới"
                 android:textSize="15sp"
-                android:backgroundTint="#00BCD4"/>
+                android:backgroundTint="#03A9F4"/>
 
             <Button
                 android:id="@+id/btnThem"
@@ -133,7 +190,7 @@
                 android:text="Thêm"
                 android:textSize="15sp"
                 android:layout_marginLeft="10sp"
-                android:backgroundTint="#00BCD4"/>
+                android:backgroundTint="#4CAF50"/>
 
         </LinearLayout>
 
